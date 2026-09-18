@@ -1,7 +1,9 @@
 'use client'
-import { useState } from 'react'
+import { useState, use } from 'react'
+import { supabase } from '../../../lib/supabase'
 
 export default function CollectPage({ params }) {
+  const { slug } = use(params)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [rating, setRating] = useState(5)
@@ -11,16 +13,40 @@ export default function CollectPage({ params }) {
 
   async function handleSubmit() {
     setLoading(true)
-    setTimeout(() => {
-      setSubmitted(true)
+
+    const { data: business } = await supabase
+      .from('businesses')
+      .select('id')
+      .eq('slug', slug)
+      .single()
+
+    if (!business) {
+      alert('Business not found')
       setLoading(false)
-    }, 1000)
+      return
+    }
+
+    const { error } = await supabase
+      .from('testimonials')
+      .insert({
+        business_id: business.id,
+        reviewer_name: name,
+        reviewer_email: email,
+        star_rating: rating,
+        review_text: review,
+      })
+
+    if (!error) {
+      setSubmitted(true)
+    } else {
+      alert('Something went wrong, try again')
+    }
+    setLoading(false)
   }
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 
-                      flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center">
           <div className="text-6xl mb-4">🎉</div>
           <h2 className="text-2xl font-bold text-gray-800 mb-2">Thank you!</h2>
@@ -31,10 +57,9 @@ export default function CollectPage({ params }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 
-                    flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full">
-        
+
         <h1 className="text-2xl font-bold text-gray-800 mb-2">
           Leave a Review ⭐
         </h1>
@@ -51,8 +76,7 @@ export default function CollectPage({ params }) {
               <button
                 key={star}
                 onClick={() => setRating(star)}
-                className={`text-3xl transition-transform hover:scale-110
-                  ${star <= rating ? 'opacity-100' : 'opacity-30'}`}
+                className={`text-3xl transition-transform hover:scale-110 ${star <= rating ? 'opacity-100' : 'opacity-30'}`}
               >
                 ⭐
               </button>
@@ -69,8 +93,7 @@ export default function CollectPage({ params }) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="John Doe"
-            className="w-full border border-gray-200 rounded-lg px-4 py-2 
-                       focus:outline-none focus:ring-2 focus:ring-purple-400"
+            className="w-full border border-gray-200 rounded-lg px-4 py-2 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400"
           />
         </div>
 
@@ -83,8 +106,7 @@ export default function CollectPage({ params }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="john@example.com"
-            className="w-full border border-gray-200 rounded-lg px-4 py-2 
-                       focus:outline-none focus:ring-2 focus:ring-purple-400"
+            className="w-full border border-gray-200 rounded-lg px-4 py-2 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400"
           />
         </div>
 
@@ -97,17 +119,14 @@ export default function CollectPage({ params }) {
             onChange={(e) => setReview(e.target.value)}
             placeholder="Tell us about your experience..."
             rows={4}
-            className="w-full border border-gray-200 rounded-lg px-4 py-2 
-                       focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none"
+            className="w-full border border-gray-200 rounded-lg px-4 py-2 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-400 resize-none"
           />
         </div>
 
         <button
           onClick={handleSubmit}
           disabled={!name || !review || loading}
-          className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold
-                     hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed
-                     transition-colors"
+          className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {loading ? 'Submitting...' : 'Submit Review'}
         </button>
