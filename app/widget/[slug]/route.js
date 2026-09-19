@@ -48,13 +48,6 @@ export async function GET(request, { params }) {
         Powered by TrustDrop
       </p>
     </div>
-
-    <script>
-      // Auto resize
-      if (window.parent !== window) {
-        window.parent.postMessage({ height: document.body.scrollHeight }, '*');
-      }
-    </script>
   `
 
   return new Response(html, {
