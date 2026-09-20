@@ -12,6 +12,17 @@ export default function Dashboard() {
     checkUser()
   }, [])
 
+  async function fetchTestimonials(businessId) {
+    const { data, error } = await supabase
+      .from('testimonials')
+      .select('*')
+      .eq('business_id', businessId)
+      .order('created_at', { ascending: false })
+    console.log('Testimonials:', data, 'Error:', error)
+    setTestimonials(data || [])
+    setLoading(false)
+  }
+
   async function checkUser() {
     const { data: { user } } = await supabase.auth.getUser()
 
@@ -20,11 +31,13 @@ export default function Dashboard() {
       return
     }
 
-    const { data: businessData } = await supabase
+    const { data: businessData, error } = await supabase
       .from('businesses')
       .select('*')
       .eq('id', user.id)
       .single()
+
+    console.log('Business:', businessData, 'Error:', error)
 
     if (!businessData) {
       window.location.href = '/login'
@@ -33,16 +46,6 @@ export default function Dashboard() {
 
     setBusiness(businessData)
     fetchTestimonials(businessData.id)
-  }
-
-  async function fetchTestimonials(businessId) {
-    const { data } = await supabase
-      .from('testimonials')
-      .select('*')
-      .eq('business_id', businessId)
-      .order('created_at', { ascending: false })
-    setTestimonials(data || [])
-    setLoading(false)
   }
 
   async function approveTestimonial(id, currentStatus) {
@@ -99,7 +102,7 @@ export default function Dashboard() {
         .logout-btn { background: transparent; border: 1px solid #1a2030; color: #555; padding: 8px 16px; border-radius: 8px; font-size: 13px; cursor: pointer; font-family: inherit; transition: all 0.2s; }
         .logout-btn:hover { border-color: #ef4444; color: #ef4444; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr) !important; } .header-row { flex-direction: column !important; gap: 16px !important; } }
+        @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr) !important; } }
       `}</style>
 
       {/* NAV */}
