@@ -7,6 +7,7 @@ export default function Dashboard() {
   const [business, setBusiness] = useState(null)
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all')
+  const [noBusiness, setNoBusiness] = useState(false)
 
   useEffect(() => {
     checkUser()
@@ -24,10 +25,19 @@ export default function Dashboard() {
 
   async function checkUser() {
     const { data: { session } } = await supabase.auth.getSession()
+    // Only redirect to /auth if there is truly no session at all.
     if (!session) { window.location.href = '/auth'; return }
+
     const { data: businessData } = await supabase
       .from('businesses').select('*').eq('id', session.user.id).single()
-    if (!businessData) { window.location.href = '/auth'; return }
+
+    // IMPORTANT: never redirect back to /auth here — that caused the loop.
+    // If session exists but no business row, show an error state instead.
+    if (!businessData) {
+      setNoBusiness(true)
+      setLoading(false)
+      return
+    }
     setBusiness(businessData)
     fetchTestimonials(businessData.id)
   }
