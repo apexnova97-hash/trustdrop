@@ -85,6 +85,27 @@ export default function Dashboard() {
     )
   }
 
+  if (noBusiness) {
+    return (
+      <div style={{ minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif", padding: 24 }}>
+        <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');`}</style>
+        <div style={{ background: '#0a0e1a', border: '1px solid #141c2e', borderRadius: 20, padding: '40px 34px', maxWidth: 420, width: '100%', textAlign: 'center' }}>
+          <div style={{ fontSize: 40, marginBottom: 16 }}>⚠️</div>
+          <h2 style={{ fontSize: 20, fontWeight: 700, color: 'white', marginBottom: 10 }}>No business found</h2>
+          <p style={{ color: '#666', fontSize: 14, lineHeight: 1.6, marginBottom: 24 }}>
+            Your account is logged in, but we couldn't find a business record linked to it. This can happen if signup was interrupted.
+          </p>
+          <button
+            onClick={async () => { await supabase.auth.signOut(); window.location.href = '/auth?mode=signup' }}
+            style={{ background: '#2563eb', color: 'white', border: 'none', padding: '12px 24px', borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit' }}
+          >
+            Log out and try signing up again
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div style={{ minHeight: '100vh', background: '#050810', fontFamily: "'Inter', sans-serif", color: 'white' }}>
       <style>{`
