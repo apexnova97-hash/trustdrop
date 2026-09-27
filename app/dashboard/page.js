@@ -23,11 +23,11 @@ export default function Dashboard() {
   }
 
   async function checkUser() {
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) { window.location.href = '/login'; return }
+    const { data: { session } } = await supabase.auth.getSession()
+    if (!session) { window.location.href = '/auth'; return }
     const { data: businessData } = await supabase
-      .from('businesses').select('*').eq('id', user.id).single()
-    if (!businessData) { window.location.href = '/login'; return }
+      .from('businesses').select('*').eq('id', session.user.id).single()
+    if (!businessData) { window.location.href = '/auth'; return }
     setBusiness(businessData)
     fetchTestimonials(businessData.id)
   }
