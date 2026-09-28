@@ -13,14 +13,38 @@ export default function SignupPage() {
   async function handleSignup() {
     setLoading(true)
     setError('')
-    const slug = businessName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-    const { data, error: signupError } = await supabase.auth.signUp({ email, password })
-    if (signupError) { setError(signupError.message); setLoading(false); return }
-    const { error: businessError } = await supabase.from('businesses').insert({
-      id: data.user.id, email, business_name: businessName, slug,
+
+    // The database trigger creates the businesses row automatically.
+    // This works even when email confirmation means there is no session yet.
+    const { data, error: signupError } = await supabase.auth.signUp({
+      email: email.trim(),
+      password,
+      options: {
+        data: {
+          business_name: businessName.trim()
+        }
+      }
     })
-    if (businessError) { setError(businessError.message); setLoading(false); return }
-    window.location.href = '/dashboard'
+
+    if (signupError) {
+      setError(signupError.message)
+      setLoading(false)
+      return
+    }
+
+    if (!data.user) {
+      setError('Account could not be created. Please try again.')
+      setLoading(false)
+      return
+    }
+
+    if (data.session) {
+      window.location.href = '/dashboard'
+    } else {
+      setDone(true)
+    }
+
+    setLoading(false)
   }
 
   if (done) {
