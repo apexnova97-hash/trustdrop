@@ -1,13 +1,31 @@
 import { supabase } from '../../../lib/supabase'
+import { getCollectionSlug } from '../../../lib/slug'
 
 export async function GET(request, { params }) {
   const { slug } = await params
 
-  const { data: business } = await supabase
+  let { data: business } = await supabase
     .from('businesses')
-    .select('id, business_name')
+    .select('id, business_name, slug')
     .eq('slug', slug)
-    .single()
+    .maybeSingle()
+
+  if (!business && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(slug)) {
+    const { data: byId } = await supabase
+      .from('businesses')
+      .select('id, business_name, slug')
+      .eq('id', slug)
+      .maybeSingle()
+    business = byId
+  }
+
+  if (!business) {
+    const { data: businesses } = await supabase
+      .from('businesses')
+      .select('id, business_name, slug')
+
+    business = (businesses || []).find(item => getCollectionSlug(item) === slug) || null
+  }
 
   if (!business) {
     return new Response('Business not found', { status: 404 })
