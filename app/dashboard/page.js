@@ -25,19 +25,43 @@ export default function Dashboard() {
 
   async function checkUser() {
     const { data: { session } } = await supabase.auth.getSession()
-    // Only redirect to /auth if there is truly no session at all.
-    if (!session) { window.location.href = '/auth'; return }
 
-    const { data: businessData } = await supabase
-      .from('businesses').select('*').eq('id', session.user.id).single()
+    // Only redirect to /auth if there is truly no session.
+    if (!session) {
+      window.location.href = '/auth'
+      return
+    }
 
-    // IMPORTANT: never redirect back to /auth here — that caused the loop.
-    // If session exists but no business row, show an error state instead.
+    // maybeSingle() is intentional: .single() returns HTTP 406 when
+    // the row does not exist.
+    let { data: businessData, error: businessError } = await supabase
+      .from('businesses')
+      .select('*')
+      .eq('id', session.user.id)
+      .maybeSingle()
+
+    // Older accounts may already have a business row under the same
+    // email but with a different ID. Use the email as a safe legacy
+    // fallback so those accounts do not get stuck on the 406/no-business
+    // screen.
+    if (!businessData && !businessError && session.user.email) {
+      const { data: emailBusiness } = await supabase
+        .from('businesses')
+        .select('*')
+        .eq('email', session.user.email)
+        .maybeSingle()
+
+      if (emailBusiness) {
+        businessData = emailBusiness
+      }
+    }
+
     if (!businessData) {
       setNoBusiness(true)
       setLoading(false)
       return
     }
+
     setBusiness(businessData)
     fetchTestimonials(businessData.id)
   }
