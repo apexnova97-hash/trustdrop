@@ -35,21 +35,35 @@ export default function AuthPage() {
   }
 
   async function handleSignup() {
-    setSLoading(true); setSError('')
-    const slug = sBiz.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+    setSLoading(true)
+    setSError('')
 
-    const { data, error } = await supabase.auth.signUp({ email: sEmail, password: sPass })
-    if (error) { setSError(error.message); setSLoading(false); return }
-
-    await supabase.from('businesses').insert({
-      id: data.user.id, email: sEmail, business_name: sBiz, slug
+    const { data, error } = await supabase.auth.signUp({
+      email: sEmail,
+      password: sPass,
+      options: {
+        data: {
+          business_name: sBiz,
+        },
+      },
     })
+
+    if (error) {
+      setSError(error.message)
+      setSLoading(false)
+      return
+    }
+
+    // The business row is created by the Supabase auth trigger using
+    // business_name metadata. This avoids RLS problems from trying to
+    // create the row from an unverified browser session.
 
     if (data.session) {
       window.location.href = '/dashboard'
     } else {
       setDone(true)
     }
+
     setSLoading(false)
   }
 
