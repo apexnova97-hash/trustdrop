@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
+import { getCollectionSlug } from '../../lib/slug'
 
 export default function Dashboard() {
   const [testimonials, setTestimonials] = useState([])
@@ -28,8 +29,15 @@ export default function Dashboard() {
     // Only redirect to /auth if there is truly no session at all.
     if (!session) { window.location.href = '/auth'; return }
 
-    const { data: businessData } = await supabase
-      .from('businesses').select('*').eq('id', session.user.id).single()
+    const { data: businessData, error: businessError } = await supabase
+      .from('businesses')
+      .select('*')
+      .eq('id', session.user.id)
+      .single()
+
+    if (businessError) {
+      console.error('Failed to load business:', businessError)
+    }
 
     // IMPORTANT: never redirect back to /auth here — that caused the loop.
     // If session exists but no business row, show an error state instead.
@@ -38,8 +46,27 @@ export default function Dashboard() {
       setLoading(false)
       return
     }
-    setBusiness(businessData)
-    fetchTestimonials(businessData.id)
+
+    // Never let a missing/invalid slug turn into /collect/undefined.
+    const normalizedBusiness = {
+      ...businessData,
+      slug: getCollectionSlug(businessData),
+    }
+
+    const rawSlug = typeof businessData.slug === 'string' ? businessData.slug.trim() : ''
+    if ((!rawSlug || ['undefined', 'null'].includes(rawSlug.toLowerCase())) && normalizedBusiness.slug) {
+      const { error: slugUpdateError } = await supabase
+        .from('businesses')
+        .update({ slug: normalizedBusiness.slug })
+        .eq('id', businessData.id)
+
+      if (slugUpdateError) {
+        console.warn('Could not repair business slug automatically:', slugUpdateError.message)
+      }
+    }
+
+    setBusiness(normalizedBusiness)
+    fetchTestimonials(normalizedBusiness.id)
   }
 
   async function approveTestimonial(id, currentStatus) {
@@ -72,6 +99,8 @@ export default function Dashboard() {
   const avgRating = testimonials.length
     ? (testimonials.reduce((sum, t) => sum + t.star_rating, 0) / testimonials.length).toFixed(1)
     : '0.0'
+
+  const collectionSlug = getCollectionSlug(business)
 
   if (loading) {
     return (
@@ -254,9 +283,9 @@ export default function Dashboard() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
             <span style={{ color: '#444', fontSize: 13 }}>Collection link:</span>
             <code style={{ color: '#60a5fa', fontSize: 13, background: 'rgba(37,99,235,0.08)', padding: '3px 10px', borderRadius: 6, border: '1px solid rgba(37,99,235,0.15)' }}>
-              trustdrop-lac.vercel.app/collect/{business?.slug}
+              trustdrop-lac.vercel.app/collect/{collectionSlug}
             </code>
-            <button className="copy-btn" onClick={() => navigator.clipboard.writeText(`https://trustdrop-lac.vercel.app/collect/${business?.slug}`)}>
+            <button className="copy-btn" onClick={() => navigator.clipboard.writeText(`https://trustdrop-lac.vercel.app/collect/${collectionSlug}`)}>
               Copy
             </button>
           </div>
