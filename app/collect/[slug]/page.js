@@ -1,6 +1,7 @@
 'use client'
 import { useState, use } from 'react'
 import { supabase } from '../../../lib/supabase'
+import { getCollectionSlug } from '../../../lib/slug'
 
 export default function CollectPage({ params }) {
   const { slug } = use(params)
@@ -14,8 +15,31 @@ export default function CollectPage({ params }) {
 
   async function handleSubmit() {
     setLoading(true)
-    const { data: business } = await supabase
-      .from('businesses').select('id').eq('slug', slug).single()
+    let { data: business } = await supabase
+      .from('businesses')
+      .select('id, business_name, slug')
+      .eq('slug', slug)
+      .maybeSingle()
+
+    // Backward-compatible fallback for legacy links that use a business ID.
+    if (!business && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(slug)) {
+      const { data: byId } = await supabase
+        .from('businesses')
+        .select('id, business_name, slug')
+        .eq('id', slug)
+        .maybeSingle()
+      business = byId
+    }
+
+    // Final compatibility fallback for existing rows with a blank/placeholder slug.
+    if (!business) {
+      const { data: businesses } = await supabase
+        .from('businesses')
+        .select('id, business_name, slug')
+
+      business = (businesses || []).find(item => getCollectionSlug(item) === slug) || null
+    }
+
     if (!business) { alert('Business not found'); setLoading(false); return }
     const { error } = await supabase.from('testimonials').insert({
       business_id: business.id,
