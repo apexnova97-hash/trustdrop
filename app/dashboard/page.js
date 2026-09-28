@@ -265,7 +265,7 @@ export default function Dashboard() {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           {business && (
-            <a href={`/collect/${business.slug}`} target="_blank" className="nav-link-btn">
+            <a href={`/collect/${collectionSlug}`} target="_blank" className="nav-link-btn">
               My link →
             </a>
           )}
@@ -326,7 +326,7 @@ export default function Dashboard() {
             <p style={{ color: '#444', fontSize: 15, marginBottom: 6 }}>No reviews here yet</p>
             <p style={{ color: '#2a3550', fontSize: 13 }}>Share your collection link to start receiving reviews</p>
             {business && (
-              <a href={`/collect/${business.slug}`} target="_blank" className="nav-link-btn" style={{ display: 'inline-block', marginTop: 20, fontSize: 13 }}>
+              <a href={`/collect/${collectionSlug}`} target="_blank" className="nav-link-btn" style={{ display: 'inline-block', marginTop: 20, fontSize: 13 }}>
                 Open collection page →
               </a>
             )}
