@@ -13,14 +13,31 @@ export default function SignupPage() {
   async function handleSignup() {
     setLoading(true)
     setError('')
-    const slug = businessName.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-    const { data, error: signupError } = await supabase.auth.signUp({ email, password })
-    if (signupError) { setError(signupError.message); setLoading(false); return }
-    const { error: businessError } = await supabase.from('businesses').insert({
-      id: data.user.id, email, business_name: businessName, slug,
+
+    const { data, error: signupError } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          business_name: businessName,
+        },
+      },
     })
-    if (businessError) { setError(businessError.message); setLoading(false); return }
-    window.location.href = '/dashboard'
+
+    if (signupError) {
+      setError(signupError.message)
+      setLoading(false)
+      return
+    }
+
+    // The Supabase auth trigger creates the linked business row and slug.
+    if (data.session) {
+      window.location.href = '/dashboard'
+    } else {
+      setDone(true)
+    }
+
+    setLoading(false)
   }
 
   if (done) {
