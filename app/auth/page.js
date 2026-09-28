@@ -35,21 +35,40 @@ export default function AuthPage() {
   }
 
   async function handleSignup() {
-    setSLoading(true); setSError('')
-    const slug = sBiz.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+    setSLoading(true)
+    setSError('')
 
-    const { data, error } = await supabase.auth.signUp({ email: sEmail, password: sPass })
-    if (error) { setSError(error.message); setSLoading(false); return }
-
-    await supabase.from('businesses').insert({
-      id: data.user.id, email: sEmail, business_name: sBiz, slug
+    // The database creates the businesses row from this metadata.
+    // Do not insert into businesses from the browser: email-confirmation
+    // signups may not have an authenticated session yet, so RLS can block it.
+    const { data, error } = await supabase.auth.signUp({
+      email: sEmail.trim(),
+      password: sPass,
+      options: {
+        data: {
+          business_name: sBiz.trim()
+        }
+      }
     })
+
+    if (error) {
+      setSError(error.message)
+      setSLoading(false)
+      return
+    }
+
+    if (!data.user) {
+      setSError('Account could not be created. Please try again.')
+      setSLoading(false)
+      return
+    }
 
     if (data.session) {
       window.location.href = '/dashboard'
     } else {
       setDone(true)
     }
+
     setSLoading(false)
   }
 
