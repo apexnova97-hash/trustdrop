@@ -25,43 +25,16 @@ export default function Dashboard() {
 
   async function checkUser() {
     const { data: { session } } = await supabase.auth.getSession()
+    if (!session) { window.location.href = '/auth'; return }
 
-    // Only redirect to /auth if there is truly no session.
-    if (!session) {
-      window.location.href = '/auth'
-      return
-    }
-
-    // maybeSingle() is intentional: .single() returns HTTP 406 when
-    // the row does not exist.
-    let { data: businessData, error: businessError } = await supabase
-      .from('businesses')
-      .select('*')
-      .eq('id', session.user.id)
-      .maybeSingle()
-
-    // Older accounts may already have a business row under the same
-    // email but with a different ID. Use the email as a safe legacy
-    // fallback so those accounts do not get stuck on the 406/no-business
-    // screen.
-    if (!businessData && !businessError && session.user.email) {
-      const { data: emailBusiness } = await supabase
-        .from('businesses')
-        .select('*')
-        .eq('email', session.user.email)
-        .maybeSingle()
-
-      if (emailBusiness) {
-        businessData = emailBusiness
-      }
-    }
+    const { data: businessData } = await supabase
+      .from('businesses').select('*').eq('id', session.user.id).single()
 
     if (!businessData) {
       setNoBusiness(true)
       setLoading(false)
       return
     }
-
     setBusiness(businessData)
     fetchTestimonials(businessData.id)
   }
@@ -96,6 +69,11 @@ export default function Dashboard() {
   const avgRating = testimonials.length
     ? (testimonials.reduce((sum, t) => sum + t.star_rating, 0) / testimonials.length).toFixed(1)
     : '0.0'
+
+  // Lemon Squeezy checkout — pre-fills the customer's email so it's one click
+  const checkoutUrl = business
+    ? `https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21?checkout[email]=${encodeURIComponent(business.email)}`
+    : 'https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21'
 
   if (loading) {
     return (
@@ -137,6 +115,7 @@ export default function Dashboard() {
         * { box-sizing: border-box; margin: 0; padding: 0; }
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.2); opacity: 0; } }
 
         .stat-card {
           background: #0a0e1a;
@@ -241,10 +220,53 @@ export default function Dashboard() {
         }
         .copy-btn:hover { border-color: rgba(37,99,235,0.3); color: #60a5fa; }
 
+        .upgrade-card {
+          background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(29,78,216,0.05));
+          border: 1px solid rgba(37,99,235,0.3);
+          border-radius: 16px;
+          padding: 24px;
+          margin-bottom: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          flex-wrap: wrap;
+        }
+
+        .upgrade-btn {
+          background: #2563eb;
+          color: white;
+          border: none;
+          padding: 11px 22px;
+          border-radius: 9px;
+          font-size: 14px;
+          font-weight: 600;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          cursor: pointer;
+          font-family: inherit;
+          transition: background 0.15s, transform 0.15s;
+          white-space: nowrap;
+        }
+        .upgrade-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+        .live-dot {
+          width: 8px; height: 8px; border-radius: 50%; background: #22d3ee;
+          flex-shrink: 0; position: relative;
+        }
+        .live-dot::after {
+          content: ''; position: absolute; inset: -3px; border-radius: 50%;
+          border: 1.5px solid #22d3ee;
+          animation: pulseRing 1.6s ease-out infinite;
+        }
+
         @media (max-width: 768px) {
           .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .review-actions { flex-direction: column !important; }
           .review-meta { flex-wrap: wrap !important; }
+          .upgrade-card { flex-direction: column !important; align-items: flex-start !important; }
         }
       `}</style>
 
@@ -271,7 +293,7 @@ export default function Dashboard() {
       <div style={{ maxWidth: 860, margin: '0 auto', padding: '36px 5% 80px' }}>
 
         {/* HEADER */}
-        <div style={{ marginBottom: 32 }}>
+        <div style={{ marginBottom: 28 }}>
           <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.5px', marginBottom: 6, color: 'white' }}>
             {business?.business_name}
           </h1>
@@ -284,6 +306,20 @@ export default function Dashboard() {
               Copy
             </button>
           </div>
+        </div>
+
+        {/* UPGRADE / SUBSCRIBE CARD */}
+        <div className="upgrade-card">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div className="live-dot" />
+            <div>
+              <p style={{ fontSize: 14, fontWeight: 600, color: 'white', marginBottom: 2 }}>You're on the free trial</p>
+              <p style={{ fontSize: 13, color: '#888' }}>Upgrade to keep collecting reviews after your trial ends — just $19/month</p>
+            </div>
+          </div>
+          <a href={checkoutUrl} target="_blank" className="upgrade-btn">
+            Upgrade now →
+          </a>
         </div>
 
         {/* STATS */}
