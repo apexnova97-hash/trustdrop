@@ -3,6 +3,9 @@ import './globals.css'
 export const metadata = {
   title: 'TrustDrop — Collect Customer Reviews',
   description: 'The simplest way to collect and display customer testimonials.',
+  verification: {
+    google: '-r8xi6sbKvpm2E5ttMz3Avm8dhab8aiyeoAzmT-ogyI',
+  },
   icons: {
     icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⭐</text></svg>',
   },
