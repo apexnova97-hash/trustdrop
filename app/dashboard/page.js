@@ -8,6 +8,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all')
   const [noBusiness, setNoBusiness] = useState(false)
+  const [actionId, setActionId] = useState(null)
 
   useEffect(() => {
     checkUser()
@@ -40,19 +41,52 @@ export default function Dashboard() {
   }
 
   async function approveTestimonial(id, currentStatus) {
-    const { error } = await supabase
+    if (!business || actionId) return
+
+    setActionId(id)
+    const nextStatus = !currentStatus
+
+    const { data, error } = await supabase
       .from('testimonials')
-      .update({ approved: !currentStatus })
+      .update({ approved: nextStatus })
       .eq('id', id)
-    if (!error) fetchTestimonials(business.id)
+      .eq('business_id', business.id)
+      .select('*')
+      .single()
+
+    if (error) {
+      console.error('Approve testimonial error:', error)
+      alert(error.message || 'Could not update this review.')
+    } else if (data) {
+      setTestimonials(prev =>
+        prev.map(t => t.id === id ? data : t)
+      )
+    }
+
+    setActionId(null)
   }
 
   async function deleteTestimonial(id) {
+    if (!business || actionId) return
+
+    if (!window.confirm('Delete this review permanently?')) return
+
+    setActionId(id)
+
     const { error } = await supabase
       .from('testimonials')
       .delete()
       .eq('id', id)
-    if (!error) fetchTestimonials(business.id)
+      .eq('business_id', business.id)
+
+    if (error) {
+      console.error('Delete testimonial error:', error)
+      alert(error.message || 'Could not delete this review.')
+    } else {
+      setTestimonials(prev => prev.filter(t => t.id !== id))
+    }
+
+    setActionId(null)
   }
 
   async function handleLogout() {
@@ -400,16 +434,27 @@ export default function Dashboard() {
                     <button
                       className="approve-btn"
                       onClick={() => approveTestimonial(t.id, t.approved)}
+                      disabled={actionId === t.id}
                       style={{
                         background: t.approved ? 'rgba(255,255,255,0.04)' : 'rgba(52,211,153,0.1)',
                         color: t.approved ? '#333' : '#34d399',
                         border: `1px solid ${t.approved ? '#141c2e' : 'rgba(52,211,153,0.25)'}`,
+                        opacity: actionId === t.id ? 0.5 : 1,
+                        cursor: actionId === t.id ? 'wait' : 'pointer',
                       }}
                     >
-                      {t.approved ? 'Unpublish' : '✓ Approve'}
+                      {actionId === t.id ? 'Saving...' : t.approved ? 'Unpublish' : '✓ Approve'}
                     </button>
-                    <button className="delete-btn" onClick={() => deleteTestimonial(t.id)}>
-                      Delete
+                    <button
+                      className="delete-btn"
+                      onClick={() => deleteTestimonial(t.id)}
+                      disabled={actionId === t.id}
+                      style={{
+                        opacity: actionId === t.id ? 0.5 : 1,
+                        cursor: actionId === t.id ? 'wait' : 'pointer',
+                      }}
+                    >
+                      {actionId === t.id ? 'Deleting...' : 'Delete'}
                     </button>
                   </div>
                 </div>
