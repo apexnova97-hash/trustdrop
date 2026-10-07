@@ -9,6 +9,7 @@ export default function Dashboard() {
   const [filter, setFilter] = useState('all')
   const [noBusiness, setNoBusiness] = useState(false)
   const [actionId, setActionId] = useState(null)
+  const [trialExpired, setTrialExpired] = useState(false)
 
   useEffect(() => {
     checkUser()
@@ -37,6 +38,21 @@ export default function Dashboard() {
       return
     }
     setBusiness(businessData)
+
+    const trialEndsAt = businessData.trial_ends_at ? new Date(businessData.trial_ends_at) : null
+    const plan = String(businessData.plan || '').toLowerCase()
+    const isPaid = businessData.subscription_status === 'active' || ['paid', 'pro', 'active'].includes(plan)
+    const isTrialExpired = !isPaid && (
+      businessData.subscription_status === 'expired' ||
+      (businessData.subscription_status === 'trialing' && trialEndsAt && trialEndsAt <= new Date())
+    )
+
+    if (isTrialExpired) {
+      setTrialExpired(true)
+      setLoading(false)
+      return
+    }
+
     fetchTestimonials(businessData.id)
   }
 
@@ -116,6 +132,27 @@ export default function Dashboard() {
         <div style={{ textAlign: 'center' }}>
           <div style={{ width: 36, height: 36, border: '2px solid #1a2030', borderTopColor: '#2563eb', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 16px' }} />
           <p style={{ color: '#444', fontSize: 14 }}>Loading dashboard...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (trialExpired) {
+    return (
+      <div style={{ minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif", padding: 24 }}>
+        <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');`}</style>
+        <div style={{ background: '#0a0e1a', border: '1px solid rgba(37,99,235,0.25)', borderRadius: 20, padding: '42px 34px', maxWidth: 480, width: '100%', textAlign: 'center', boxShadow: '0 20px 60px rgba(0,0,0,0.35)' }}>
+          <div style={{ width: 58, height: 58, margin: '0 auto 18px', borderRadius: 16, background: 'rgba(37,99,235,0.12)', border: '1px solid rgba(37,99,235,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 25 }}>⭐</div>
+          <h2 style={{ fontSize: 24, fontWeight: 800, color: 'white', marginBottom: 10 }}>Your free trial has ended</h2>
+          <p style={{ color: '#777', fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
+            Your 14-day TrustDrop trial has expired. Upgrade to keep using your dashboard and collecting customer reviews.
+          </p>
+          <a href={checkoutUrl} target="_blank" rel="noreferrer" className="upgrade-btn" style={{ display: 'inline-flex' }}>
+            Upgrade for $19/month →
+          </a>
+          <button onClick={handleLogout} className="logout-btn" style={{ display: 'block', margin: '16px auto 0' }}>
+            Log out
+          </button>
         </div>
       </div>
     )
@@ -343,18 +380,24 @@ export default function Dashboard() {
         </div>
 
         {/* UPGRADE / SUBSCRIBE CARD */}
-        <div className="upgrade-card">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div className="live-dot" />
-            <div>
-              <p style={{ fontSize: 14, fontWeight: 600, color: 'white', marginBottom: 2 }}>You're on the free trial</p>
-              <p style={{ fontSize: 13, color: '#888' }}>Upgrade to keep collecting reviews after your trial ends — just $19/month</p>
+        {business?.subscription_status !== 'active' && !['paid', 'pro', 'active'].includes(String(business?.plan || '').toLowerCase()) && (
+          <div className="upgrade-card">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div className="live-dot" />
+              <div>
+                <p style={{ fontSize: 14, fontWeight: 600, color: 'white', marginBottom: 2 }}>
+                  {business?.trial_ends_at
+                    ? `Free trial — ${Math.max(0, Math.ceil((new Date(business.trial_ends_at).getTime() - Date.now()) / 86400000))} day(s) remaining`
+                    : 'You're on the free trial'}
+                </p>
+                <p style={{ fontSize: 13, color: '#888' }}>Upgrade for $19/month to keep TrustDrop after your trial ends.</p>
+              </div>
             </div>
+            <a href={checkoutUrl} target="_blank" rel="noreferrer" className="upgrade-btn">
+              Upgrade now →
+            </a>
           </div>
-          <a href={checkoutUrl} target="_blank" className="upgrade-btn">
-            Upgrade now →
-          </a>
-        </div>
+        )}
 
         {/* STATS */}
         <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 32 }}>
