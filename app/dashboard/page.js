@@ -7,6 +7,10 @@ const PAID_PLANS = ['paid', 'pro', 'active']
 
 function isPaid(business) {
   if (!business) return false
+
+  // An explicitly expired account is always expired.
+  if (business.subscription_status === 'expired') return false
+
   return PAID_STATUSES.includes(business.subscription_status) ||
     PAID_PLANS.includes(String(business.plan || '').toLowerCase())
 }
