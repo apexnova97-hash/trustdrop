@@ -130,6 +130,11 @@ export default function Dashboard() {
     return true
   })
 
+  // Lemon Squeezy checkout
+  const checkoutUrl = business
+    ? `https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21?checkout[email]=${encodeURIComponent(business.email)}`
+    : 'https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21'
+
   if (isExpired(business)) {
     return (
       <div style={{ minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif", padding: 24 }}>
@@ -156,11 +161,6 @@ export default function Dashboard() {
   const avgRating = testimonials.length
     ? (testimonials.reduce((sum, t) => sum + t.star_rating, 0) / testimonials.length).toFixed(1)
     : '0.0'
-
-  // Lemon Squeezy checkout — pre-fills the customer's email so it's one click
-  const checkoutUrl = business
-    ? `https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21?checkout[email]=${encodeURIComponent(business.email)}`
-    : 'https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21'
 
   if (loading) {
     return (
