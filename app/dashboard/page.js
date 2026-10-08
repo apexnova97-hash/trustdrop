@@ -2,6 +2,30 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 
+const PAID_STATUSES = ['active']
+const PAID_PLANS = ['paid', 'pro', 'active']
+
+function isPaid(business) {
+  if (!business) return false
+  return PAID_STATUSES.includes(business.subscription_status) ||
+    PAID_PLANS.includes(String(business.plan || '').toLowerCase())
+}
+
+function isExpired(business) {
+  if (!business || isPaid(business)) return false
+  if (business.subscription_status === 'expired') return true
+  if (business.subscription_status === 'trialing' && business.trial_ends_at) {
+    return new Date(business.trial_ends_at) <= new Date()
+  }
+  return false
+}
+
+function daysRemaining(business) {
+  if (!business?.trial_ends_at) return null
+  const ms = new Date(business.trial_ends_at).getTime() - Date.now()
+  return Math.max(0, Math.ceil(ms / 86400000))
+}
+
 export default function Dashboard() {
   const [testimonials, setTestimonials] = useState([])
   const [business, setBusiness] = useState(null)
@@ -9,7 +33,6 @@ export default function Dashboard() {
   const [filter, setFilter] = useState('all')
   const [noBusiness, setNoBusiness] = useState(false)
   const [actionId, setActionId] = useState(null)
-  const [trialExpired, setTrialExpired] = useState(false)
 
   useEffect(() => {
     checkUser()
@@ -39,16 +62,7 @@ export default function Dashboard() {
     }
     setBusiness(businessData)
 
-    const trialEndsAt = businessData.trial_ends_at ? new Date(businessData.trial_ends_at) : null
-    const plan = String(businessData.plan || '').toLowerCase()
-    const isPaid = businessData.subscription_status === 'active' || ['paid', 'pro', 'active'].includes(plan)
-    const isTrialExpired = !isPaid && (
-      businessData.subscription_status === 'expired' ||
-      (businessData.subscription_status === 'trialing' && trialEndsAt && trialEndsAt <= new Date())
-    )
-
-    if (isTrialExpired) {
-      setTrialExpired(true)
+    if (isExpired(businessData)) {
       setLoading(false)
       return
     }
@@ -116,6 +130,29 @@ export default function Dashboard() {
     return true
   })
 
+  if (isExpired(business)) {
+    return (
+      <div style={{ minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif", padding: 24 }}>
+        <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'); *{box-sizing:border-box}`}</style>
+        <div style={{ background: '#0a0e1a', border: '1px solid #141c2e', borderRadius: 20, padding: '44px 36px', maxWidth: 460, width: '100%', textAlign: 'center', position: 'relative' }}>
+          <div style={{ width: 64, height: 64, background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 22px', fontSize: 28 }}>⏰</div>
+          <h1 style={{ fontSize: 24, fontWeight: 800, color: 'white', marginBottom: 12 }}>Your free trial has ended</h1>
+          <p style={{ color: '#666', fontSize: 15, lineHeight: 1.7, marginBottom: 28 }}>
+            Your 14-day TrustDrop trial has expired. Upgrade to keep using your dashboard and collecting customer reviews.
+          </p>
+          <a href={checkoutUrl} target="_blank" rel="noreferrer" style={{ display: 'block', background: '#2563eb', color: 'white', textDecoration: 'none', padding: '15px 0', borderRadius: 10, fontSize: 16, fontWeight: 700, marginBottom: 14 }}>
+            Upgrade for $19/month →
+          </a>
+          <button onClick={handleLogout} className="logout-btn" style={{ width: '100%', padding: '12px 0' }}>
+            Log out
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  const trialDays = daysRemaining(business)
+
   const avgRating = testimonials.length
     ? (testimonials.reduce((sum, t) => sum + t.star_rating, 0) / testimonials.length).toFixed(1)
     : '0.0'
@@ -132,27 +169,6 @@ export default function Dashboard() {
         <div style={{ textAlign: 'center' }}>
           <div style={{ width: 36, height: 36, border: '2px solid #1a2030', borderTopColor: '#2563eb', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 16px' }} />
           <p style={{ color: '#444', fontSize: 14 }}>Loading dashboard...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (trialExpired) {
-    return (
-      <div style={{ minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif", padding: 24 }}>
-        <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');`}</style>
-        <div style={{ background: '#0a0e1a', border: '1px solid rgba(37,99,235,0.25)', borderRadius: 20, padding: '42px 34px', maxWidth: 480, width: '100%', textAlign: 'center', boxShadow: '0 20px 60px rgba(0,0,0,0.35)' }}>
-          <div style={{ width: 58, height: 58, margin: '0 auto 18px', borderRadius: 16, background: 'rgba(37,99,235,0.12)', border: '1px solid rgba(37,99,235,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 25 }}>⭐</div>
-          <h2 style={{ fontSize: 24, fontWeight: 800, color: 'white', marginBottom: 10 }}>Your free trial has ended</h2>
-          <p style={{ color: '#777', fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>
-            Your 14-day TrustDrop trial has expired. Upgrade to keep using your dashboard and collecting customer reviews.
-          </p>
-          <a href={checkoutUrl} target="_blank" rel="noreferrer" className="upgrade-btn" style={{ display: 'inline-flex' }}>
-            Upgrade for $19/month →
-          </a>
-          <button onClick={handleLogout} className="logout-btn" style={{ display: 'block', margin: '16px auto 0' }}>
-            Log out
-          </button>
         </div>
       </div>
     )
