@@ -404,7 +404,7 @@ export default function Dashboard() {
                 <p style={{ fontSize: 14, fontWeight: 600, color: 'white', marginBottom: 2 }}>
                   {business?.trial_ends_at
                     ? `Free trial — ${Math.max(0, Math.ceil((new Date(business.trial_ends_at).getTime() - Date.now()) / 86400000))} day(s) remaining`
-                    : 'You're on the free trial'}
+                    : "You're on the free trial"}
                 </p>
                 <p style={{ fontSize: 13, color: '#888' }}>Upgrade for $19/month to keep TrustDrop after your trial ends.</p>
               </div>
