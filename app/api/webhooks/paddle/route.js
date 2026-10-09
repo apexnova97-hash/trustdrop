@@ -1,11 +1,39 @@
+import { createHmac, timingSafeEqual } from 'node:crypto'
 import { NextResponse } from 'next/server'
-import { getPaddleClient } from '../../../../lib/paddle'
 import { getSupabaseAdmin } from '../../../../lib/supabaseAdmin'
 
 export const runtime = 'nodejs'
 
+function verifyPaddleSignature(rawBody, signatureHeader, secret) {
+  const parts = Object.fromEntries(
+    signatureHeader.split(';').map(part => {
+      const separator = part.indexOf('=')
+      return separator < 0 ? [part, ''] : [part.slice(0, separator), part.slice(separator + 1)]
+    })
+  )
+
+  const timestamp = parts.ts
+  const suppliedSignature = parts.h1
+  if (!timestamp || !suppliedSignature || !/^\d+$/.test(timestamp)) return false
+
+  // Reject stale requests to reduce replay risk; signature covers exact raw bytes.
+  const ageSeconds = Math.abs(Date.now() / 1000 - Number(timestamp))
+  if (!Number.isFinite(ageSeconds) || ageSeconds > 300) return false
+
+  const expected = createHmac('sha256', secret)
+    .update(`${timestamp}:${rawBody}`, 'utf8')
+    .digest()
+  let supplied
+  try {
+    supplied = Buffer.from(suppliedSignature, 'hex')
+  } catch {
+    return false
+  }
+  return supplied.length === expected.length && timingSafeEqual(supplied, expected)
+}
+
 function getCustomData(data) {
-  return data?.customData || data?.custom_data || {}
+  return data?.custom_data || data?.customData || {}
 }
 
 function mapSubscriptionStatus(status) {
@@ -23,18 +51,20 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Webhook is not configured.' }, { status: 400 })
   }
 
-  // Signature verification requires the exact, untouched request body.
   const rawBody = await request.text()
-  let event
-  try {
-    event = await getPaddleClient().webhooks.unmarshal(rawBody, secret, signature)
-  } catch (error) {
-    console.warn('Rejected Paddle webhook signature:', error?.message || 'invalid signature')
+  if (!verifyPaddleSignature(rawBody, signature, secret)) {
     return NextResponse.json({ error: 'Invalid Paddle signature.' }, { status: 401 })
   }
 
-  const eventId = event?.eventId || event?.event_id
-  const eventType = event?.eventType || event?.event_type
+  let event
+  try {
+    event = JSON.parse(rawBody)
+  } catch {
+    return NextResponse.json({ error: 'Malformed event JSON.' }, { status: 400 })
+  }
+
+  const eventId = event?.event_id
+  const eventType = event?.event_type
   const data = event?.data
   if (!eventId || !eventType || !data) {
     return NextResponse.json({ error: 'Malformed Paddle event.' }, { status: 400 })
@@ -49,8 +79,6 @@ export async function POST(request) {
     'subscription.resumed',
     'subscription.past_due',
   ])
-
-  // Valid, unrelated events should be acknowledged without modifying access.
   if (!supported.has(eventType)) {
     return NextResponse.json({ received: true, ignored: true })
   }
@@ -59,22 +87,19 @@ export async function POST(request) {
   const businessId = customData.trustdrop_business_id
   const subscriptionId = data.id
   const status = mapSubscriptionStatus(data.status)
-
   if (!businessId || !subscriptionId || !status) {
-    console.warn('Paddle subscription event missing expected mapping/status:', eventType)
     return NextResponse.json({ error: 'Subscription event is missing required data.' }, { status: 400 })
   }
 
-  // Do not grant access for an event that isn't for the configured Pro price.
   const priceId = process.env.PADDLE_PRICE_ID
   const items = Array.isArray(data.items) ? data.items : []
   const hasExpectedPrice = items.some(item =>
     item?.price?.id === priceId ||
-    item?.priceId === priceId ||
-    item?.price_id === priceId
+    item?.price_id === priceId ||
+    item?.priceId === priceId
   )
-  if (priceId && items.length > 0 && !hasExpectedPrice) {
-    console.warn('Ignored Paddle subscription for unexpected price:', subscriptionId)
+  if (!priceId || !hasExpectedPrice) {
+    console.warn('Ignored Paddle subscription without the configured TrustDrop price:', subscriptionId)
     return NextResponse.json({ received: true, ignored: true })
   }
 
@@ -90,25 +115,21 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Database lookup failed.' }, { status: 500 })
   }
   if (!business) {
-    // Return non-2xx so Paddle retries; this may be a temporary ordering issue.
     return NextResponse.json({ error: 'TrustDrop business not found.' }, { status: 404 })
   }
 
-  const eventTime = event?.occurredAt || event?.occurred_at || new Date().toISOString()
+  const eventTime = event?.occurred_at || new Date().toISOString()
   const eventMs = Date.parse(eventTime)
   const priorMs = business.paddle_updated_at ? Date.parse(business.paddle_updated_at) : 0
   if (Number.isFinite(eventMs) && eventMs < priorMs) {
     return NextResponse.json({ received: true, ignored: true, reason: 'stale_event' })
   }
 
-  // Once a business is linked to a subscription, a different subscription must not
-  // overwrite it unless the old subscription has already ended.
   if (
     business.paddle_subscription_id &&
     business.paddle_subscription_id !== subscriptionId &&
     !['cancelled', 'expired'].includes(status)
   ) {
-    console.warn('Rejected unexpected Paddle subscription for business:', businessId)
     return NextResponse.json({ error: 'Business is already linked to another subscription.' }, { status: 409 })
   }
 
@@ -116,17 +137,14 @@ export async function POST(request) {
     plan: status === 'active' ? 'pro' : 'free',
     subscription_status: status,
     paddle_subscription_id: subscriptionId,
-    paddle_customer_id: data.customerId || data.customer_id || null,
+    paddle_customer_id: data.customer_id || null,
     paddle_updated_at: Number.isFinite(eventMs) ? new Date(eventMs).toISOString() : new Date().toISOString(),
     paddle_last_event_id: eventId,
   }
 
-  // A live paid subscription clears the trial deadline. For a trialing Paddle
-  // subscription, use Paddle's billing period; TrustDrop's own 14-day trial is
-  // otherwise preserved and remains governed by trial_ends_at.
   if (status === 'active') patch.trial_ends_at = null
   if (status === 'trialing') {
-    const periodEnd = data.currentBillingPeriod?.endsAt || data.current_billing_period?.ends_at
+    const periodEnd = data.current_billing_period?.ends_at
     if (periodEnd) patch.trial_ends_at = periodEnd
   }
 
