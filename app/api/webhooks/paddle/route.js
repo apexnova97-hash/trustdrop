@@ -142,11 +142,9 @@ export async function POST(request) {
     paddle_last_event_id: eventId,
   }
 
+  // Only a verified active paid subscription clears TrustDrop's own trial deadline.
+  // Paddle-side trial events do not extend or replace TrustDrop's 14-day trial.
   if (status === 'active') patch.trial_ends_at = null
-  if (status === 'trialing') {
-    const periodEnd = data.current_billing_period?.ends_at
-    if (periodEnd) patch.trial_ends_at = periodEnd
-  }
 
   const { error: updateError } = await admin
     .from('businesses')
