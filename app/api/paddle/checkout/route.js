@@ -50,6 +50,7 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Your subscription is already active.' }, { status: 409 })
     }
 
+    const siteUrl = process.env.SITE_URL || new URL(request.url).origin
     const paddleResponse = await fetch(`${getPaddleApiBaseUrl()}/transactions`, {
       method: 'POST',
       headers: {
@@ -62,7 +63,7 @@ export async function POST(request) {
           trustdrop_business_id: business.id,
           trustdrop_user_id: user.id,
         },
-        checkout: { url: process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin },
+        checkout: { url: siteUrl },
         enable_checkout: true,
       }),
       cache: 'no-store',
