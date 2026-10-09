@@ -63,7 +63,6 @@ export async function POST(request) {
           trustdrop_user_id: user.id,
         },
         checkout: { url: process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin },
-        enable_checkout: true,
       }),
       cache: 'no-store',
     })
