@@ -1,27 +1,21 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Script from 'next/script'
 import { supabase } from '../../lib/supabase'
 
-const PAID_STATUSES = ['active']
-const PAID_PLANS = ['paid', 'pro', 'active']
-
 function isPaid(business) {
-  if (!business) return false
-
-  // An explicitly expired account is always expired.
-  if (business.subscription_status === 'expired') return false
-
-  return PAID_STATUSES.includes(business.subscription_status) ||
-    PAID_PLANS.includes(String(business.plan || '').toLowerCase())
+  // A plan label alone never grants paid access. The subscription must have
+  // been linked by the verified Paddle webhook.
+  return Boolean(business && business.subscription_status === 'active' && business.paddle_subscription_id)
 }
 
 function isExpired(business) {
   if (!business || isPaid(business)) return false
-  if (business.subscription_status === 'expired') return true
-  if (business.subscription_status === 'trialing' && business.trial_ends_at) {
-    return new Date(business.trial_ends_at) <= new Date()
+  if (business.subscription_status === 'expired' || business.subscription_status === 'cancelled') return true
+  if (business.subscription_status === 'trialing') {
+    return !business.trial_ends_at || new Date(business.trial_ends_at) <= new Date()
   }
-  return false
+  return true
 }
 
 function daysRemaining(business) {
@@ -37,6 +31,8 @@ export default function Dashboard() {
   const [filter, setFilter] = useState('all')
   const [noBusiness, setNoBusiness] = useState(false)
   const [actionId, setActionId] = useState(null)
+  const [checkoutLoading, setCheckoutLoading] = useState(false)
+  const [paddleReady, setPaddleReady] = useState(false)
 
   useEffect(() => {
     checkUser()
@@ -134,14 +130,49 @@ export default function Dashboard() {
     return true
   })
 
-  // Lemon Squeezy checkout
-  const checkoutUrl = business
-    ? `https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21?checkout[email]=${encodeURIComponent(business.email)}`
-    : 'https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21'
+  function handlePaddleScriptLoad() {
+    const token = process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN
+    if (!window.Paddle || !token || window.__trustDropPaddleInitialized) return
+
+    if (process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT !== 'production') {
+      window.Paddle.Environment.set('sandbox')
+    }
+    window.Paddle.Initialize({ token })
+    window.__trustDropPaddleInitialized = true
+    setPaddleReady(true)
+  }
+
+  async function handleCheckout() {
+    if (checkoutLoading) return
+    if (!paddleReady || !window.Paddle) {
+      alert('Checkout is still loading. Please try again in a moment.')
+      return
+    }
+
+    setCheckoutLoading(true)
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session?.access_token) throw new Error('Please log in again to continue.')
+
+      const response = await fetch('/api/paddle/checkout', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${session.access_token}`, 'Content-Type': 'application/json' },
+      })
+      const result = await response.json()
+      if (!response.ok || !result.transactionId) throw new Error(result.error || 'Could not start checkout.')
+      window.Paddle.Checkout.open({ transactionId: result.transactionId })
+    } catch (error) {
+      console.error('Paddle checkout error:', error)
+      alert(error.message || 'Could not start checkout. Please try again.')
+    } finally {
+      setCheckoutLoading(false)
+    }
+  }
 
   if (isExpired(business)) {
     return (
       <div style={{ minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif", padding: 24 }}>
+        <Script src="https://cdn.paddle.com/paddle/v2/paddle.js" strategy="afterInteractive" onLoad={handlePaddleScriptLoad} />
         <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'); *{box-sizing:border-box}`}</style>
         <div style={{ background: '#0a0e1a', border: '1px solid #141c2e', borderRadius: 20, padding: '44px 36px', maxWidth: 460, width: '100%', textAlign: 'center', position: 'relative' }}>
           <div style={{ width: 64, height: 64, background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 22px', fontSize: 28 }}>⏰</div>
@@ -149,9 +180,9 @@ export default function Dashboard() {
           <p style={{ color: '#666', fontSize: 15, lineHeight: 1.7, marginBottom: 28 }}>
             Your 14-day TrustDrop trial has expired. Upgrade to keep using your dashboard and collecting customer reviews.
           </p>
-          <a href={checkoutUrl} target="_blank" rel="noreferrer" style={{ display: 'block', background: '#2563eb', color: 'white', textDecoration: 'none', padding: '15px 0', borderRadius: 10, fontSize: 16, fontWeight: 700, marginBottom: 14 }}>
-            Upgrade for $19/month →
-          </a>
+          <button onClick={handleCheckout} disabled={checkoutLoading} style={{ display: 'block', width: '100%', background: '#2563eb', color: 'white', border: 0, padding: '15px 0', borderRadius: 10, fontSize: 16, fontWeight: 700, marginBottom: 14, cursor: checkoutLoading ? 'wait' : 'pointer', opacity: checkoutLoading ? 0.7 : 1 }}>
+            {checkoutLoading ? 'Opening checkout...' : 'Upgrade for $19/month →'}
+          </button>
           <button onClick={handleLogout} className="logout-btn" style={{ width: '100%', padding: '12px 0' }}>
             Log out
           </button>
@@ -201,6 +232,7 @@ export default function Dashboard() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#050810', fontFamily: "'Inter', sans-serif", color: 'white' }}>
+      <Script src="https://cdn.paddle.com/paddle/v2/paddle.js" strategy="afterInteractive" onLoad={handlePaddleScriptLoad} />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -413,9 +445,9 @@ export default function Dashboard() {
                 <p style={{ fontSize: 13, color: '#888' }}>Upgrade for $19/month to keep TrustDrop after your trial ends.</p>
               </div>
             </div>
-            <a href={checkoutUrl} target="_blank" rel="noreferrer" className="upgrade-btn">
-              Upgrade now →
-            </a>
+            <button onClick={handleCheckout} disabled={checkoutLoading} className="upgrade-btn" style={{ border: 0, cursor: checkoutLoading ? 'wait' : 'pointer', opacity: checkoutLoading ? 0.7 : 1 }}>
+              {checkoutLoading ? 'Opening checkout...' : 'Upgrade now →'}
+            </button>
           </div>
         )}
 
