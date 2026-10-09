@@ -18,7 +18,7 @@ function verifyPaddleSignature(rawBody, signatureHeader, secret) {
 
   // Reject stale requests to reduce replay risk; signature covers exact raw bytes.
   const ageSeconds = Math.abs(Date.now() / 1000 - Number(timestamp))
-  if (!Number.isFinite(ageSeconds) || ageSeconds > 300) return false
+  if (!Number.isFinite(ageSeconds) || ageSeconds > 5) return false
 
   const expected = createHmac('sha256', secret)
     .update(`${timestamp}:${rawBody}`, 'utf8')
