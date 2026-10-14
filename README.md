@@ -39,4 +39,4 @@ npm run dev
 
 ## About this project
 
-Built end-to-end by [Your Name] — database schema, authentication flow, UI, and deployment — as a real, live SaaS product.
+Built end-to-end by [Abrham Tekuam] — database schema, authentication flow, UI, and deployment — as a real, live SaaS product.
