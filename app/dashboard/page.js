@@ -1,27 +1,32 @@
 'use client'
 import { useState, useEffect } from 'react'
-import Script from 'next/script'
 import { supabase } from '../../lib/supabase'
 
+const PAID_STATUSES = ['active']
+const PAID_PLANS = ['paid', 'pro', 'active']
+
 function isPaid(business) {
-  // A plan label alone never grants paid access. The subscription must have
-  // been linked by the verified Paddle webhook.
-  return Boolean(business && business.subscription_status === 'active' && business.paddle_subscription_id)
+  if (!business) return false
+  if (PAID_STATUSES.includes(business.subscription_status)) return true
+  if (business.plan && PAID_PLANS.includes(business.plan)) return true
+  return false
 }
 
 function isExpired(business) {
-  if (!business || isPaid(business)) return false
-  if (business.subscription_status === 'expired' || business.subscription_status === 'cancelled') return true
-  if (business.subscription_status === 'trialing') {
-    return !business.trial_ends_at || new Date(business.trial_ends_at) <= new Date()
+  if (!business) return false
+  if (isPaid(business)) return false
+  if (business.subscription_status === 'expired') return true
+  if (business.subscription_status === 'trialing' && business.trial_ends_at) {
+    return new Date(business.trial_ends_at) <= new Date()
   }
-  return true
+  // No trial_ends_at at all -> don't crash, treat as normal/active trial
+  return false
 }
 
 function daysRemaining(business) {
   if (!business?.trial_ends_at) return null
   const ms = new Date(business.trial_ends_at).getTime() - Date.now()
-  return Math.max(0, Math.ceil(ms / 86400000))
+  return Math.max(0, Math.ceil(ms / (1000 * 60 * 60 * 24)))
 }
 
 export default function Dashboard() {
@@ -30,9 +35,6 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all')
   const [noBusiness, setNoBusiness] = useState(false)
-  const [actionId, setActionId] = useState(null)
-  const [checkoutLoading, setCheckoutLoading] = useState(false)
-  const [paddleReady, setPaddleReady] = useState(false)
 
   useEffect(() => {
     checkUser()
@@ -61,62 +63,23 @@ export default function Dashboard() {
       return
     }
     setBusiness(businessData)
-
-    if (isExpired(businessData)) {
-      setLoading(false)
-      return
-    }
-
     fetchTestimonials(businessData.id)
   }
 
   async function approveTestimonial(id, currentStatus) {
-    if (!business || actionId) return
-
-    setActionId(id)
-    const nextStatus = !currentStatus
-
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from('testimonials')
-      .update({ approved: nextStatus })
+      .update({ approved: !currentStatus })
       .eq('id', id)
-      .eq('business_id', business.id)
-      .select('*')
-      .single()
-
-    if (error) {
-      console.error('Approve testimonial error:', error)
-      alert(error.message || 'Could not update this review.')
-    } else if (data) {
-      setTestimonials(prev =>
-        prev.map(t => t.id === id ? data : t)
-      )
-    }
-
-    setActionId(null)
+    if (!error) fetchTestimonials(business.id)
   }
 
   async function deleteTestimonial(id) {
-    if (!business || actionId) return
-
-    if (!window.confirm('Delete this review permanently?')) return
-
-    setActionId(id)
-
     const { error } = await supabase
       .from('testimonials')
       .delete()
       .eq('id', id)
-      .eq('business_id', business.id)
-
-    if (error) {
-      console.error('Delete testimonial error:', error)
-      alert(error.message || 'Could not delete this review.')
-    } else {
-      setTestimonials(prev => prev.filter(t => t.id !== id))
-    }
-
-    setActionId(null)
+    if (!error) fetchTestimonials(business.id)
   }
 
   async function handleLogout() {
@@ -130,72 +93,13 @@ export default function Dashboard() {
     return true
   })
 
-  function handlePaddleScriptLoad() {
-    const token = process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN
-    if (!window.Paddle || !token || window.__trustDropPaddleInitialized) return
-
-    if (process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT !== 'production') {
-      window.Paddle.Environment.set('sandbox')
-    }
-    window.Paddle.Initialize({ token })
-    window.__trustDropPaddleInitialized = true
-    setPaddleReady(true)
-  }
-
-  async function handleCheckout() {
-    if (checkoutLoading) return
-    if (!paddleReady || !window.Paddle) {
-      alert('Checkout is still loading. Please try again in a moment.')
-      return
-    }
-
-    setCheckoutLoading(true)
-    try {
-      const { data: { session } } = await supabase.auth.getSession()
-      if (!session?.access_token) throw new Error('Please log in again to continue.')
-
-      const response = await fetch('/api/paddle/checkout', {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${session.access_token}`, 'Content-Type': 'application/json' },
-      })
-      const result = await response.json()
-      if (!response.ok || !result.transactionId) throw new Error(result.error || 'Could not start checkout.')
-      window.Paddle.Checkout.open({ transactionId: result.transactionId })
-    } catch (error) {
-      console.error('Paddle checkout error:', error)
-      alert(error.message || 'Could not start checkout. Please try again.')
-    } finally {
-      setCheckoutLoading(false)
-    }
-  }
-
-  if (isExpired(business)) {
-    return (
-      <div style={{ minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif", padding: 24 }}>
-        <Script src="https://cdn.paddle.com/paddle/v2/paddle.js" strategy="afterInteractive" onLoad={handlePaddleScriptLoad} />
-        <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'); *{box-sizing:border-box}`}</style>
-        <div style={{ background: '#0a0e1a', border: '1px solid #141c2e', borderRadius: 20, padding: '44px 36px', maxWidth: 460, width: '100%', textAlign: 'center', position: 'relative' }}>
-          <div style={{ width: 64, height: 64, background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 22px', fontSize: 28 }}>⏰</div>
-          <h1 style={{ fontSize: 24, fontWeight: 800, color: 'white', marginBottom: 12 }}>Your free trial has ended</h1>
-          <p style={{ color: '#666', fontSize: 15, lineHeight: 1.7, marginBottom: 28 }}>
-            Your 14-day TrustDrop trial has expired. Upgrade to keep using your dashboard and collecting customer reviews.
-          </p>
-          <button onClick={handleCheckout} disabled={checkoutLoading} style={{ display: 'block', width: '100%', background: '#2563eb', color: 'white', border: 0, padding: '15px 0', borderRadius: 10, fontSize: 16, fontWeight: 700, marginBottom: 14, cursor: checkoutLoading ? 'wait' : 'pointer', opacity: checkoutLoading ? 0.7 : 1 }}>
-            {checkoutLoading ? 'Opening checkout...' : 'Upgrade for $19/month →'}
-          </button>
-          <button onClick={handleLogout} className="logout-btn" style={{ width: '100%', padding: '12px 0' }}>
-            Log out
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  const trialDays = daysRemaining(business)
-
   const avgRating = testimonials.length
     ? (testimonials.reduce((sum, t) => sum + t.star_rating, 0) / testimonials.length).toFixed(1)
     : '0.0'
+
+  const checkoutUrl = business
+    ? `https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21?checkout[email]=${encodeURIComponent(business.email)}`
+    : 'https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21'
 
   if (loading) {
     return (
@@ -230,9 +134,41 @@ export default function Dashboard() {
     )
   }
 
+  // ── TRIAL EXPIRED SCREEN ──
+  if (isExpired(business)) {
+    return (
+      <div style={{ minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif", padding: 24 }}>
+        <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'); *{box-sizing:border-box} @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.2); opacity: 0; } }`}</style>
+        <div style={{ position: 'absolute', width: 400, height: 400, background: '#1d4ed8', borderRadius: '50%', filter: 'blur(140px)', opacity: 0.08, top: '50%', left: '50%', transform: 'translate(-50%,-50%)', pointerEvents: 'none' }} />
+        <div style={{ background: '#0a0e1a', border: '1px solid #141c2e', borderRadius: 20, padding: '44px 36px', maxWidth: 460, width: '100%', textAlign: 'center', position: 'relative' }}>
+          <div style={{ width: 64, height: 64, background: 'rgba(239,68,68,0.1)', border: '1px solid rgba(239,68,68,0.25)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 22px', fontSize: 28 }}>⏰</div>
+          <h1 style={{ fontSize: 24, fontWeight: 800, color: 'white', marginBottom: 12, letterSpacing: '-0.5px' }}>Your free trial has ended</h1>
+          <p style={{ color: '#666', fontSize: 15, lineHeight: 1.7, marginBottom: 28 }}>
+            Your 14-day TrustDrop trial has expired. Upgrade to keep using your dashboard and collecting customer reviews.
+          </p>
+          <a
+            href={checkoutUrl}
+            target="_blank"
+            style={{ display: 'block', background: '#2563eb', color: 'white', textDecoration: 'none', padding: '15px 0', borderRadius: 10, fontSize: 16, fontWeight: 700, marginBottom: 14, transition: 'background 0.15s' }}
+          >
+            Upgrade for $19/month →
+          </a>
+          <button
+            onClick={handleLogout}
+            style={{ background: 'transparent', border: '1px solid #141c2e', color: '#555', padding: '12px 0', borderRadius: 10, fontSize: 14, fontWeight: 500, cursor: 'pointer', fontFamily: 'inherit', width: '100%' }}
+          >
+            Log out
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  const trialDays = daysRemaining(business)
+  const showTrialBanner = !isPaid(business)
+
   return (
     <div style={{ minHeight: '100vh', background: '#050810', fontFamily: "'Inter', sans-serif", color: 'white' }}>
-      <Script src="https://cdn.paddle.com/paddle/v2/paddle.js" strategy="afterInteractive" onLoad={handlePaddleScriptLoad} />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -355,6 +291,10 @@ export default function Dashboard() {
           gap: 16px;
           flex-wrap: wrap;
         }
+        .upgrade-card.urgent {
+          background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(217,119,6,0.05));
+          border-color: rgba(245,158,11,0.35);
+        }
 
         .upgrade-btn {
           background: #2563eb;
@@ -384,6 +324,8 @@ export default function Dashboard() {
           border: 1.5px solid #22d3ee;
           animation: pulseRing 1.6s ease-out infinite;
         }
+        .live-dot.urgent { background: #f59e0b; }
+        .live-dot.urgent::after { border-color: #f59e0b; }
 
         @media (max-width: 768px) {
           .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
@@ -431,23 +373,25 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* UPGRADE / SUBSCRIBE CARD */}
-        {business?.subscription_status !== 'active' && !['paid', 'pro', 'active'].includes(String(business?.plan || '').toLowerCase()) && (
-          <div className="upgrade-card">
+        {/* UPGRADE / TRIAL CARD — only for non-paid accounts */}
+        {showTrialBanner && (
+          <div className={`upgrade-card ${trialDays !== null && trialDays <= 3 ? 'urgent' : ''}`}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-              <div className="live-dot" />
+              <div className={`live-dot ${trialDays !== null && trialDays <= 3 ? 'urgent' : ''}`} />
               <div>
                 <p style={{ fontSize: 14, fontWeight: 600, color: 'white', marginBottom: 2 }}>
-                  {business?.trial_ends_at
-                    ? `Free trial — ${Math.max(0, Math.ceil((new Date(business.trial_ends_at).getTime() - Date.now()) / 86400000))} day(s) remaining`
-                    : "You're on the free trial"}
+                  {trialDays === null
+                    ? 'Free trial'
+                    : trialDays === 0
+                    ? 'Free trial — ends today'
+                    : `Free trial — ${trialDays} day${trialDays === 1 ? '' : 's'} remaining`}
                 </p>
-                <p style={{ fontSize: 13, color: '#888' }}>Upgrade for $19/month to keep TrustDrop after your trial ends.</p>
+                <p style={{ fontSize: 13, color: '#888' }}>Upgrade to keep collecting reviews after your trial ends — just $19/month</p>
               </div>
             </div>
-            <button onClick={handleCheckout} disabled={checkoutLoading} className="upgrade-btn" style={{ border: 0, cursor: checkoutLoading ? 'wait' : 'pointer', opacity: checkoutLoading ? 0.7 : 1 }}>
-              {checkoutLoading ? 'Opening checkout...' : 'Upgrade now →'}
-            </button>
+            <a href={checkoutUrl} target="_blank" className="upgrade-btn">
+              Upgrade now →
+            </a>
           </div>
         )}
 
@@ -529,27 +473,16 @@ export default function Dashboard() {
                     <button
                       className="approve-btn"
                       onClick={() => approveTestimonial(t.id, t.approved)}
-                      disabled={actionId === t.id}
                       style={{
                         background: t.approved ? 'rgba(255,255,255,0.04)' : 'rgba(52,211,153,0.1)',
                         color: t.approved ? '#333' : '#34d399',
                         border: `1px solid ${t.approved ? '#141c2e' : 'rgba(52,211,153,0.25)'}`,
-                        opacity: actionId === t.id ? 0.5 : 1,
-                        cursor: actionId === t.id ? 'wait' : 'pointer',
                       }}
                     >
-                      {actionId === t.id ? 'Saving...' : t.approved ? 'Unpublish' : '✓ Approve'}
+                      {t.approved ? 'Unpublish' : '✓ Approve'}
                     </button>
-                    <button
-                      className="delete-btn"
-                      onClick={() => deleteTestimonial(t.id)}
-                      disabled={actionId === t.id}
-                      style={{
-                        opacity: actionId === t.id ? 0.5 : 1,
-                        cursor: actionId === t.id ? 'wait' : 'pointer',
-                      }}
-                    >
-                      {actionId === t.id ? 'Deleting...' : 'Delete'}
+                    <button className="delete-btn" onClick={() => deleteTestimonial(t.id)}>
+                      Delete
                     </button>
                   </div>
                 </div>
