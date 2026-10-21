@@ -16,7 +16,7 @@ export default function LandingPage() {
 
   return (
     <main style={{ fontFamily: "'Inter', -apple-system, sans-serif", background: '#f1f0ee', minHeight: '100vh', color: '#161616', overflowX: 'hidden', fontSize: '16px' }}>
-      <style>{\`
+      <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { font-size: 16px; overflow-x: hidden; scroll-behavior: smooth; }
@@ -69,7 +69,7 @@ export default function LandingPage() {
           nav { padding: 0 20px !important; }
           .s { padding-left: 20px !important; padding-right: 20px !important; }
         }
-      \`}</style>
+      `}</style>
 
       {/* NAV */}
       <nav style={{ height: 68, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 6%', borderBottom: '1px solid #e4e2df' }}>
