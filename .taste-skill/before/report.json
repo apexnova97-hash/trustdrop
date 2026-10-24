@@ -1,0 +1,3531 @@
+{
+ "url": "http://127.0.0.1:3000",
+ "at": "2026-10-24T10:40:28.928Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 11,
+   "filled": [
+    1,
+    1,
+    1,
+    1,
+    0.84,
+    0.83,
+    0.82,
+    1,
+    1,
+    1,
+    1
+   ],
+   "motion": {
+    "elements": 95,
+    "css": 53,
+    "transitions": 40,
+    "scripted": 2,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 9218,
+     "screens": 10.2,
+     "words": 759,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 79,
+     "sections": 7,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "All your customer proof, handled.",
+     "words": 5,
+     "chars": 33,
+     "lines": 2,
+     "size": 78,
+     "vw": 5.4,
+     "font": "Plus Jakarta Sans",
+     "weight": 600,
+     "tracking": -0.045,
+     "leading": 1.01,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "center",
+     "position": "center",
+     "widthRatio": 0.68,
+     "top": 229,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "All your customer proof, handled.",
+     "words": 5,
+     "lines": 2,
+     "size": 78,
+     "font": "Plus Jakarta Sans"
+    },
+    "headings": [
+     {
+      "text": "All your customer proof, handled.",
+      "words": 5,
+      "chars": 33,
+      "lines": 2,
+      "size": 78,
+      "vw": 5.4,
+      "font": "Plus Jakarta Sans",
+      "weight": 600,
+      "tracking": -0.045,
+      "leading": 1.01,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.68,
+      "top": 229,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Everything your reviews need. Nothing they don’t.",
+      "words": 7,
+      "chars": 49,
+      "lines": 2,
+      "size": 52,
+      "vw": 3.6,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.5,
+      "top": 2984,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Easy testimonials ahead.",
+      "words": 3,
+      "chars": 24,
+      "lines": 1,
+      "size": 44,
+      "vw": 3.1,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.47,
+      "top": 3747,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "500+",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 52,
+      "vw": 3.6,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.18,
+      "top": 6517,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "10k+",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 52,
+      "vw": 3.6,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.16,
+      "top": 6517,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "4.9",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 52,
+      "vw": 3.6,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.16,
+      "top": 6517,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "30s",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 52,
+      "vw": 3.6,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.16,
+      "top": 6517,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "A wall of love that works while you sleep.",
+      "words": 9,
+      "chars": 42,
+      "lines": 2,
+      "size": 52,
+      "vw": 3.6,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.5,
+      "top": 6780,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "3×",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 76,
+      "vw": 5.3,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.055,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.21,
+      "top": 7095,
+      "gradientText": true,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "30s",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 76,
+      "vw": 5.3,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.055,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.21,
+      "top": 7095,
+      "gradientText": true,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "1 line",
+      "words": 2,
+      "chars": 6,
+      "lines": 1,
+      "size": 76,
+      "vw": 5.3,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.055,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.21,
+      "top": 7095,
+      "gradientText": true,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "“",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 58,
+      "vw": 4,
+      "font": "Plus Jakarta Sans",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.7,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.34,
+      "top": 7102,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "“",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 58,
+      "vw": 4,
+      "font": "Plus Jakarta Sans",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.7,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.34,
+      "top": 7102,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "“",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 58,
+      "vw": 4,
+      "font": "Plus Jakarta Sans",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.7,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.34,
+      "top": 7102,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "Simple pricing. Serious proof.",
+      "words": 4,
+      "chars": 30,
+      "lines": 1,
+      "size": 52,
+      "vw": 3.6,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.5,
+      "top": 7557,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "$ 19 /month",
+      "words": 3,
+      "chars": 11,
+      "lines": 1,
+      "size": 68,
+      "vw": 4.7,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.27,
+      "top": 7840,
+      "mixedFonts": [
+       "Plus Jakarta Sans",
+       "Inter"
+      ],
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "Your best marketing is already your customers.",
+      "words": 7,
+      "chars": 46,
+      "lines": 2,
+      "size": 58,
+      "vw": 4,
+      "font": "Plus Jakarta Sans",
+      "weight": 600,
+      "tracking": -0.045,
+      "leading": 1.06,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.49,
+      "top": 8482,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 17,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 5,
+     "medianWords": 1,
+     "mixedFontHeadings": 1
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.84,
+       "mono": false
+      },
+      {
+       "family": "Plus Jakarta Sans",
+       "share": 0.16,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      19,
+      21,
+      26,
+      44,
+      52,
+      58,
+      68,
+      76,
+      78
+     ],
+     "sizeCount": 17,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 13.5,
+      "leading": 1.6,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 5.2
+     },
+     "measureChars": 67,
+     "max": {
+      "size": 78,
+      "vw": 5.4,
+      "font": "Plus Jakarta Sans",
+      "text": "All your customer proof,"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 10,
+     "microLabelShare": 0.04,
+     "microSamples": [
+      "1 / 3 · A customer leaves a review",
+      "Scroll to explore",
+      "From link to live widget",
+      "How it works",
+      "Scroll to explore",
+      "Loved by businesses"
+     ],
+     "upperShare": 0.05,
+     "centerShare": 0.28,
+     "smallText": 33
+    },
+    "eyebrows": [
+     {
+      "text": "Trusted by 500+ businesses",
+      "above": "All your customer proof, handled.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 13,
+      "top": 173
+     },
+     {
+      "text": "From link to live widget",
+      "above": "Everything your reviews need. Nothing th",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 2948
+     },
+     {
+      "text": "Loved by businesses",
+      "above": "A wall of love that works while you slee",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 6744
+     },
+     {
+      "text": "Pricing",
+      "above": "Simple pricing. Serious proof.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 7522
+     },
+     {
+      "text": "Everything included",
+      "above": "$ 19 /month",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 11.5,
+      "top": 7784
+     },
+     {
+      "text": "Ready when you are",
+      "above": "Your best marketing is already your cust",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 11.5,
+      "top": 8443
+     }
+    ],
+    "numbered": [
+     {
+      "text": "01",
+      "size": 10.5,
+      "top": 3924
+     },
+     {
+      "text": "02",
+      "size": 10.5,
+      "top": 4012
+     },
+     {
+      "text": "03",
+      "size": 10.5,
+      "top": 4099
+     },
+     {
+      "text": "04",
+      "size": 10.5,
+      "top": 4187
+     },
+     {
+      "text": "01 / 04",
+      "size": 10,
+      "top": 3914
+     }
+    ],
+    "color": {
+     "bodyBg": "#050810",
+     "bodyBgHsl": {
+      "h": 224,
+      "s": 0.52,
+      "l": 0.04
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#fcfbf8",
+       "top": 0,
+       "hsl": {
+        "h": 45,
+        "s": 0.4,
+        "l": 0.98
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 716,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#071a31",
+       "top": 8338,
+       "hsl": {
+        "h": 213,
+        "s": 0.75,
+        "l": 0.11
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#5d6e82",
+       "share": 0.3
+      },
+      {
+       "color": "#071a31",
+       "share": 0.24
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.22
+      },
+      {
+       "color": "#33465c",
+       "share": 0.06
+      },
+      {
+       "color": "#a9b2be",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#0069ff",
+      "hsl": {
+       "h": 215,
+       "s": 1,
+       "l": 0.5
+      },
+      "fg": "#071a31"
+     },
+     "lowContrast": [
+      {
+       "text": "Shopify",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "WordPress",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "Webflow",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "Squarespace",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "Framer",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "Custom sites",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      }
+     ]
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 4,
+     "radius": "pill",
+     "height": 51,
+     "withShadow": 3,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Get started free",
+      "Get started free",
+      "See how it works",
+      "Publish"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 14,
+     "shadowOverlay": 3,
+     "shadowSamples": [
+      "a.btn.btn-light → rgba(7, 26, 49, 0.18) 0px 12px 30px 0px",
+      "span.app-tile → rgba(10, 26, 60, 0.18) 0px 10px 22px 0px",
+      "span.app-tile → rgba(10, 26, 60, 0.18) 0px 10px 22px 0px",
+      "span.app-tile → rgba(10, 26, 60, 0.18) 0px 10px 22px 0px"
+     ],
+     "gradients": 5,
+     "scrims": 0,
+     "gradientSamples": [
+      "div.hero-panel → radial-gradient(110% 90% at 8% 0%, rgb(44, 91, 203) 0%, rgba(44, 91, 203, 0) 58%), radial-gradient(90% 90% at ",
+      "div.demo-body → radial-gradient(80% 100% at 50% 0%, rgb(247, 250, 255) 0%, rgb(243, 246, 251) 100%)",
+      "div.show-visual.g-violet → linear-gradient(150deg, rgb(109, 126, 234) 0%, rgb(161, 139, 242) 52%, rgb(241, 176, 204) 100%)",
+      "div.story-panel → linear-gradient(135deg, rgb(240, 233, 255) 0%, rgb(251, 231, 239) 48%, rgb(255, 239, 223) 100%)"
+     ],
+     "gradientText": 3,
+     "hairlines": 14,
+     "hairlineSamples": [
+      "header.td-nav 1440px",
+      "button.show-item.is-active 491px",
+      "button.show-item 491px",
+      "button.show-item 491px",
+      "button.show-item 491px"
+     ],
+     "outlinedBoxes": 6,
+     "dashed": 0,
+     "blurred": 10,
+     "roundedBoxes": 20,
+     "boxRadius": 50,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 4,
+       "iconTopped": true,
+       "rounded": true,
+       "top": 3220
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 7,
+     "fixed": true,
+     "height": 75,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "plus jakarta sans",
+     "inter"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 9218,
+    "margins": {
+     "left": 158,
+     "right": 74
+    },
+    "sections": [
+     {
+      "sel": "section#top.hero-section",
+      "tag": "section",
+      "top": 0,
+      "height": 2758,
+      "words": 67,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "All your customer proof,",
+       "size": 78,
+       "tag": "h1"
+      },
+      "left": 316,
+      "right": 316,
+      "textLeft": 316,
+      "textRight": 316,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "section#features.section",
+      "tag": "section",
+      "top": 2837,
+      "height": 693,
+      "words": 128,
+      "media": 0,
+      "middle": 87,
+      "heading": {
+       "text": "Everything your reviews need.",
+       "size": 52,
+       "tag": "h2"
+      },
+      "left": 158,
+      "right": 186,
+      "textLeft": 158,
+      "textRight": 186,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#how.section",
+      "tag": "section",
+      "top": 3530,
+      "height": 2848,
+      "words": 59,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Easy testimonials ahead.",
+       "size": 44,
+       "tag": "h2"
+      },
+      "left": 158,
+      "right": 465,
+      "textLeft": 164,
+      "textRight": 465,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": true
+     },
+     {
+      "sel": "section.stats-section",
+      "tag": "section",
+      "top": 6378,
+      "height": 255,
+      "words": 17,
+      "media": 0,
+      "middle": 163,
+      "heading": {
+       "text": "500",
+       "size": 52,
+       "tag": "span"
+      },
+      "left": 158,
+      "right": 304,
+      "textLeft": 158,
+      "textRight": 304,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#customers.section",
+      "tag": "section",
+      "top": 6633,
+      "height": 778,
+      "words": 139,
+      "media": 0,
+      "middle": 665,
+      "heading": {
+       "text": "3×",
+       "size": 76,
+       "tag": "span"
+      },
+      "left": 0,
+      "right": 0,
+      "textLeft": -754,
+      "textRight": -717,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#pricing.section",
+      "tag": "section",
+      "top": 7410,
+      "height": 824,
+      "words": 94,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "19",
+       "size": 68,
+       "tag": "div"
+      },
+      "left": 295,
+      "right": 307,
+      "textLeft": 295,
+      "textRight": 307,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.final-wrap",
+      "tag": "div",
+      "top": 8234,
+      "height": 983,
+      "words": 97,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Your best marketing is already your",
+       "size": 58,
+       "tag": "h2"
+      },
+      "left": 150,
+      "right": 114,
+      "textLeft": 150,
+      "textRight": 114,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "All your customer proof, handled.",
+      "size": 78,
+      "top": 229,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 158,
+      "n": 3
+     },
+     {
+      "x": 181,
+      "n": 1
+     },
+     {
+      "x": 295,
+      "n": 1
+     },
+     {
+      "x": 466,
+      "n": 1
+     },
+     {
+      "x": 656,
+      "n": 1
+     },
+     {
+      "x": 750,
+      "n": 1
+     },
+     {
+      "x": 1035,
+      "n": 1
+     },
+     {
+      "x": 1676,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 10,
+    "bodySize": 14,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.18,
+    "voidBox": {
+     "x": 0,
+     "y": 120,
+     "w": 300,
+     "h": 780
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 7,
+   "filled": [
+    1,
+    1,
+    0.93,
+    0.82,
+    1,
+    1,
+    1
+   ],
+   "motion": {
+    "elements": 77,
+    "css": 44,
+    "transitions": 32,
+    "scripted": 1,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 6463,
+     "screens": 6.3,
+     "words": 762,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 87,
+     "sections": 7,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "All your customer proof, handled.",
+     "words": 5,
+     "chars": 33,
+     "lines": 2,
+     "size": 50.7,
+     "vw": 6.6,
+     "font": "Plus Jakarta Sans",
+     "weight": 600,
+     "tracking": -0.045,
+     "leading": 1.01,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "center",
+     "position": "center",
+     "widthRatio": 0.92,
+     "top": 223,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "All your customer proof, handled.",
+     "words": 5,
+     "lines": 2,
+     "size": 50.7,
+     "font": "Plus Jakarta Sans"
+    },
+    "headings": [
+     {
+      "text": "All your customer proof, handled.",
+      "words": 5,
+      "chars": 33,
+      "lines": 2,
+      "size": 50.7,
+      "vw": 6.6,
+      "font": "Plus Jakarta Sans",
+      "weight": 600,
+      "tracking": -0.045,
+      "leading": 1.01,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 223,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Everything your reviews need. Nothing they don’t.",
+      "words": 7,
+      "chars": 49,
+      "lines": 2,
+      "size": 32.3,
+      "vw": 4.2,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.93,
+      "top": 1420,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Easy testimonials ahead.",
+      "words": 3,
+      "chars": 24,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.89,
+      "top": 2376,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "500+",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 38,
+      "vw": 4.9,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.43,
+      "top": 3471,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "10k+",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 38,
+      "vw": 4.9,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.4,
+      "top": 3471,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "4.9",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 38,
+      "vw": 4.9,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.43,
+      "top": 3595,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "30s",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 38,
+      "vw": 4.9,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.4,
+      "top": 3595,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "A wall of love that works while you sleep.",
+      "words": 9,
+      "chars": 42,
+      "lines": 2,
+      "size": 32.3,
+      "vw": 4.2,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.93,
+      "top": 3838,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "3×",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 52,
+      "vw": 6.8,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.055,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.82,
+      "top": 4079,
+      "gradientText": true,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "30s",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 52,
+      "vw": 6.8,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.055,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.82,
+      "top": 4079,
+      "gradientText": true,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "1 line",
+      "words": 2,
+      "chars": 6,
+      "lines": 1,
+      "size": 52,
+      "vw": 6.8,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.055,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.82,
+      "top": 4079,
+      "gradientText": true,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "“",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 58,
+      "vw": 7.6,
+      "font": "Plus Jakarta Sans",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.7,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.74,
+      "top": 4279,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "“",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 58,
+      "vw": 7.6,
+      "font": "Plus Jakarta Sans",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.7,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.74,
+      "top": 4279,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "“",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 58,
+      "vw": 7.6,
+      "font": "Plus Jakarta Sans",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.7,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.74,
+      "top": 4279,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "Simple pricing. Serious proof.",
+      "words": 4,
+      "chars": 30,
+      "lines": 1,
+      "size": 32.3,
+      "vw": 4.2,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.93,
+      "top": 4681,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "$ 19 /month",
+      "words": 3,
+      "chars": 11,
+      "lines": 1,
+      "size": 68,
+      "vw": 8.9,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.38,
+      "top": 4934,
+      "mixedFonts": [
+       "Plus Jakarta Sans",
+       "Inter"
+      ],
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "Your best marketing is already your customers.",
+      "words": 7,
+      "chars": 46,
+      "lines": 2,
+      "size": 38.4,
+      "vw": 5,
+      "font": "Plus Jakarta Sans",
+      "weight": 600,
+      "tracking": -0.045,
+      "leading": 1.06,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.83,
+      "top": 5591,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 17,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 5,
+     "medianWords": 1,
+     "mixedFontHeadings": 1
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.85,
+       "mono": false
+      },
+      {
+       "family": "Plus Jakarta Sans",
+       "share": 0.15,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      19,
+      21,
+      26,
+      30,
+      32,
+      38,
+      51,
+      52,
+      58,
+      68
+     ],
+     "sizeCount": 18,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 17,
+      "leading": 1.65,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 5.1
+     },
+     "measureChars": 78,
+     "max": {
+      "size": 68,
+      "vw": 8.9,
+      "font": "Plus Jakarta Sans",
+      "text": "19"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 8,
+     "microLabelShare": 0.032,
+     "microSamples": [
+      "2 / 3 · You approve it in one click",
+      "From link to live widget",
+      "How it works",
+      "Loved by businesses",
+      "Pricing",
+      "Ready when you are"
+     ],
+     "upperShare": 0.04,
+     "centerShare": 0.27,
+     "smallText": 33
+    },
+    "eyebrows": [
+     {
+      "text": "Trusted by 500+ businesses",
+      "above": "All your customer proof, handled.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 13,
+      "top": 167
+     },
+     {
+      "text": "From link to live widget",
+      "above": "Everything your reviews need. Nothing th",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1385
+     },
+     {
+      "text": "How it works",
+      "above": "Easy testimonials ahead.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 2341
+     },
+     {
+      "text": "Loved by businesses",
+      "above": "A wall of love that works while you slee",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 3803
+     },
+     {
+      "text": "Founder, Bloom & Co.",
+      "above": "“",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 11.5,
+      "top": 4204
+     },
+     {
+      "text": "Owner, Northline Studio",
+      "above": "“",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 11.5,
+      "top": 4204
+     },
+     {
+      "text": "Marketing lead, Lumen Skincare",
+      "above": "“",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 11.5,
+      "top": 4204
+     },
+     {
+      "text": "Pricing",
+      "above": "Simple pricing. Serious proof.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 4646
+     },
+     {
+      "text": "Everything included",
+      "above": "$ 19 /month",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 11.5,
+      "top": 4877
+     },
+     {
+      "text": "Review received",
+      "above": "Your best marketing is already your cust",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 12,
+      "top": 5541
+     }
+    ],
+    "numbered": [
+     {
+      "text": "01",
+      "size": 10.5,
+      "top": 2982
+     },
+     {
+      "text": "02",
+      "size": 10.5,
+      "top": 3069
+     },
+     {
+      "text": "03",
+      "size": 10.5,
+      "top": 3187
+     },
+     {
+      "text": "04",
+      "size": 10.5,
+      "top": 3274
+     },
+     {
+      "text": "02 / 04",
+      "size": 10,
+      "top": 2522
+     }
+    ],
+    "color": {
+     "bodyBg": "#050810",
+     "bodyBgHsl": {
+      "h": 224,
+      "s": 0.52,
+      "l": 0.04
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#fcfbf8",
+       "top": 0,
+       "hsl": {
+        "h": 45,
+        "s": 0.4,
+        "l": 0.98
+       }
+      },
+      {
+       "color": "#5e9bff",
+       "top": -139,
+       "hsl": {
+        "h": 217,
+        "s": 1,
+        "l": 0.68
+       }
+      },
+      {
+       "color": "#c79bff",
+       "top": 186,
+       "hsl": {
+        "h": 266,
+        "s": 1,
+        "l": 0.8
+       }
+      },
+      {
+       "color": "#ffb3c9",
+       "top": 769,
+       "hsl": {
+        "h": 343,
+        "s": 1,
+        "l": 0.85
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 634,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#071a31",
+       "top": 5448,
+       "hsl": {
+        "h": 213,
+        "s": 0.75,
+        "l": 0.11
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#5d6e82",
+       "share": 0.3
+      },
+      {
+       "color": "#071a31",
+       "share": 0.23
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.21
+      },
+      {
+       "color": "#33465c",
+       "share": 0.04
+      },
+      {
+       "color": "#7c899a",
+       "share": 0.03
+      }
+     ],
+     "button": {
+      "bg": "#0069ff",
+      "hsl": {
+       "h": 215,
+       "s": 1,
+       "l": 0.5
+      },
+      "fg": "#071a31"
+     },
+     "lowContrast": [
+      {
+       "text": "Get started free",
+       "ratio": 1.2,
+       "need": 4.5,
+       "size": 16,
+       "fg": "#ffffff",
+       "bg": "#d9f27a"
+      },
+      {
+       "text": "Shopify",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "WordPress",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "Webflow",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "Squarespace",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "Framer",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      }
+     ]
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 4,
+     "radius": "pill",
+     "height": 51,
+     "withShadow": 3,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Get started free",
+      "Get started free",
+      "See how it works",
+      "Curate"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 14,
+     "shadowOverlay": 1,
+     "shadowSamples": [
+      "a.btn.btn-light → rgba(7, 26, 49, 0.18) 0px 12px 30px 0px",
+      "span.app-tile → rgba(10, 26, 60, 0.18) 0px 10px 22px 0px",
+      "span.app-tile → rgba(10, 26, 60, 0.18) 0px 10px 22px 0px",
+      "span.app-tile → rgba(10, 26, 60, 0.18) 0px 10px 22px 0px"
+     ],
+     "gradients": 5,
+     "scrims": 0,
+     "gradientSamples": [
+      "div.hero-panel → radial-gradient(110% 90% at 8% 0%, rgb(44, 91, 203) 0%, rgba(44, 91, 203, 0) 58%), radial-gradient(90% 90% at ",
+      "div.demo-body → radial-gradient(80% 100% at 50% 0%, rgb(247, 250, 255) 0%, rgb(243, 246, 251) 100%)",
+      "div.show-visual.g-peach → linear-gradient(150deg, rgb(245, 169, 107) 0%, rgb(245, 147, 174) 55%, rgb(190, 155, 242) 100%)",
+      "div.story-panel → linear-gradient(135deg, rgb(240, 233, 255) 0%, rgb(251, 231, 239) 48%, rgb(255, 239, 223) 100%)"
+     ],
+     "gradientText": 3,
+     "hairlines": 21,
+     "hairlineSamples": [
+      "div.dash-head 528px",
+      "div.dash-row.is-new 528px",
+      "div.dash-row 528px",
+      "button.show-item 712px",
+      "button.show-item.is-active 712px"
+     ],
+     "outlinedBoxes": 7,
+     "dashed": 0,
+     "blurred": 11,
+     "roundedBoxes": 21,
+     "boxRadius": 50,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 4,
+       "iconTopped": true,
+       "rounded": true,
+       "top": 1613
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 2,
+     "fixed": true,
+     "height": 75,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "plus jakarta sans",
+     "inter"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 6463,
+    "margins": {
+     "left": 28,
+     "right": 28
+    },
+    "sections": [
+     {
+      "sel": "section#top.hero-section",
+      "tag": "section",
+      "top": 0,
+      "height": 1195,
+      "words": 102,
+      "media": 0,
+      "middle": 2,
+      "heading": {
+       "text": "All your customer proof,",
+       "size": 51,
+       "tag": "h1"
+      },
+      "left": 54,
+      "right": 54,
+      "textLeft": 86,
+      "textRight": 86,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#features.section",
+      "tag": "section",
+      "top": 1273,
+      "height": 930,
+      "words": 128,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Everything your reviews need.",
+       "size": 32,
+       "tag": "h2"
+      },
+      "left": 28,
+      "right": 66,
+      "textLeft": 28,
+      "textRight": 66,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#how.section",
+      "tag": "section",
+      "top": 2203,
+      "height": 1135,
+      "words": 89,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Easy testimonials ahead.",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 28,
+      "right": 28,
+      "textLeft": 34,
+      "textRight": 66,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.stats-section",
+      "tag": "section",
+      "top": 3338,
+      "height": 353,
+      "words": 17,
+      "media": 0,
+      "middle": 222,
+      "heading": {
+       "text": "500",
+       "size": 38,
+       "tag": "span"
+      },
+      "left": 28,
+      "right": 250,
+      "textLeft": 28,
+      "textRight": 250,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#customers.section",
+      "tag": "section",
+      "top": 3691,
+      "height": 843,
+      "words": 139,
+      "media": 0,
+      "middle": 584,
+      "heading": {
+       "text": "3×",
+       "size": 52,
+       "tag": "span"
+      },
+      "left": 0,
+      "right": 0,
+      "textLeft": -644,
+      "textRight": -612,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#pricing.section",
+      "tag": "section",
+      "top": 4534,
+      "height": 810,
+      "words": 94,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "19",
+       "size": 68,
+       "tag": "div"
+      },
+      "left": 61,
+      "right": 85,
+      "textLeft": 61,
+      "textRight": 85,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.final-wrap",
+      "tag": "div",
+      "top": 5344,
+      "height": 1119,
+      "words": 97,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Your best marketing is already your",
+       "size": 38,
+       "tag": "h2"
+      },
+      "left": 40,
+      "right": 40,
+      "textLeft": 40,
+      "textRight": 40,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "All your customer proof, handled.",
+      "size": 51,
+      "top": 223,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 28,
+      "n": 3
+     },
+     {
+      "x": 51,
+      "n": 3
+     },
+     {
+      "x": 414,
+      "n": 2
+     },
+     {
+      "x": 100,
+      "n": 1
+     },
+     {
+      "x": 812,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 10,
+    "bodySize": 17,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 9,
+   "filled": [
+    1,
+    1,
+    1,
+    0.95,
+    0.73,
+    0.99,
+    1,
+    1,
+    1
+   ],
+   "motion": {
+    "elements": 69,
+    "css": 37,
+    "transitions": 31,
+    "scripted": 1,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 7075,
+     "screens": 8.4,
+     "words": 739,
+     "img": 0,
+     "video": 0,
+     "canvas": 0,
+     "svg": 87,
+     "sections": 7,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "All your customer proof, handled.",
+     "words": 5,
+     "chars": 33,
+     "lines": 3,
+     "size": 44,
+     "vw": 11.3,
+     "font": "Plus Jakarta Sans",
+     "weight": 600,
+     "tracking": -0.045,
+     "leading": 1.01,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "center",
+     "position": "center",
+     "widthRatio": 0.89,
+     "top": 198,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "All your customer proof, handled.",
+     "words": 5,
+     "lines": 3,
+     "size": 44,
+     "font": "Plus Jakarta Sans"
+    },
+    "headings": [
+     {
+      "text": "All your customer proof, handled.",
+      "words": 5,
+      "chars": 33,
+      "lines": 3,
+      "size": 44,
+      "vw": 11.3,
+      "font": "Plus Jakarta Sans",
+      "weight": 600,
+      "tracking": -0.045,
+      "leading": 1.01,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.89,
+      "top": 198,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Everything your reviews need. Nothing they don’t.",
+      "words": 7,
+      "chars": 49,
+      "lines": 3,
+      "size": 31.2,
+      "vw": 8,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 1417,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Easy testimonials ahead.",
+      "words": 3,
+      "chars": 24,
+      "lines": 1,
+      "size": 30,
+      "vw": 7.7,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 2853,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "500+",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 33,
+      "vw": 8.5,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 3895,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "10k+",
+      "words": 1,
+      "chars": 4,
+      "lines": 1,
+      "size": 33,
+      "vw": 8.5,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.36,
+      "top": 3895,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "4.9",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 33,
+      "vw": 8.5,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.41,
+      "top": 4005,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "30s",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 33,
+      "vw": 8.5,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.36,
+      "top": 4005,
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "A wall of love that works while you sleep.",
+      "words": 9,
+      "chars": 42,
+      "lines": 2,
+      "size": 31.2,
+      "vw": 8,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 4209,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "3×",
+      "words": 1,
+      "chars": 2,
+      "lines": 1,
+      "size": 54,
+      "vw": 13.8,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.055,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.78,
+      "top": 4426,
+      "gradientText": true,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "30s",
+      "words": 1,
+      "chars": 3,
+      "lines": 1,
+      "size": 54,
+      "vw": 13.8,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.055,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.78,
+      "top": 4426,
+      "gradientText": true,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "1 line",
+      "words": 2,
+      "chars": 6,
+      "lines": 1,
+      "size": 54,
+      "vw": 13.8,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.055,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.78,
+      "top": 4432,
+      "gradientText": true,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "“",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 58,
+      "vw": 14.9,
+      "font": "Plus Jakarta Sans",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.7,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.67,
+      "top": 4614,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "“",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 58,
+      "vw": 14.9,
+      "font": "Plus Jakarta Sans",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.7,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.67,
+      "top": 4614,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "“",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 58,
+      "vw": 14.9,
+      "font": "Plus Jakarta Sans",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 0.7,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "right",
+      "widthRatio": 0.67,
+      "top": 4632,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "Simple pricing. Serious proof.",
+      "words": 4,
+      "chars": 30,
+      "lines": 2,
+      "size": 31.2,
+      "vw": 8,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.03,
+      "leading": 1.1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 5025,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "$ 19 /month",
+      "words": 3,
+      "chars": 11,
+      "lines": 1,
+      "size": 58,
+      "vw": 14.9,
+      "font": "Plus Jakarta Sans",
+      "weight": 700,
+      "tracking": -0.05,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.77,
+      "top": 5302,
+      "mixedFonts": [
+       "Plus Jakarta Sans",
+       "Inter"
+      ],
+      "tag": "div",
+      "kind": "heading"
+     },
+     {
+      "text": "Your best marketing is already your customers.",
+      "words": 7,
+      "chars": 46,
+      "lines": 4,
+      "size": 34,
+      "vw": 8.7,
+      "font": "Plus Jakarta Sans",
+      "weight": 600,
+      "tracking": -0.045,
+      "leading": 1.06,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.75,
+      "top": 6254,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 17,
+     "maxLines": 4,
+     "over2Lines": 3,
+     "statements": 0,
+     "centered": 5,
+     "medianWords": 1,
+     "mixedFontHeadings": 1
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Inter",
+       "share": 0.85,
+       "mono": false
+      },
+      {
+       "family": "Plus Jakarta Sans",
+       "share": 0.15,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      19,
+      26,
+      30,
+      31,
+      33,
+      34,
+      44,
+      54,
+      58
+     ],
+     "sizeCount": 17,
+     "notLoaded": [],
+     "body": {
+      "font": "Inter",
+      "size": 15.5,
+      "leading": 1.65,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": null
+     },
+     "measureChars": 45,
+     "max": {
+      "size": 58,
+      "vw": 14.9,
+      "font": "Plus Jakarta Sans",
+      "text": "“"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 8,
+     "microLabelShare": 0.033,
+     "microSamples": [
+      "2 / 3 · You approve it in one click",
+      "From link to live widget",
+      "How it works",
+      "Loved by businesses",
+      "Pricing",
+      "Ready when you are"
+     ],
+     "upperShare": 0.04,
+     "centerShare": 0.25,
+     "smallText": 33
+    },
+    "eyebrows": [
+     {
+      "text": "Trusted by 500+ businesses",
+      "above": "All your customer proof, handled.",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 11.5,
+      "top": 146
+     },
+     {
+      "text": "From link to live widget",
+      "above": "Everything your reviews need. Nothing th",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 1382
+     },
+     {
+      "text": "How it works",
+      "above": "Easy testimonials ahead.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 2818
+     },
+     {
+      "text": "Loved by businesses",
+      "above": "A wall of love that works while you slee",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 4174
+     },
+     {
+      "text": "Founder, Bloom & Co.",
+      "above": "“",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 11.5,
+      "top": 4551
+     },
+     {
+      "text": "Owner, Northline Studio",
+      "above": "“",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 11.5,
+      "top": 4551
+     },
+     {
+      "text": "Marketing lead, Lumen Skincare",
+      "above": "“",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": false,
+      "size": 11.5,
+      "top": 4557
+     },
+     {
+      "text": "Pricing",
+      "above": "Simple pricing. Serious proof.",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 12,
+      "top": 4990
+     },
+     {
+      "text": "Everything included",
+      "above": "$ 19 /month",
+      "upper": false,
+      "tracked": false,
+      "mono": false,
+      "pill": true,
+      "size": 11.5,
+      "top": 5246
+     },
+     {
+      "text": "Ready when you are",
+      "above": "Your best marketing is already your cust",
+      "upper": true,
+      "tracked": true,
+      "mono": false,
+      "pill": false,
+      "size": 11.5,
+      "top": 6215
+     }
+    ],
+    "numbered": [
+     {
+      "text": "01",
+      "size": 10.5,
+      "top": 3425
+     },
+     {
+      "text": "02",
+      "size": 10.5,
+      "top": 3503
+     },
+     {
+      "text": "03",
+      "size": 10.5,
+      "top": 3657
+     },
+     {
+      "text": "04",
+      "size": 10.5,
+      "top": 3735
+     },
+     {
+      "text": "02 / 04",
+      "size": 10,
+      "top": 3029
+     }
+    ],
+    "color": {
+     "bodyBg": "#050810",
+     "bodyBgHsl": {
+      "h": 224,
+      "s": 0.52,
+      "l": 0.04
+     },
+     "dark": true,
+     "sectionBgs": [
+      {
+       "color": "#fcfbf8",
+       "top": 0,
+       "hsl": {
+        "h": 45,
+        "s": 0.4,
+        "l": 0.98
+       }
+      },
+      {
+       "color": "#5e9bff",
+       "top": -146,
+       "hsl": {
+        "h": 217,
+        "s": 1,
+        "l": 0.68
+       }
+      },
+      {
+       "color": "#c79bff",
+       "top": 183,
+       "hsl": {
+        "h": 266,
+        "s": 1,
+        "l": 0.8
+       }
+      },
+      {
+       "color": "#ffb3c9",
+       "top": 761,
+       "hsl": {
+        "h": 343,
+        "s": 1,
+        "l": 0.85
+       }
+      },
+      {
+       "color": "#ffd6a3",
+       "top": 1023,
+       "hsl": {
+        "h": 33,
+        "s": 1,
+        "l": 0.82
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 721,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#ffe5b8",
+       "top": 2888,
+       "hsl": {
+        "h": 38,
+        "s": 1,
+        "l": 0.86
+       }
+      },
+      {
+       "color": "#e9c9ff",
+       "top": 4285,
+       "hsl": {
+        "h": 276,
+        "s": 1,
+        "l": 0.89
+       }
+      },
+      {
+       "color": "#071a31",
+       "top": 6140,
+       "hsl": {
+        "h": 213,
+        "s": 0.75,
+        "l": 0.11
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#5d6e82",
+       "share": 0.3
+      },
+      {
+       "color": "#071a31",
+       "share": 0.24
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.19
+      },
+      {
+       "color": "#33465c",
+       "share": 0.04
+      },
+      {
+       "color": "#7c899a",
+       "share": 0.04
+      }
+     ],
+     "button": {
+      "bg": "#0069ff",
+      "hsl": {
+       "h": 215,
+       "s": 1,
+       "l": 0.5
+      },
+      "fg": "#071a31"
+     },
+     "lowContrast": [
+      {
+       "text": "Shopify",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "WordPress",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "Webflow",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "Squarespace",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "Framer",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      },
+      {
+       "text": "Custom sites",
+       "ratio": 2.1,
+       "need": 4.5,
+       "size": 14,
+       "fg": "#a9b2be",
+       "bg": "#fcfbf8"
+      }
+     ]
+    },
+    "buttons": {
+     "count": 8,
+     "inHero": 3,
+     "radius": "pill",
+     "height": 78,
+     "withShadow": 3,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Get started free",
+      "Get started free",
+      "See how it works"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 13,
+     "shadowOverlay": 1,
+     "shadowSamples": [
+      "a.btn.btn-light → rgba(7, 26, 49, 0.18) 0px 12px 30px 0px",
+      "span.app-tile → rgba(10, 26, 60, 0.18) 0px 10px 22px 0px",
+      "span.app-tile → rgba(10, 26, 60, 0.18) 0px 10px 22px 0px",
+      "span.app-tile → rgba(10, 26, 60, 0.18) 0px 10px 22px 0px"
+     ],
+     "gradients": 5,
+     "scrims": 0,
+     "gradientSamples": [
+      "div.hero-panel → radial-gradient(110% 90% at 8% 0%, rgb(44, 91, 203) 0%, rgba(44, 91, 203, 0) 58%), radial-gradient(90% 90% at ",
+      "div.demo-body → radial-gradient(80% 100% at 50% 0%, rgb(247, 250, 255) 0%, rgb(243, 246, 251) 100%)",
+      "div.show-visual.g-peach → linear-gradient(150deg, rgb(245, 169, 107) 0%, rgb(245, 147, 174) 55%, rgb(190, 155, 242) 100%)",
+      "div.story-panel → linear-gradient(135deg, rgb(240, 233, 255) 0%, rgb(251, 231, 239) 48%, rgb(255, 239, 223) 100%)"
+     ],
+     "gradientText": 3,
+     "hairlines": 19,
+     "hairlineSamples": [
+      "div.dash-head 296px",
+      "div.dash-row.is-new 296px",
+      "div.dash-row 296px",
+      "button.show-item 350px",
+      "button.show-item.is-active 350px"
+     ],
+     "outlinedBoxes": 7,
+     "dashed": 0,
+     "blurred": 7,
+     "roundedBoxes": 21,
+     "boxRadius": 50,
+     "squareMedia": 0,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": [
+      {
+       "count": 4,
+       "iconTopped": true,
+       "rounded": true,
+       "top": 1641
+      }
+     ]
+    },
+    "heroMedia": [],
+    "nav": {
+     "links": 2,
+     "fixed": true,
+     "height": 67,
+     "floatingPill": false,
+     "blur": true
+    },
+    "fontsLoaded": [
+     "plus jakarta sans",
+     "inter"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 7075,
+    "margins": {
+     "left": 20,
+     "right": 20
+    },
+    "sections": [
+     {
+      "sel": "section#top.hero-section",
+      "tag": "section",
+      "top": 0,
+      "height": 1199,
+      "words": 91,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "All your customer proof,",
+       "size": 44,
+       "tag": "h1"
+      },
+      "left": 22,
+      "right": 22,
+      "textLeft": 22,
+      "textRight": 22,
+      "fullBleed": false,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#features.section",
+      "tag": "section",
+      "top": 1298,
+      "height": 1410,
+      "words": 128,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Everything your reviews need.",
+       "size": 31,
+       "tag": "h2"
+      },
+      "left": 20,
+      "right": 27,
+      "textLeft": 20,
+      "textRight": 27,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#how.section",
+      "tag": "section",
+      "top": 2708,
+      "height": 1087,
+      "words": 89,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Easy testimonials ahead.",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 20,
+      "right": 20,
+      "textLeft": 22,
+      "textRight": 22,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section.stats-section",
+      "tag": "section",
+      "top": 3794,
+      "height": 295,
+      "words": 17,
+      "media": 0,
+      "middle": 43,
+      "heading": {
+       "text": "500",
+       "size": 33,
+       "tag": "span"
+      },
+      "left": 20,
+      "right": 72,
+      "textLeft": 20,
+      "textRight": 72,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#customers.section",
+      "tag": "section",
+      "top": 4090,
+      "height": 816,
+      "words": 139,
+      "media": 0,
+      "middle": 245,
+      "heading": {
+       "text": "3×",
+       "size": 54,
+       "tag": "span"
+      },
+      "left": 0,
+      "right": 0,
+      "textLeft": -308,
+      "textRight": -285,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "section#pricing.section",
+      "tag": "section",
+      "top": 4906,
+      "height": 1158,
+      "words": 94,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "19",
+       "size": 58,
+       "tag": "div"
+      },
+      "left": 30,
+      "right": 30,
+      "textLeft": 30,
+      "textRight": 30,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div.final-wrap",
+      "tag": "div",
+      "top": 6064,
+      "height": 1011,
+      "words": 85,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Your best marketing is already your",
+       "size": 34,
+       "tag": "h2"
+      },
+      "left": 28,
+      "right": 44,
+      "textLeft": 28,
+      "textRight": 44,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "All your customer proof, handled.",
+      "size": 44,
+      "top": 198,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 41,
+      "n": 5
+     },
+     {
+      "x": 20,
+      "n": 3
+     },
+     {
+      "x": 64,
+      "n": 1
+     },
+     {
+      "x": 414,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 10,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "mixed-font-headline",
+   "width": 1440,
+   "message": "1 headline(s) switch typeface or to italic mid-line (the \"one italic serif word\" move).",
+   "fix": "Set the whole headline in one face. Emphasis comes from the words.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "eyebrow",
+   "width": 1440,
+   "message": "6 eyebrow/kicker label(s) above headings: \"Trusted by 500+ businesses\" above \"All your customer proof, handled.\"; \"From link to live widget\" above \"Everything your reviews need. Nothing th\"; \"Loved by businesses\" above \"A wall of love that works while you slee\"; \"Pricing\" above \"Simple pricing. Serious proof.\"; \"Everything included\" (pill) above \"$ 19 /month\"",
+   "fix": "Delete them. If the label carried real information, fold it into the headline or the supporting sentence.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "numbering",
+   "width": 1440,
+   "message": "Decorative index numbers: \"01\", \"02\", \"03\", \"04\", \"01 / 04\"",
+   "fix": "Remove them. If order truly matters, write it into the words (\"First, …\") or use a real <ol>.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "micro-label",
+   "width": 1440,
+   "message": "10 tiny uppercase letter-spaced labels (e.g. \"1 / 3 · A customer leaves a review\", \"Scroll to explore\", \"From link to live widget\", \"How it works\").",
+   "fix": "Use sentence-case text at a readable size, or delete the label.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "gradient",
+   "width": 1440,
+   "message": "5 gradient fill(s): div.hero-panel → radial-gradient(110% 90% at 8% 0%, rgb(44, 91, 203) 0%, rgba(44, 91, 203, 0) 58%), radial-gradient(90% 90% at  | div.demo-body → radial-gradient(80% 100% at 50% 0%, rgb(247, 250, 255) 0%, rgb(243, 246, 251) 100%) | div.show-visual.g-violet → linear-gradient(150deg, rgb(109, 126, 234) 0%, rgb(161, 139, 242) 52%, rgb(241, 176, 204) 100%)",
+   "fix": "Use a flat colour or a real image. The only gradient allowed by default is a neutral scrim over a photo for legibility.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "gradient-text",
+   "width": 1440,
+   "message": "3 gradient-filled text element(s).",
+   "fix": "Solid colour text.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "shadow",
+   "width": 1440,
+   "message": "14 box-shadow(s) on elements at rest: a.btn.btn-light → rgba(7, 26, 49, 0.18) 0px 12px 30px 0px | span.app-tile → rgba(10, 26, 60, 0.18) 0px 10px 22px 0px | span.app-tile → rgba(10, 26, 60, 0.18) 0px 10px 22px 0px",
+   "fix": "Remove. Separate surfaces with a tone step or space. Shadows are for things that really float (menus, dialogs, sticky bars).",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "button-fx",
+   "width": 1440,
+   "message": "Buttons with shadow/glow.",
+   "fix": "Flat fill, one colour.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "hairline",
+   "width": 1440,
+   "message": "14 thin rule(s)/divider line(s): header.td-nav 1440px | button.show-item.is-active 491px | button.show-item 491px | button.show-item 491px",
+   "fix": "Delete. Separate with space, a tone change, or scale. Lines are only for real tables and form fields.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "outlined-box",
+   "width": 1440,
+   "message": "6 boxes drawn with a 1px outline.",
+   "fix": "Define a surface by its fill (one tone step from the page) or leave the content unboxed.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "glass",
+   "width": 1440,
+   "message": "10 backdrop-blur surfaces.",
+   "fix": "One blurred sticky bar at most; glass cards are a tell.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "icon-cards",
+   "width": 1440,
+   "message": "1 row(s) of identical cards each topped with a small icon (4 cards).",
+   "fix": "Replace with one composed section from the direction: a narrative split, a list set in large type, or real imagery per item.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "palette-cream",
+   "width": 1440,
+   "message": "Yellow-cream background (section #fcfbf8).",
+   "fix": "Use the drawn palette. If you want warmth, take a low-chroma stone or bone, not a yellow cream.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "contrast",
+   "width": 1440,
+   "message": "Unreadable text: \"Shopify\" 2.1:1 (#a9b2be on #fcfbf8); \"WordPress\" 2.1:1 (#a9b2be on #fcfbf8); \"Webflow\" 2.1:1 (#a9b2be on #fcfbf8); \"Squarespace\" 2.1:1 (#a9b2be on #fcfbf8)",
+   "fix": "Raise contrast to at least 4.5:1 for text, 3:1 for large display.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "size-count",
+   "width": 1440,
+   "message": "17 different font sizes (10, 11, 12, 13, 14, 15, 16, 17, 19, 21, 26, 44, 52, 58, 68, 76, 78).",
+   "fix": "A page needs about five: display, heading, lead, body, small.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "body-size",
+   "width": 1440,
+   "message": "Body text is 13.5px (the size most of the running text is set in).",
+   "fix": "Body copy 16–20px. Map small sizes from blueprints onto your body step."
+  },
+  {
+   "level": "WARN",
+   "id": "grey-body",
+   "width": 1440,
+   "message": "The running text is a soft grey on its ground (5.2:1).",
+   "fix": "Set body copy in the full ink (7:1 or more). Keep the muted ink for secondary notes; pages read thin and unfinished when everything is grey.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "few-pictures",
+   "width": 1440,
+   "message": "Only 0 picture(s) on the page (0 photographs, footage or raster images, 0 interface fragments). Drawings in SVG do not count.",
+   "fix": "Find real pictures of the subject's world with scripts/assets.mjs (photographs, archival images, maps, engravings, footage), download them to assets/ and give them room: a hero picture, one per section that has a subject, a full-width band. At least four, usually six to twelve."
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "FAIL",
+   "id": "small-text",
+   "width": 1440,
+   "message": "33 text blocks under 13px.",
+   "fix": "Nothing meant to be read goes below 13px.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "off-centre",
+   "width": 1440,
+   "message": "The page sits off-centre: its content comes to 158px from the left edge but only to 74px from the right, at 1440px.",
+   "fix": "Give the page one pair of equal margins. Check the wrapper for a max-width without margin-inline: auto, a grid with an empty last column, or padding on one side only. If one side is meant to hold air, it must still be closed by something that reaches the margin (a picture, the navigation's last item, a figure)."
+  },
+  {
+   "level": "WARN",
+   "id": "empty-middle",
+   "width": 1440,
+   "message": "1 section(s) have content at both edges and 665px of nothing between: \"3×\"",
+   "fix": "Bring the two parts together on the grid, or put the picture or figure of the section in the middle. An empty middle third reads as a hole, the same as an empty half.",
+   "alsoAt": [
+    768
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "ragged-edges",
+   "width": 1440,
+   "message": "Left-aligned text starts at 8 different lines (158px, 181px, 295px, 466px, 656px, 750px, 1035px); the three most used hold only 50% of it.",
+   "fix": "Pick two or three anchor lines from the grid and start every heading and paragraph on one of them."
+  },
+  {
+   "level": "WARN",
+   "id": "long-pin",
+   "width": 1440,
+   "message": "The same large text stays on screen for 3 screens in a row: \"Easy testimonials ahead.\"",
+   "fix": "A pinned element earns two screens, and something must change at each. Shorten the run or give every screen its own content."
+  },
+  {
+   "level": "FAIL",
+   "id": "palette-purple",
+   "width": 768,
+   "message": "Indigo / violet (section #c79bff).",
+   "fix": "Use the accent from the drawn palette.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "headline-lines",
+   "width": 390,
+   "message": "3 headline(s) wrap past two lines at 390px: \"All your customer proof, handled.\" → 3 lines (5 words, 44px); \"Everything your reviews need. Nothing they don’t\" → 3 lines (7 words, 31.2px); \"Your best marketing is already your customers.\" → 4 lines (7 words, 34px)",
+   "fix": "Cut words first (a headline is a title, not a sentence). Then give it a wider measure. Lower the size only as a last resort and never below the scale you chose. A real statement paragraph belongs in a <p> or <blockquote> at 24px or less."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "/workspace/chats/3a3e2baff9ebc3a2020a0123/.taste-skill/before/desktop-fold.jpg",
+   "pages": [
+    "/workspace/chats/3a3e2baff9ebc3a2020a0123/.taste-skill/before/desktop-page-01.jpg",
+    "/workspace/chats/3a3e2baff9ebc3a2020a0123/.taste-skill/before/desktop-page-02.jpg",
+    "/workspace/chats/3a3e2baff9ebc3a2020a0123/.taste-skill/before/desktop-page-03.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "/workspace/chats/3a3e2baff9ebc3a2020a0123/.taste-skill/before/tablet-fold.jpg",
+   "pages": [
+    "/workspace/chats/3a3e2baff9ebc3a2020a0123/.taste-skill/before/tablet-page-01.jpg",
+    "/workspace/chats/3a3e2baff9ebc3a2020a0123/.taste-skill/before/tablet-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "/workspace/chats/3a3e2baff9ebc3a2020a0123/.taste-skill/before/mobile-fold.jpg",
+   "pages": [
+    "/workspace/chats/3a3e2baff9ebc3a2020a0123/.taste-skill/before/mobile-page-01.jpg",
+    "/workspace/chats/3a3e2baff9ebc3a2020a0123/.taste-skill/before/mobile-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}
