@@ -3,6 +3,22 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 import { Logo } from '../page'
 
+function usePrefersReducedMotion() {
+  return useSyncExternalStore(
+    (onChange) => {
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+      if (mq.addEventListener) mq.addEventListener('change', onChange)
+      else mq.addListener(onChange)
+      return () => {
+        if (mq.removeEventListener) mq.removeEventListener('change', onChange)
+        else mq.removeListener(onChange)
+      }
+    },
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    () => false
+  )
+}
+
 const PAID_STATUSES = ['active']
 const PAID_PLANS = ['paid', 'pro', 'active']
 
