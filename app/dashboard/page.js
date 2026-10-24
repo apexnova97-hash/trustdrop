@@ -1,5 +1,5 @@
 'use client'
-import { useSyncExternalStore, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
 import { Logo } from '../page'
 
@@ -21,6 +21,9 @@ function usePrefersReducedMotion() {
 
 const PAID_STATUSES = ['active']
 const PAID_PLANS = ['paid', 'pro', 'active']
+
+/* Time bucket for sparkline graph: 'day' | 'week' | 'month' */
+const TIME_BUCKETS = { day: (d) => d, week: (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate() - d.getDay()), month: (d) => new Date(d.getFullYear(), d.getMonth(), 1) }
 
 function isPaid(business) {
   if (!business) return false
@@ -51,8 +54,21 @@ export default function Dashboard() {
   const [business, setBusiness] = useState(null)
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all')
+  const [filterBucket, setFilterBucket] = useState('all')
+  const [filterCategory, setFilterCategory] = useState('all')
   const [noBusiness, setNoBusiness] = useState(false)
   const reduced = usePrefersReducedMotion()
+
+  /* Bucket sparkline counts */
+  const filteredForBuckets = filterBucket === 'all'
+    ? testimonials
+    : testimonials.filter((t) => t.category === filterCategory)
+  const buckets = [0, 0, 0]
+  filteredForBuckets.forEach((t) => {
+    const d = new Date(t.created_at)
+    const bi = filterBucket === 'day' ? 0 : filterBucket === 'week' ? 1 : 2
+    buckets[bi]++
+  })
 
   useEffect(() => {
     checkUser()
@@ -106,6 +122,8 @@ export default function Dashboard() {
   }
 
   const filtered = testimonials.filter(t => {
+    const tCategory = t.category || 'all'
+    if (filterCategory !== 'all' && tCategory !== filterCategory) return false
     if (filter === 'approved') return t.approved
     if (filter === 'pending') return !t.approved
     return true
@@ -271,6 +289,17 @@ export default function Dashboard() {
               </span>
             </button>
           ))}
+          <button key="category-all" className={`filter-btn ${filterBucket === 'all' ? 'active' : ''}`} onClick={() => setFilterBucket('all')} style={{ marginLeft: 16, minWidth: 100 }}>
+            Cat: {filterCategory === 'all' ? 'All' : filterCategory}
+            {' '}
+            <span style={{ opacity: 0.5, fontSize: 11 }}>({testimonials.length})</span>
+          </button>
+          <button key="category-books" className={`filter-btn ${filterCategory === 'books' ? 'active' : ''}`} onClick={() => setFilterCategory('books')} style={{ marginLeft: 8, minWidth: 80 }}>
+            Books
+          </button>
+          <button key="category-flowers" className={`filter-btn ${filterCategory === 'flowers' ? 'active' : ''}`} onClick={() => setFilterCategory('flowers')} style={{ marginLeft: 8, minWidth: 80 }}>
+            Flowers
+          </button>
         </div>
 
         {/* REVIEWS */}
