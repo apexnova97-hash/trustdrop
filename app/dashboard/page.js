@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { supabase } from '../../lib/supabase'
+import { Logo } from '../page'
 
 const PAID_STATUSES = ['active']
 const PAID_PLANS = ['paid', 'pro', 'active']
@@ -35,6 +36,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all')
   const [noBusiness, setNoBusiness] = useState(false)
+  const reduced = usePrefersReducedMotion()
 
   useEffect(() => {
     checkUser()
@@ -104,7 +106,7 @@ export default function Dashboard() {
   if (loading) {
     return (
       <div style={{ minHeight: '100vh', background: '#050810', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: "'Inter', sans-serif" }}>
-        <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap'); @keyframes spin { to { transform: rotate(360deg); } }`}</style>
+        <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap'); @keyframes spin { to { transform: rotate(360deg); } }`}</style>
         <div style={{ textAlign: 'center' }}>
           <div style={{ width: 36, height: 36, border: '2px solid #1a2030', borderTopColor: '#2563eb', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 16px' }} />
           <p style={{ color: '#444', fontSize: 14 }}>Loading dashboard...</p>
@@ -169,180 +171,16 @@ export default function Dashboard() {
 
   return (
     <div style={{ minHeight: '100vh', background: '#050810', fontFamily: "'Inter', sans-serif", color: 'white' }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.2); opacity: 0; } }
-
-        .stat-card {
-          background: #0a0e1a;
-          border: 1px solid #141c2e;
-          border-radius: 16px;
-          padding: 20px 24px;
-          transition: border-color 0.2s, transform 0.2s;
-          cursor: default;
-        }
-        .stat-card:hover { border-color: rgba(37,99,235,0.4); transform: translateY(-2px); }
-
-        .filter-btn {
-          background: transparent;
-          border: 1px solid #141c2e;
-          color: #555;
-          padding: 7px 16px;
-          border-radius: 8px;
-          font-size: 13px;
-          cursor: pointer;
-          font-family: inherit;
-          transition: all 0.15s;
-          white-space: nowrap;
-        }
-        .filter-btn:hover { border-color: #2a3550; color: #888; }
-        .filter-btn.active { background: rgba(37,99,235,0.12); border-color: rgba(37,99,235,0.35); color: #60a5fa; }
-
-        .review-card {
-          background: #0a0e1a;
-          border: 1px solid #141c2e;
-          border-radius: 16px;
-          padding: 22px 24px;
-          transition: border-color 0.2s;
-          animation: fadeIn 0.3s ease;
-        }
-        .review-card:hover { border-color: #1e2a40; }
-
-        .approve-btn {
-          border: none;
-          padding: 7px 14px;
-          border-radius: 8px;
-          font-size: 12px;
-          font-weight: 600;
-          cursor: pointer;
-          font-family: inherit;
-          transition: all 0.15s;
-          white-space: nowrap;
-        }
-        .approve-btn:hover { transform: translateY(-1px); }
-
-        .delete-btn {
-          border: 1px solid rgba(239,68,68,0.2);
-          padding: 7px 14px;
-          border-radius: 8px;
-          font-size: 12px;
-          font-weight: 600;
-          cursor: pointer;
-          font-family: inherit;
-          transition: all 0.15s;
-          background: rgba(239,68,68,0.08);
-          color: #ef4444;
-          white-space: nowrap;
-        }
-        .delete-btn:hover { background: rgba(239,68,68,0.18); transform: translateY(-1px); }
-
-        .nav-link-btn {
-          background: rgba(37,99,235,0.1);
-          border: 1px solid rgba(37,99,235,0.25);
-          color: #60a5fa;
-          padding: 7px 14px;
-          border-radius: 8px;
-          font-size: 13px;
-          font-weight: 500;
-          text-decoration: none;
-          transition: all 0.15s;
-          white-space: nowrap;
-        }
-        .nav-link-btn:hover { background: rgba(37,99,235,0.18); border-color: rgba(37,99,235,0.4); }
-
-        .logout-btn {
-          background: transparent;
-          border: 1px solid #141c2e;
-          color: #444;
-          padding: 7px 14px;
-          border-radius: 8px;
-          font-size: 13px;
-          cursor: pointer;
-          font-family: inherit;
-          transition: all 0.15s;
-        }
-        .logout-btn:hover { border-color: rgba(239,68,68,0.3); color: #ef4444; }
-
-        .copy-btn {
-          background: transparent;
-          border: 1px solid #141c2e;
-          color: #555;
-          padding: 5px 10px;
-          border-radius: 6px;
-          font-size: 12px;
-          cursor: pointer;
-          font-family: inherit;
-          transition: all 0.15s;
-        }
-        .copy-btn:hover { border-color: rgba(37,99,235,0.3); color: #60a5fa; }
-
-        .upgrade-card {
-          background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(29,78,216,0.05));
-          border: 1px solid rgba(37,99,235,0.3);
-          border-radius: 16px;
-          padding: 24px;
-          margin-bottom: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 16px;
-          flex-wrap: wrap;
-        }
-        .upgrade-card.urgent {
-          background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(217,119,6,0.05));
-          border-color: rgba(245,158,11,0.35);
-        }
-
-        .upgrade-btn {
-          background: #2563eb;
-          color: white;
-          border: none;
-          padding: 11px 22px;
-          border-radius: 9px;
-          font-size: 14px;
-          font-weight: 600;
-          text-decoration: none;
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          cursor: pointer;
-          font-family: inherit;
-          transition: background 0.15s, transform 0.15s;
-          white-space: nowrap;
-        }
-        .upgrade-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
-
-        .live-dot {
-          width: 8px; height: 8px; border-radius: 50%; background: #22d3ee;
-          flex-shrink: 0; position: relative;
-        }
-        .live-dot::after {
-          content: ''; position: absolute; inset: -3px; border-radius: 50%;
-          border: 1.5px solid #22d3ee;
-          animation: pulseRing 1.6s ease-out infinite;
-        }
-        .live-dot.urgent { background: #f59e0b; }
-        .live-dot.urgent::after { border-color: #f59e0b; }
-
-        @media (max-width: 768px) {
-          .stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          .review-actions { flex-direction: column !important; }
-          .review-meta { flex-wrap: wrap !important; }
-          .upgrade-card { flex-direction: column !important; align-items: flex-start !important; }
-        }
-      `}</style>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');`}</style>
 
       {/* NAV */}
       <nav style={{ borderBottom: '1px solid #0e1420', padding: '0 5%', height: 60, display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(5,8,16,0.95)', backdropFilter: 'blur(16px)', position: 'sticky', top: 0, zIndex: 100 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Logo light={true} size={24} />
           <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <div style={{ width: 28, height: 28, background: 'linear-gradient(135deg, #2563eb, #1d4ed8)', borderRadius: 7, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 13, boxShadow: '0 0 12px rgba(37,99,235,0.35)' }}>⭐</div>
             <span style={{ fontWeight: 700, fontSize: 15, color: 'white' }}>TrustDrop</span>
           </a>
-          <span style={{ color: '#222', fontSize: 14, margin: '0 2px' }}>/</span>
+          <span style={{ color: '#222', fontSize: 14, margin: '0 2x' }}>/</span>
           <span style={{ color: '#444', fontSize: 14 }}>Dashboard</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -367,13 +205,11 @@ export default function Dashboard() {
             <code style={{ color: '#60a5fa', fontSize: 13, background: 'rgba(37,99,235,0.08)', padding: '3px 10px', borderRadius: 6, border: '1px solid rgba(37,99,235,0.15)' }}>
               trustdrop-lac.vercel.app/collect/{business?.slug}
             </code>
-            <button className="copy-btn" onClick={() => navigator.clipboard.writeText(`https://trustdrop-lac.vercel.app/collect/${business?.slug}`)}>
-              Copy
-            </button>
+            <button className="copy-btn" onClick={() => navigator.clipboard.writeText(`https://trustdrop-lac.vercel.app/collect/${business?.slug}`)}>Copy</button>
           </div>
         </div>
 
-        {/* UPGRADE / TRIAL CARD — only for non-paid accounts */}
+        {/* UPGRADE / TRIAL CARD */}
         {showTrialBanner && (
           <div className={`upgrade-card ${trialDays !== null && trialDays <= 3 ? 'urgent' : ''}`}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -389,9 +225,7 @@ export default function Dashboard() {
                 <p style={{ fontSize: 13, color: '#888' }}>Upgrade to keep collecting reviews after your trial ends — just $19/month</p>
               </div>
             </div>
-            <a href={checkoutUrl} target="_blank" className="upgrade-btn">
-              Upgrade now →
-            </a>
+            <a href={checkoutUrl} target="_blank" className="upgrade-btn">Upgrade now →</a>
           </div>
         )}
 
@@ -451,7 +285,7 @@ export default function Dashboard() {
                         <p style={{ fontWeight: 600, fontSize: 14, color: 'white', marginBottom: 1 }}>{t.reviewer_name}</p>
                         {t.reviewer_email && <p style={{ fontSize: 12, color: '#333' }}>{t.reviewer_email}</p>}
                       </div>
-                      <span style={{ color: '#f59e0b', fontSize: 13, letterSpacing: '1px' }}>
+                      <span style={{ color: '#f59e0b', fontSize: 13, letterSpacing: '1x' }}>
                         {'★'.repeat(t.star_rating)}{'☆'.repeat(5 - t.star_rating)}
                       </span>
                       <span style={{ padding: '3px 10px', borderRadius: 100, fontSize: 11, fontWeight: 600, background: t.approved ? 'rgba(52,211,153,0.08)' : 'rgba(245,158,11,0.08)', color: t.approved ? '#34d399' : '#f59e0b', border: `1px solid ${t.approved ? 'rgba(52,211,153,0.2)' : 'rgba(245,158,11,0.2)'}` }}>
@@ -493,4 +327,4 @@ export default function Dashboard() {
       </div>
     </div>
   )
-} 
+}

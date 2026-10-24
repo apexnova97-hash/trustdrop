@@ -352,6 +352,8 @@ function Logo({ light = false, size = 32 }) {
   )
 }
 
+export { Logo }
+
 function CountUp({ end, decimals = 0, suffix = '' }) {
   const ref = useRef(null)
   const started = useRef(false)
