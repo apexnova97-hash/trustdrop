@@ -1072,29 +1072,22 @@ export default function Dashboard() {
 
               <section className="tdd-card tdd-rise" style={{ animationDelay: '.27s' }}>
                 <div className="tdd-products-head">
-                  <p className="tdd-products-title"><IconLink /> Your review link</p>
+                  <p className="tdd-products-title"><IconBox /> Website Widget</p>
                 </div>
-                <p className="tdd-products-sub">Share this link with customers so they can leave a review.</p>
-                <input className="tdd-input" readOnly value={reviewUrl} onFocus={(e) => e.target.select()} />
+                <p className="tdd-products-sub">Display your approved customer reviews on your website.</p>
+                <input
+                  className="tdd-input"
+                  readOnly
+                  value={siteUrl + '/widget/' + business.slug}
+                  onFocus={(e) => e.target.select()}
+                />
                 <div className="tdd-link-actions">
-                  <button className="tdd-btn tdd-btn-primary tdd-btn-sm" onClick={() => copyText(reviewUrl, 'Review link copied')}>
-                    <IconCopy /> Copy link
-                  </button>
-                  <a className="tdd-btn tdd-btn-ghost tdd-btn-sm" href={reviewUrl} target="_blank" rel="noreferrer" style={{ background: '#fff' }}>
-                    Preview <IconArrow />
+                  <a className="tdd-btn tdd-btn-primary tdd-btn-sm" href={siteUrl + '/widget/' + business.slug} target="_blank" rel="noreferrer">
+                    <IconArrow /> Open widget
                   </a>
-                </div>
-                <div style={{ borderTop: '1px solid #F0EDE5', marginTop: 18, paddingTop: 16 }}>
-                  <p className="tdd-products-title" style={{ marginBottom: 6 }}><IconBox /> Website widget</p>
-                  <p className="tdd-products-sub">Open the widget that displays your approved reviews, or copy its link to embed on your website.</p>
-                  <div className="tdd-link-actions">
-                    <a className="tdd-btn tdd-btn-primary tdd-btn-sm" href={siteUrl + '/widget/' + business.slug} target="_blank" rel="noreferrer">
-                      <IconArrow /> Open widget
-                    </a>
-                    <button className="tdd-btn tdd-btn-ghost tdd-btn-sm" onClick={() => copyText(siteUrl + '/widget/' + business.slug, 'Widget link copied')} style={{ background: '#fff' }}>
-                      <IconCopy /> Copy widget URL
-                    </button>
-                  </div>
+                  <button className="tdd-btn tdd-btn-ghost tdd-btn-sm" onClick={() => copyText(siteUrl + '/widget/' + business.slug, 'Widget link copied')} style={{ background: '#fff' }}>
+                    <IconCopy /> Copy widget URL
+                  </button>
                 </div>
               </section>
 
