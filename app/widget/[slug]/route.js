@@ -1,59 +1,57 @@
 import { supabase } from '../../../lib/supabase'
+import { renderWidgetDocument } from '../../../lib/widgetHtml'
+
+function widgetResponse(data, status = 200) {
+  return new Response(renderWidgetDocument(data), {
+    status,
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Access-Control-Allow-Origin': '*',
+      'X-Content-Type-Options': 'nosniff',
+      'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'unsafe-inline'; frame-ancestors *; base-uri 'none'; form-action 'none'",
+      'Cache-Control': 'no-store',
+    },
+  })
+}
 
 export async function GET(request, { params }) {
   const { slug } = await params
 
-  const { data: business } = await supabase
+  const { data: business, error: businessError } = await supabase
     .from('businesses')
     .select('id, business_name')
     .eq('slug', slug)
-    .single()
+    .maybeSingle()
 
-  if (!business) {
-    return new Response('Business not found', { status: 404 })
+  if (businessError) {
+    return widgetResponse({ state: 'error', businessName: '', reviews: [] }, 500)
   }
 
-  const { data: testimonials } = await supabase
+  if (!business) {
+    return widgetResponse({ state: 'notFound', businessName: '', reviews: [] }, 404)
+  }
+
+  const { data: testimonials, error: reviewsError } = await supabase
     .from('testimonials')
-    .select('*')
+    .select('reviewer_name, star_rating, review_text, created_at')
     .eq('business_id', business.id)
     .eq('approved', true)
     .order('created_at', { ascending: false })
 
-  const stars = (rating) => '⭐'.repeat(rating)
+  if (reviewsError) {
+    return widgetResponse({ state: 'error', businessName: business.business_name, reviews: [] }, 500)
+  }
 
-  const html = `
-    <div style="font-family: sans-serif; max-width: 100%;">
-      <h3 style="color: #7c3aed; margin-bottom: 16px;">
-        What people say about ${business.business_name}
-      </h3>
-      ${testimonials && testimonials.length > 0 
-        ? testimonials.map(t => `
-          <div style="background: #f9fafb; border-radius: 12px; padding: 16px; margin-bottom: 12px; border: 1px solid #e5e7eb;">
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-              <div style="width: 36px; height: 36px; background: #ede9fe; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #7c3aed;">
-                ${t.reviewer_name[0].toUpperCase()}
-              </div>
-              <div>
-                <p style="margin: 0; font-weight: 600; color: #1f2937;">${t.reviewer_name}</p>
-                <p style="margin: 0; font-size: 12px; color: #9ca3af;">${stars(t.star_rating)}</p>
-              </div>
-            </div>
-            <p style="margin: 0; color: #4b5563; font-size: 14px;">${t.review_text}</p>
-          </div>
-        `).join('')
-        : '<p style="color: #9ca3af;">No reviews yet.</p>'
-      }
-      <p style="font-size: 11px; color: #d1d5db; text-align: right; margin-top: 8px;">
-        Powered by TrustDrop
-      </p>
-    </div>
-  `
+  const reviews = (testimonials || []).map((review) => ({
+    name: review.reviewer_name || 'Customer',
+    rating: review.star_rating,
+    text: review.review_text || '',
+    date: review.created_at || '',
+  }))
 
-  return new Response(html, {
-    headers: {
-      'Content-Type': 'text/html',
-      'Access-Control-Allow-Origin': '*',
-    },
+  return widgetResponse({
+    state: 'ready',
+    businessName: business.business_name,
+    reviews,
   })
 }
