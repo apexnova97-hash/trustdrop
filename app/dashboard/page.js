@@ -1084,6 +1084,18 @@ export default function Dashboard() {
                     Preview <IconArrow />
                   </a>
                 </div>
+                <div style={{ borderTop: '1px solid #F0EDE5', marginTop: 18, paddingTop: 16 }}>
+                  <p className="tdd-products-title" style={{ marginBottom: 6 }}><IconBox /> Website widget</p>
+                  <p className="tdd-products-sub">Open the widget that displays your approved reviews, or copy its link to embed on your website.</p>
+                  <div className="tdd-link-actions">
+                    <a className="tdd-btn tdd-btn-primary tdd-btn-sm" href={siteUrl + '/widget/' + business.slug} target="_blank" rel="noreferrer">
+                      <IconArrow /> Open widget
+                    </a>
+                    <button className="tdd-btn tdd-btn-ghost tdd-btn-sm" onClick={() => copyText(siteUrl + '/widget/' + business.slug, 'Widget link copied')} style={{ background: '#fff' }}>
+                      <IconCopy /> Copy widget URL
+                    </button>
+                  </div>
+                </div>
               </section>
 
               <section className="tdd-link-card tdd-rise" style={{ animationDelay: '.28s' }}>
