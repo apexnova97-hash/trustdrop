@@ -1070,6 +1070,22 @@ export default function Dashboard() {
                 )}
               </section>
 
+              <section className="tdd-card tdd-rise" style={{ animationDelay: '.27s' }}>
+                <div className="tdd-products-head">
+                  <p className="tdd-products-title"><IconLink /> Your review link</p>
+                </div>
+                <p className="tdd-products-sub">Share this link with customers so they can leave a review.</p>
+                <input className="tdd-input" readOnly value={reviewUrl} onFocus={(e) => e.target.select()} />
+                <div className="tdd-link-actions">
+                  <button className="tdd-btn tdd-btn-primary tdd-btn-sm" onClick={() => copyText(reviewUrl, 'Review link copied')}>
+                    <IconCopy /> Copy link
+                  </button>
+                  <a className="tdd-btn tdd-btn-ghost tdd-btn-sm" href={reviewUrl} target="_blank" rel="noreferrer" style={{ background: '#fff' }}>
+                    Preview <IconArrow />
+                  </a>
+                </div>
+              </section>
+
               <section className="tdd-link-card tdd-rise" style={{ animationDelay: '.28s' }}>
                 <p className="tdd-link-title"><IconLink /> Your review link</p>
                 <p className="tdd-link-sub">Send this to a happy customer. One tap, thirty seconds, no account needed.</p>
