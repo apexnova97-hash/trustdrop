@@ -83,14 +83,21 @@ export default function CollectPage({ params }) {
 
   return (
     <div className="cpg">
-      <style>{`
-        .cpg { --bg:#FCFBF8; --ink:#071A31; --ink-soft:#33465C; --body:#5D6E82; --muted:#8391A2; --line:#E8E4DA; --blue:#0069FF; --blue-dark:#0052CC; --violet:#6B5CE7; --lime:#D9F27A; --ease:cubic-bezier(.16,1,.3,1);
-          min-height:100vh; background:var(--bg); color:var(--ink); font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
-          display:flex; align-items:center; justify-content:center; padding:28px; position:relative; overflow:hidden; }
-        .cpg * { box-sizing:border-box; }
+      <style>{`        .cpg { --bg:#FCFBF8; --ink:#071A31; --ink-soft:#33465C; --body:#5D6E82; --muted:#8391A2; --line:#E8E4DA;
+          --blue:#0069FF; --blue-dark:#0052CC; --violet:#6B5CE7; --lime:#D9F27A; --ease:cubic-bezier(.16,1,.3,1);
+          min-height:100vh; min-height:100dvh; background:var(--bg); color:var(--ink);
+          font-family:var(--font-body),'Inter',-apple-system,BlinkMacSystemFont,sans-serif; -webkit-font-smoothing:antialiased;
+          display:flex; align-items:center; justify-content:center;
+          padding:clamp(14px,4vw,28px); padding-bottom:calc(clamp(14px,4vw,28px) + env(safe-area-inset-bottom,0px));
+          position:relative; overflow-x:clip; -webkit-tap-highlight-color:transparent; }
+        .cpg *, .cpg *::before, .cpg *::after { box-sizing:border-box; }
+        .cpg :where(h1,h2,p) { margin:0; }
+
         .cpg-blob { position:absolute; border-radius:50%; filter:blur(90px); pointer-events:none; }
-        .cpg-blob.a { width:520px; height:520px; top:-180px; right:-120px; background:linear-gradient(150deg,#8FBBFF,#B8A6F7); opacity:.45; animation:driftA 22s var(--ease) infinite; }
-        .cpg-blob.b { width:460px; height:460px; bottom:-200px; left:-140px; background:linear-gradient(150deg,#A6E9D2,#C9D6FA); opacity:.4; animation:driftB 26s var(--ease) infinite; }
+        .cpg-blob.a { width:min(520px,70vw); height:min(520px,70vw); top:-180px; right:-120px;
+          background:linear-gradient(150deg,#8FBBFF,#B8A6F7); opacity:.45; animation:driftA 22s var(--ease) infinite; }
+        .cpg-blob.b { width:min(460px,65vw); height:min(460px,65vw); bottom:-200px; left:-140px;
+          background:linear-gradient(150deg,#A6E9D2,#C9D6FA); opacity:.4; animation:driftB 26s var(--ease) infinite; }
         @keyframes driftA { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-60px,40px) scale(1.08)} }
         @keyframes driftB { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(50px,-40px) scale(1.06)} }
         @keyframes panelIn { from{opacity:0; transform:translateY(18px) scale(.985)} to{opacity:1; transform:none} }
@@ -98,47 +105,71 @@ export default function CollectPage({ params }) {
         @keyframes popIn { 0%{opacity:0; transform:scale(.85)} 100%{opacity:1; transform:scale(1)} }
         @keyframes pulseDot { 0%{box-shadow:0 0 0 0 rgba(14,159,110,.45)} 70%{box-shadow:0 0 0 8px rgba(14,159,110,0)} 100%{box-shadow:0 0 0 0 rgba(14,159,110,0)} }
 
-        .cpg-card { position:relative; width:100%; max-width:480px; background:rgba(255,255,255,.86); backdrop-filter:blur(14px);
-          border:1px solid var(--line); border-radius:24px; padding:34px 32px; box-shadow:0 24px 60px -28px rgba(7,26,49,.28); animation:panelIn .6s var(--ease) both; }
-        .cpg-brand { display:inline-flex; align-items:center; gap:9px; margin-bottom:24px; }
-        .cpg-brand-name { font-weight:800; font-size:15px; letter-spacing:-.02em; }
-        .cpg-product { display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:600; color:#0E9F6E;
-          background:#E7F8EF; border:1px solid #CBEFDD; padding:4px 10px; border-radius:999px; margin-bottom:14px; animation:popIn .4s var(--ease) both; }
-        .cpg-product i { width:5px; height:5px; border-radius:50%; background:#0E9F6E; display:block; animation:pulseDot 2.4s infinite; }
-        .cpg h1 { font-size:27px; line-height:1.15; letter-spacing:-.035em; font-weight:800; margin:0 0 7px; }
-        .cpg-sub { color:var(--body); font-size:14.5px; line-height:1.55; margin:0 0 24px; }
-        .cpg label { display:block; font-size:11.5px; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.09em; margin-bottom:7px; }
+        .cpg-card { position:relative; width:100%; max-width:min(480px, 100%); background:rgba(255,255,255,.88);
+          backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--line);
+          border-radius:clamp(18px,2.6vw,24px); padding:clamp(20px,4.4vw,34px) clamp(18px,4vw,32px);
+          box-shadow:0 24px 60px -28px rgba(7,26,49,.28); animation:panelIn .6s var(--ease) both; }
+        .cpg-brand { display:inline-flex; align-items:center; gap:clamp(7px,1.2vw,9px); margin-bottom:clamp(16px,3vw,24px); }
+        .cpg-brand svg { width:clamp(24px,4vw,28px); height:auto; }
+        .cpg-brand-name { font-family:var(--font-display),sans-serif; font-weight:800; font-size:clamp(14px,1.6vw,15px); letter-spacing:-.02em; }
+        .cpg-product { display:inline-flex; align-items:center; gap:7px; font-size:clamp(11px,1.3vw,12px); font-weight:600;
+          color:#0E9F6E; background:#E7F8EF; border:1px solid #CBEFDD; padding:4px 10px; border-radius:999px;
+          margin-bottom:12px; animation:popIn .4s var(--ease) both; max-width:100%; overflow-wrap:anywhere; }
+        .cpg-product i { width:5px; height:5px; border-radius:50%; background:#0E9F6E; display:block; flex-shrink:0; animation:pulseDot 2.4s infinite; }
+        .cpg h1 { font-family:var(--font-display),sans-serif; font-size:clamp(21px,3.4vw,27px); line-height:1.16; letter-spacing:-.035em; font-weight:800; margin-bottom:6px; text-wrap:balance; }
+        .cpg-sub { color:var(--body); font-size:clamp(13px,1.4vw,14.5px); line-height:1.55; margin-bottom:4px; }
+        .cpg label { display:block; font-size:clamp(10px,.95vw,11.5px); font-weight:700; color:var(--ink-soft);
+          text-transform:uppercase; letter-spacing:.09em; margin-bottom:7px; }
         .cpg label span { text-transform:none; letter-spacing:0; font-weight:500; color:var(--muted); }
-        .cpg-field { width:100%; background:#fff; border:1px solid var(--line); border-radius:12px; padding:12px 14px;
-          font-size:14.5px; color:var(--ink); font-family:inherit; outline:none;
-          transition:border-color .2s, box-shadow .25s, transform .25s var(--ease); }
+        .cpg-field { width:100%; background:#fff; border:1px solid var(--line); border-radius:12px;
+          padding:clamp(11px,1.6vw,12px) clamp(12px,1.8vw,14px); font-size:16px; color:var(--ink);
+          font-family:inherit; outline:none; transition:border-color .2s, box-shadow .25s; }
         .cpg-field::placeholder { color:#B6BFC9; }
         .cpg-field:focus { border-color:rgba(0,105,255,.5); box-shadow:0 0 0 4px rgba(0,105,255,.1); }
-        .cpg-row { margin-bottom:15px; }
-        .cpg-stars { display:flex; align-items:center; gap:3px; }
-        .cpg-star { background:none; border:none; cursor:pointer; padding:0 2px; font-size:30px; line-height:1;
-          color:#F5A524; transition:transform .22s var(--ease), opacity .2s; }
+        .cpg-row { margin-top:clamp(14px,2.4vw,18px); }
+        .cpg-stars { display:flex; align-items:center; gap:2px; flex-wrap:wrap; }
+        .cpg-star { background:none; border:none; cursor:pointer; padding:2px 3px; font-size:clamp(26px,7vw,32px);
+          line-height:1; color:#F5A524; transition:transform .22s var(--ease); -webkit-tap-highlight-color:transparent; }
         .cpg-star:hover { transform:scale(1.16) rotate(-4deg); }
+        .cpg-star:active { transform:scale(.94); }
         .cpg-star.on { animation:starPop .38s var(--ease) both; }
         .cpg-star.off { color:#E4DED2; }
-        .cpg-star-label { margin-left:9px; font-size:12.5px; font-weight:600; color:var(--body); }
+        .cpg-star-label { margin-left:8px; font-size:clamp(11.5px,1.3vw,12.5px); font-weight:600; color:var(--body); }
         .cpg-count { text-align:right; font-size:11px; color:#B6BFC9; margin-top:4px; }
-        .cpg-submit { width:100%; border:none; border-radius:14px; padding:15px; font-family:inherit; font-size:15px; font-weight:700;
-          color:#fff; cursor:pointer; background:linear-gradient(135deg,#2E7CFF,#0052CC);
-          box-shadow:0 14px 30px -12px rgba(0,105,255,.65);
-          transition:transform .3s var(--ease), box-shadow .3s var(--ease), opacity .2s; }
+        .cpg-submit { margin-top:clamp(16px,2.6vw,20px); }
+        .cpg-submit { width:100%; border:none; border-radius:14px; padding:clamp(13px,2vw,15px);
+          font-family:inherit; font-size:clamp(14px,1.6vw,15px); font-weight:700; color:#fff; cursor:pointer;
+          background:linear-gradient(135deg,#2E7CFF,#0052CC); box-shadow:0 14px 30px -12px rgba(0,105,255,.65);
+          min-height:50px; transition:transform .3s var(--ease), box-shadow .3s var(--ease), opacity .2s; }
         .cpg-submit:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 20px 38px -14px rgba(0,105,255,.7); }
+        .cpg-submit:active:not(:disabled) { transform:scale(.985); }
         .cpg-submit:disabled { opacity:.38; cursor:not-allowed; box-shadow:none; }
-        .cpg-foot { text-align:center; font-size:11.5px; color:#AEB8C4; margin:18px 0 0; }
+        .cpg-foot { text-align:center; font-size:clamp(11px,1.2vw,11.5px); color:#AEB8C4; margin-top:16px; }
         .cpg-foot b { color:var(--blue); font-weight:700; }
-        .cpg-done { text-align:center; padding:14px 0 6px; animation:panelIn .6s var(--ease) both; }
-        .cpg-done-icon { width:74px; height:74px; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-size:32px;
-          background:linear-gradient(150deg,#D9F8E8,#BFE9FF); box-shadow:0 18px 40px -18px rgba(14,159,110,.5); animation:popIn .5s var(--ease) both; }
-        .cpg-done h2 { font-size:23px; letter-spacing:-.03em; margin:0 0 8px; font-weight:800; }
-        .cpg-done p { color:var(--body); font-size:14px; margin:0 0 18px; line-height:1.6; }
-        .cpg-done-stars { display:inline-flex; gap:3px; color:#F5A524; font-size:22px; letter-spacing:2px; }
-        @media (max-width:520px) { .cpg-card { padding:26px 22px; border-radius:20px; } .cpg h1 { font-size:23px; } }
-      `}</style>
+        .cpg-done { text-align:center; padding:10px 0 4px; animation:panelIn .6s var(--ease) both; }
+        .cpg-done-icon { width:clamp(60px,13vw,74px); height:clamp(60px,13vw,74px); border-radius:50%; margin:0 auto 18px;
+          display:flex; align-items:center; justify-content:center; font-size:clamp(26px,6vw,32px);
+          background:linear-gradient(150deg,#D9F8E8,#BFE9FF); box-shadow:0 18px 40px -18px rgba(14,159,110,.5);
+          animation:popIn .5s var(--ease) both; }
+        .cpg-done h2 { font-family:var(--font-display),sans-serif; font-size:clamp(19px,2.8vw,23px); letter-spacing:-.03em; margin-bottom:7px; font-weight:800; }
+        .cpg-done p { color:var(--body); font-size:clamp(13px,1.5vw,14px); margin-bottom:16px; line-height:1.6; }
+        .cpg-done-stars { display:inline-flex; gap:3px; color:#F5A524; font-size:clamp(18px,4vw,22px); letter-spacing:2px; }
+
+        @media (max-width: 420px) {
+          .cpg-card { border-radius:18px; }
+          .cpg-stars { gap:0; }
+          .cpg-star { padding:2px; }
+          .cpg-star-label { width:100%; margin:6px 0 0; }
+        }
+        @media (hover: none) {
+          .cpg-star:hover { transform:none; }
+          .cpg-submit:hover:not(:disabled) { transform:none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .cpg-blob, .cpg-card, .cpg-star, .cpg-product, .cpg-done-icon { animation:none !important; }
+          .cpg *, .cpg *::before, .cpg *::after { transition:none !important; }
+        }
+`}</style>
 
       <span className="cpg-blob a" aria-hidden="true" />
       <span className="cpg-blob b" aria-hidden="true" />

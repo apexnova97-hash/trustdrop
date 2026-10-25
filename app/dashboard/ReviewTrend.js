@@ -6,10 +6,10 @@ const RANGES = [
   ['month', 'Months'],
 ]
 
-function rangeLabel(range) {
-  if (range === 'day') return '30 days'
-  if (range === 'week') return '12 weeks'
-  return '12 months'
+function rangeLabel(range, compact) {
+  if (range === 'day') return compact ? '14 days' : '30 days'
+  if (range === 'week') return compact ? '8 weeks' : '12 weeks'
+  return compact ? '6 months' : '12 months'
 }
 
 export default function ReviewTrend({
@@ -22,6 +22,7 @@ export default function ReviewTrend({
   onProductChange,
   products = [],
   reduced,
+  compact,
   delay = 0,
 }) {
   return (
@@ -32,7 +33,7 @@ export default function ReviewTrend({
           <p className="tdd-chart-sub">
             {total === 0
               ? 'No reviews in this period yet'
-              : total + ' review' + (total === 1 ? '' : 's') + ' in the last ' + rangeLabel(range)}
+              : total + ' review' + (total === 1 ? '' : 's') + ' in the last ' + rangeLabel(range, compact)}
           </p>
         </div>
         <div className="tdd-chart-controls">
@@ -89,10 +90,11 @@ export default function ReviewTrend({
 
       <div className="tdd-bar-labels" key={'labels' + range}>
         {series.map((b, i) => {
-          const hide = series.length >= 20 ? i % 5 !== 0 : series.length > 8 && i % 2 !== 0
+          const step = Math.ceil(series.length / 6)
+          const hide = series.length > 6 && i % step !== 0
           return (
             <div key={i} className="tdd-bar-label">
-              {hide ? '' : b.label}
+              {hide ? null : <span>{b.label}</span>}
             </div>
           )
         })}
