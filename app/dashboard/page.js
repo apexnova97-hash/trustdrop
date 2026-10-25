@@ -712,6 +712,17 @@ export default function Dashboard() {
 
   const siteUrl = 'https://trustdrop-lac.vercel.app'
   const reviewUrl = business ? siteUrl + '/collect/' + business.slug : siteUrl
+  const widgetUrl = business ? siteUrl + '/widget/' + business.slug : siteUrl
+  const widgetEmbedCode = business
+    ? `<iframe
+  src="${widgetUrl}"
+  title="Customer reviews"
+  width="100%"
+  height="560"
+  loading="lazy"
+  style="border:0;border-radius:16px;width:100%;max-width:100%;"
+></iframe>`
+    : ''
 
   const checkoutUrl = business
     ? `https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21?checkout[email]=${encodeURIComponent(business.email)}`
@@ -1078,17 +1089,35 @@ export default function Dashboard() {
                 <input
                   className="tdd-input"
                   readOnly
-                  value={siteUrl + '/widget/' + business.slug}
+                  value={widgetUrl}
                   onFocus={(e) => e.target.select()}
+                  aria-label="Website widget URL"
                 />
                 <div className="tdd-link-actions">
-                  <a className="tdd-btn tdd-btn-primary tdd-btn-sm" href={siteUrl + '/widget/' + business.slug} target="_blank" rel="noreferrer">
+                  <a className="tdd-btn tdd-btn-primary tdd-btn-sm" href={widgetUrl} target="_blank" rel="noreferrer">
                     <IconArrow /> Open widget
                   </a>
-                  <button className="tdd-btn tdd-btn-ghost tdd-btn-sm" onClick={() => copyText(siteUrl + '/widget/' + business.slug, 'Widget link copied')} style={{ background: '#fff' }}>
+                  <button className="tdd-btn tdd-btn-ghost tdd-btn-sm" onClick={() => copyText(widgetUrl, 'Widget link copied')} style={{ background: '#fff' }}>
                     <IconCopy /> Copy widget URL
                   </button>
                 </div>
+                <p className="tdd-products-sub" style={{ marginTop: 16, marginBottom: 7 }}>Embed code</p>
+                <textarea
+                  className="tdd-field"
+                  readOnly
+                  rows={5}
+                  value={widgetEmbedCode}
+                  onFocus={(e) => e.target.select()}
+                  aria-label="Website widget embed code"
+                  style={{ resize: 'vertical', minHeight: 120, fontFamily: 'ui-monospace, SFMono-Regular, Consolas, monospace', fontSize: 11.5, lineHeight: 1.6 }}
+                />
+                <button
+                  className="tdd-btn tdd-btn-primary tdd-btn-sm tdd-btn-block"
+                  style={{ marginTop: 9 }}
+                  onClick={() => copyText(widgetEmbedCode, 'Embed code copied')}
+                >
+                  <IconCopy /> Copy embed code
+                </button>
               </section>
 
               <section className="tdd-link-card tdd-rise" style={{ animationDelay: '.28s' }}>
