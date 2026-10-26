@@ -79,7 +79,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
     })
   }, [])
 
-  // Mode changes stay on this page: no navigation, form values kept. /* v2-anims */
+  // Mode changes stay on this page: no navigation, form values kept. /* v2-anims x */
   const switchMode = useCallback((next) => {
     setDir(next === 'signup' ? 1 : -1)
     setMode(next)
