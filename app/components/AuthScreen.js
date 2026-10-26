@@ -202,6 +202,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
           transition:color .2s;
           &:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }
           &:hover { color:rgba(252,251,248,.85); }
+        }
         .ta-tab::after { content:''; position:absolute; left:0; right:0; bottom:0; height:2px;
           background:var(--lime); transform:scaleX(0); transform-origin:left;
           transition:transform .4s var(--ease); }
@@ -289,6 +290,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
           letter-spacing:-.005em; cursor:pointer;
           transition:background .2s, transform .25s var(--ease), opacity .2s;
           &:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
+        }
         .ta-submit svg { transition:transform .3s var(--ease); }
         .ta-submit:hover:not(:disabled) { background:var(--lime-hi); transform:translateY(-1px); }
         .ta-submit:hover:not(:disabled) svg { transform:translateX(3px); }
