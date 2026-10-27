@@ -2602,8 +2602,8 @@ export default function LandingPage() {
               <p className="price-note">
                 Everything you need to turn happy customers into your best marketing channel. Cancel anytime.
               </p>
-              <a className="btn btn-primary btn-lg" href={primaryHref}>
-                {loggedIn ? 'Go to dashboard' : 'Start your free trial'} <Icon name="arrow" size={17} />
+              <a className="btn btn-primary btn-lg" href="https://checkout.dodopayments.com/buy/pdt_0NqbFcSkZFAiLERFxk5S2?quantity=1">
+                Subscribe now <Icon name="arrow" size={17} />
               </a>
               <p className="price-fine">
                 <Icon name="checkCircle" size={14} /> No credit card required for the trial
