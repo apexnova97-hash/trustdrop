@@ -724,9 +724,7 @@ export default function Dashboard() {
 ></iframe>`
     : ''
 
-  const checkoutUrl = business
-    ? `https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21?checkout[email]=${encodeURIComponent(business.email)}`
-    : 'https://trustdrop7.lemonsqueezy.com/checkout/buy/f805ed02-332c-426b-a866-078eba3c3c21'
+  const checkoutUrl = 'https://checkout.dodopayments.com/buy/pdt_0NqbFcSkZFAiLERFxk5S2?quantity=1'
 
   if (loading) {
     return (
