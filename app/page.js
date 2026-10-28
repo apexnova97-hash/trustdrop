@@ -1100,23 +1100,23 @@ export default function LandingPage() {
     <main className="td-page">
       <style>{`
         .td-page {
-          --bg: #FCFBF8;
-          --ink: #071A31;
-          --ink-soft: #33465C;
-          --body: #5D6E82;
-          --muted: #8391A2;
-          --blue: #0069FF;
-          --blue-dark: #0052CC;
-          --blue-soft: #EAF2FF;
-          --line: #E8E4DA;
-          --line-soft: #F0EDE5;
-          --white: #FFFFFF;
-          --green: #0E9F6E;
-          --green-soft: #E7F8EF;
-          --lime: #D9F27A;
-          --violet: #6B5CE7;
-          --shadow-sm: 0 1px 2px rgba(7,26,49,.05), 0 8px 24px rgba(7,26,49,.05);
-          --shadow-md: 0 18px 50px rgba(7,26,49,.10);
+          --bg: #EDF0E8;
+          --ink: #121A14;
+          --ink-soft: #38453C;
+          --body: #4E5C52;
+          --muted: #78857B;
+          --blue: #FF4B1F;
+          --blue-dark: #D93A12;
+          --blue-soft: #FFE3D8;
+          --line: #D6DCD3;
+          --line-soft: #E2E7DE;
+          --white: #FAFBF6;
+          --green: #17694A;
+          --green-soft: #DCEBE1;
+          --lime: #FF4B1F;
+          --violet: #5A4B7C;
+          --shadow-sm: 0 1px 0 rgba(18,26,20,.04);
+          --shadow-md: 0 24px 48px rgba(18,26,20,.14);
           --ease: cubic-bezier(.16,1,.3,1);
           position: relative;
           background: var(--bg);
@@ -2361,7 +2361,76 @@ export default function LandingPage() {
           .how-sticky { position: static !important; min-height: 0 !important; display: block !important; }
           .hero-h1 .line > span { transform: none !important; }
         }
-      `}</style>
+      
+        /* ---------- skin: flat poster system ---------- */
+        .hero-panel { background: var(--ink); border-radius: 4px; padding: 92px 34px 96px; }
+        .hero-panel::after { content: none; }
+        .blob, .visual-glow { display: none; }
+        .hero-inner { max-width: 1180px; text-align: left; }
+        .td-page .hero-h1 { margin: 0; color: var(--white); font-weight: 700; letter-spacing: -.04em; }
+        .hero-h1 .mark { color: var(--blue); }
+        .hero-sub { margin: 26px 0 0; color: rgba(250,251,246,.76); }
+        .hero-actions, .hero-note { justify-content: flex-start; }
+        .hero-note { color: rgba(250,251,246,.55); }
+        .hero-badge { display: none; }
+        .app-row { justify-content: flex-start; }
+
+        /* one geometry: sharp corners */
+        .btn, .nav-burger, .price-badge, .dash-count, .mock-tag, .seg, .seg-bar,
+        .dot, .round-btn, .demo-tab, .demo-arrow, .ta-submit { border-radius: 3px; }
+        .td-page [class$="-card"], .td-page .cap-card, .td-page .price-card, .td-page .site,
+        .td-page .hero-panel, .td-page .show-visual, .td-page .story-panel, .td-page .demo-stage,
+        .td-page .price-wrap, .td-page .price, .td-page .collect-shell, .td-page .demo-body,
+        .td-page .quote-box, .td-page .story-quote, .td-page .app-tile { border-radius: 4px; }
+        .td-page .cap-card, .td-page .price-card { background: var(--white); box-shadow: none; }
+        .td-page .mock-field, .td-page .mock-btn, .td-page .demo-btn { border-radius: 3px; }
+        .td-page .show-badge, .td-page .chip { border-radius: 3px; }
+
+        /* flat fills, no glow or glass */
+        .btn-primary { background: var(--blue); color: var(--ink); box-shadow: none; }
+        .btn-primary:hover { background: var(--blue-dark); color: #fff; box-shadow: none; }
+        .btn-lime { background: var(--blue); color: var(--ink); }
+        .btn-lime:hover { background: var(--blue-dark); color: #fff; box-shadow: none; }
+        .btn-light { background: var(--white); color: var(--ink); box-shadow: none; }
+        .btn-light:hover { box-shadow: none; }
+        .btn-white-outline { background: transparent; border-color: rgba(250,251,246,.34); backdrop-filter: none; -webkit-backdrop-filter: none; }
+        .btn-white-outline:hover { background: rgba(250,251,246,.08); }
+        .btn-secondary:hover { background: transparent; border-color: var(--ink); }
+        .td-nav { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
+        .td-nav.is-scrolled { box-shadow: none; }
+        .mobile-menu { box-shadow: none; }
+        .eyebrow { display: none; }
+
+        /* capability cards: icon, heading, sentence; no tile, no chip */
+        .cap-card { box-shadow: none; }
+        .cap-card:hover { box-shadow: none; border-color: var(--ink); transform: translateY(-4px); }
+        .cap-card::after { background: var(--blue); }
+        .cap-icon { background: none; color: var(--ink); border-radius: 0; margin-bottom: 22px; }
+        .cap-card:hover .cap-icon { transform: none; box-shadow: none; }
+
+        /* product visuals: one quiet tone instead of four gradients */
+        .demo-card, .mock-card, .site { box-shadow: none; }
+        .demo-stage { background: var(--ink); }
+        .demo-hint i { background: rgba(250,251,246,.4); }
+        .g-violet { background: #C9C2D8; }
+        .g-peach { background: #E6C6B2; }
+        .g-mint { background: #BFD6C6; }
+        .g-blue { background: #C2CEDA; }
+        .org-avatar { background: #E3D6C8; color: var(--ink); }
+        .bars span { background: var(--ink); }
+        .bars span:nth-child(6) { background: var(--ink); }
+        .show-meter span { background: var(--blue); }
+
+        /* stories and pricing panels */
+        .story-panel { background: #E4E8DE; }
+        .story-metric { background: none; -webkit-text-fill-color: var(--ink); color: var(--ink); }
+        .price-left { background: #E7EBE1; }
+        .price-badge { background: transparent; border-color: var(--line); color: var(--ink); }
+
+        /* trust strip */
+        .marquee-item { color: var(--muted); }
+        .marquee-item i { background: var(--blue); }
+`}</style>
 
       {/* NAV */}
       <header className={`td-nav${scrolled ? ' is-scrolled' : ''}`}>
@@ -2425,27 +2494,13 @@ export default function LandingPage() {
       {/* HERO */}
       <section className="hero-section" id="top">
         <div className="hero-panel">
-          <span className="blob blob-a" aria-hidden="true" />
-          <span className="blob blob-b" aria-hidden="true" />
-          <span className="blob blob-c" aria-hidden="true" />
-          <span className="blob blob-d" aria-hidden="true" />
-
           <div className="hero-inner">
-            <span className="hero-badge">
-              <Stars size={12} />
-              <span>Trusted by 500+ businesses</span>
-              <span className="badge-divider" />
-              <span className="badge-soft">4.9 average rating</span>
-            </span>
-
             <h1 className="hero-h1">
               <span className="line">
-                <span>All your customer proof,</span>
+                <span>Every happy customer,</span>
               </span>
               <span className="line">
-                <span>
-                  <span className="mark">handled.</span>
-                </span>
+                <span>on the record.</span>
               </span>
             </h1>
 
@@ -2455,7 +2510,7 @@ export default function LandingPage() {
             </p>
 
             <div className="hero-actions">
-              <a className="btn btn-light btn-lg" href={primaryHref}>
+              <a className="btn btn-primary btn-lg" href={primaryHref}>
                 {primaryLabel} <Icon name="arrow" size={17} />
               </a>
               <a className="btn btn-white-outline btn-lg" href="#how">
@@ -2523,10 +2578,9 @@ export default function LandingPage() {
           <div className="caps">
             {CAPS.map((c, i) => (
               <a className="cap-card reveal" href="#how" key={c.title} style={{ '--d': `${i * 80}ms` }}>
-                <span className={`cap-icon tint-${c.tint}`}>
+                <span className="cap-icon">
                   <Icon name={c.icon} size={22} />
                 </span>
-                <span className="cap-label">{c.kicker}</span>
                 <h3>{c.title}</h3>
                 <p>{c.text}</p>
                 <span className="cap-link">

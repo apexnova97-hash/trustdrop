@@ -1,15 +1,16 @@
 import './globals.css'
-import { Inter, Plus_Jakarta_Sans } from 'next/font/google'
+import { Bricolage_Grotesque, Instrument_Sans } from 'next/font/google'
 
-const displayFont = Plus_Jakarta_Sans({
+const displayFont = Bricolage_Grotesque({
   subsets: ['latin'],
-  weight: ['500', '600', '700', '800'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-display',
   display: 'swap',
 })
 
-const bodyFont = Inter({
+const bodyFont = Instrument_Sans({
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-body',
   display: 'swap',
 })
@@ -31,7 +32,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         className={`${displayFont.variable} ${bodyFont.variable}`}
-        style={{ margin: 0, padding: 0, background: '#050810', overflowX: 'clip' }}
+        style={{ margin: 0, padding: 0, background: '#EDF0E8', overflowX: 'clip' }}
       >
         {children}
       </body>

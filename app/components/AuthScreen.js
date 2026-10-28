@@ -23,7 +23,7 @@ function Logo() {
   return (
     <span className="ta-brand">
       <svg width="26" height="26" viewBox="0 0 40 40" aria-hidden="true">
-        <rect width="40" height="40" rx="11" fill="#0069FF" />
+        <rect width="40" height="40" rx="3" fill="#FF4B1F" />
         <path d={STAR_PATH} fill="#FFC62E" />
       </svg>
       <span className="ta-brand-name">TrustDrop</span>
@@ -71,6 +71,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
 
   const isSignup = mode === 'signup'
   const slug = slugify(business)
+  const strength = strengthOf(password)
   const linkBase = origin ? origin.replace(/\/$/, '') + '/collect/' : '/collect/'
 
   useEffect(() => {
@@ -137,8 +138,8 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
     <div className="ta">
       <style>{`
         .ta {
-          --paper:#FCFBF8; --ink:#071A31; --ink-soft:#33465C; --muted:#5D6E82;
-          --lime:#D9F27A; --lime-hi:#E7FA9C; --blue:#0069FF; --line:#E8E4DA;
+          --paper:#EDF0E8; --ink:#121A14; --ink-soft:#38453C; --muted:#6C7A70;
+          --lime:#FF4B1F; --lime-hi:#FF6A42; --blue:#FF4B1F; --line:#D6DCD3;
           --pad:clamp(22px,3.2vw,44px);
           --ease:cubic-bezier(.16,1,.3,1);
           display:grid; grid-template-columns:minmax(0,1fr); align-content:start;
@@ -165,7 +166,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
         .ta-brand-name { font-family:var(--font-display),sans-serif; font-weight:700;
           font-size:18px; letter-spacing:-.03em; }
 
-        .ta-h1 { font-size:clamp(34px,6.5vw,98px); line-height:.96; letter-spacing:-.05em;
+        .ta-h1 { font-size:clamp(34px,6.5vw,98px); line-height:.9; letter-spacing:-.035em;
           font-weight:700; color:var(--ink); }
         .ta-line { display:block; overflow:hidden; padding-bottom:.045em; }
         .ta-line > span { display:block; transform:translateY(104%);
@@ -194,7 +195,8 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
         /* ---------- the form (ink field) ---------- */
         .ta-panel { position:relative; background:var(--ink); color:var(--paper);
           display:flex; flex-direction:column; min-height:min(100svh,860px);
-          padding:var(--pad); animation:taIn .8s var(--ease) .12s both; }
+          padding:var(--pad); animation:taIn .8s var(--ease) .12s both;
+          border-top:4px solid var(--blue); }
         .ta-toprow { display:flex; align-items:center; justify-content:space-between; gap:16px; }
         .ta-tabs { display:flex; gap:clamp(18px,2vw,26px); }
         .ta-tab { background:none; border:0; padding:6px 0; cursor:pointer; font-size:16px;
@@ -223,7 +225,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
           animation:taIn .6s var(--ease) .26s both; }
 
         /* the block that swaps when you change mode */
-        .ta-swap { animation:taSwap .38s var(--ease) both; }
+        .ta-swap { animation:taSwap .42s var(--ease) both; }
 
         .ta-form { margin-top:clamp(20px,3vw,28px); display:grid; gap:clamp(17px,2.4vw,22px); }
         .ta-form > * { animation:taIn .45s var(--ease) both; }
@@ -279,12 +281,12 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
         .ta-meter-track b.warn { background:#F0C46A; }
         .ta-meter-txt { font-size:13px; color:rgba(252,251,248,.6); min-width:54px; text-align:right; }
 
-        .ta-error { display:flex; gap:9px; align-items:flex-start; background:#12283F;
-          padding:12px 14px; color:#FFC0B0; font-size:15px; line-height:1.5; }
+        .ta-error { display:flex; gap:9px; align-items:flex-start; background:#23332A;
+          padding:12px 14px; color:#FFCEC0; font-size:15px; line-height:1.5; }
         .ta-error { animation:taIn .4s var(--ease) both; }
         .ta-error svg { flex-shrink:0; margin-top:2px; }
 
-        .ta-submit { width:100%; border:0; border-radius:999px; min-height:54px;
+        .ta-submit { width:100%; border:0; border-radius:3px; min-height:54px;
           display:inline-flex; align-items:center; justify-content:center; gap:10px;
           background:var(--lime); color:var(--ink); font-size:16.5px; font-weight:700;
           letter-spacing:-.005em; cursor:pointer;
@@ -325,7 +327,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
 
         @keyframes taRise { to { transform:none; } }
         @keyframes taIn { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
-        @keyframes taSwap { from { opacity:0; transform:translate3d(var(--swap-x,9px),0,0) scale(.95); }
+        @keyframes taSwap { from { opacity:0; transform:translate3d(var(--swap-x,14px),0,0) scale(.97); }
           to { opacity:1; transform:none; } }
         @keyframes taFlash { from { opacity:.25; } to { opacity:1; } }
         @keyframes taSpin { to { transform:rotate(360deg); } }
