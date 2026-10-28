@@ -402,8 +402,8 @@ function HeroDemo() {
   const [paused, setPaused] = useState(false)
   const [typed, setTyped] = useState('')
   const reduced = usePrefersReducedMotion()
-  const isWide = useMediaQuery('(min-width: 1021px)')
-  const scrollDriven = isWide && !reduced
+  // The demo advances on its own timer: no scroll-jacked hero viewport.
+  const scrollDriven = false
   const stageRef = useRef(null)
   const stickyRef = useRef(null)
   const windowRef = useRef(null)
@@ -1100,23 +1100,23 @@ export default function LandingPage() {
     <main className="td-page">
       <style>{`
         .td-page {
-          --bg: #EDF0E8;
-          --ink: #121A14;
-          --ink-soft: #38453C;
-          --body: #4E5C52;
-          --muted: #78857B;
-          --blue: #FF4B1F;
-          --blue-dark: #D93A12;
-          --blue-soft: #FFE3D8;
-          --line: #D6DCD3;
-          --line-soft: #E2E7DE;
-          --white: #FAFBF6;
-          --green: #17694A;
-          --green-soft: #DCEBE1;
-          --lime: #FF4B1F;
-          --violet: #5A4B7C;
-          --shadow-sm: 0 1px 0 rgba(18,26,20,.04);
-          --shadow-md: 0 24px 48px rgba(18,26,20,.14);
+          --bg: #FFFFFF;
+          --ink: #0B3558;
+          --ink-soft: #24486B;
+          --body: #476788;
+          --muted: #6B7F94;
+          --blue: #006BFF;
+          --blue-dark: #0052CC;
+          --blue-soft: #E8F1FF;
+          --line: #DCE7F5;
+          --line-soft: #EAF1FA;
+          --white: #FFFFFF;
+          --green: #0E9F6E;
+          --green-soft: #E7F8EF;
+          --lime: #006BFF;
+          --violet: #6B5CE7;
+          --shadow-sm: 0 2px 8px rgba(11,53,88,.05);
+          --shadow-md: 0 24px 48px rgba(11,53,88,.12);
           --ease: cubic-bezier(.16,1,.3,1);
           position: relative;
           background: var(--bg);
@@ -1483,7 +1483,7 @@ export default function LandingPage() {
         .seg.is-done .seg-bar { width: 100%; }
         .demo-stage.is-scroll .seg.is-active .seg-bar { width: var(--demo-seg, 0%); animation: none; }
         @media (min-width: 1021px) {
-          .demo-stage { height: calc(100vh + 120vh); }
+          .demo-stage.is-scroll { height: calc(100vh + 64vh); }
           .demo-stage.is-scroll .demo-sticky {
             position: sticky;
             top: 112px;
@@ -2362,75 +2362,143 @@ export default function LandingPage() {
           .hero-h1 .line > span { transform: none !important; }
         }
       
-        /* ---------- skin: flat poster system ---------- */
-        .hero-panel { background: var(--ink); border-radius: 4px; padding: 92px 34px 96px; }
+        /* ---------- skin: calendly light ---------- */
+        .hero-section { padding: 96px 16px 0; }
+        .hero-panel {
+          background:
+            radial-gradient(80% 70% at 50% -10%, #E4EFFF 0%, rgba(228,239,255,0) 70%),
+            var(--white);
+          border: 1px solid var(--line);
+          border-radius: 26px;
+          padding: 78px 30px 84px;
+        }
         .hero-panel::after { content: none; }
         .blob, .visual-glow { display: none; }
-        .hero-inner { max-width: 1180px; text-align: left; }
-        .td-page .hero-h1 { margin: 0; color: var(--white); font-weight: 700; letter-spacing: -.04em; }
-        .hero-h1 .mark { color: var(--blue); }
-        .hero-sub { margin: 26px 0 0; color: rgba(250,251,246,.76); }
-        .hero-actions, .hero-note { justify-content: flex-start; }
-        .hero-note { color: rgba(250,251,246,.55); }
-        .hero-badge { display: none; }
-        .app-row { justify-content: flex-start; }
+        .hero-inner { max-width: 1060px; text-align: center; }
+        .td-page .hero-h1 {
+          margin: 22px auto 0; color: var(--ink); font-weight: 800;
+          font-size: clamp(44px, 6.8vw, 86px); letter-spacing: -.05em; line-height: 1.02;
+        }
+        .hero-h1 .mark {
+          font-family: var(--font-script), cursive;
+          font-weight: 600; font-style: normal;
+          letter-spacing: -.01em; line-height: .9;
+          color: var(--blue); padding-right: .06em;
+        }
+        .hero-sub { margin: 24px auto 0; color: var(--body); }
+        .hero-actions, .hero-note, .app-row { justify-content: center; }
+        .hero-note { color: var(--muted); }
+        .hero-note svg { color: var(--green); }
+        .hero-badge {
+          display: inline-flex; background: var(--white); color: var(--ink-soft);
+          border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+          backdrop-filter: none; -webkit-backdrop-filter: none;
+          font-weight: 500;
+          animation: fadeUp .8s var(--ease) both;
+        }
+        .hero-badge .rating { color: #FFB020; }
+        .badge-divider { background: var(--line); }
+        .badge-soft { color: var(--muted); }
 
-        /* one geometry: sharp corners */
-        .btn, .nav-burger, .price-badge, .dash-count, .mock-tag, .seg, .seg-bar,
-        .dot, .round-btn, .demo-tab, .demo-arrow, .ta-submit { border-radius: 3px; }
+        /* one geometry: pill controls, soft panels */
+        .btn { border-radius: 999px; }
+        .btn-lg { padding: 15px 26px; font-size: 15.5px; }
+        .nav-burger, .dash-count, .mock-tag, .dot, .round-btn, .demo-tab, .demo-arrow,
+        .price-badge, .seg, .seg-bar { border-radius: 999px; }
         .td-page [class$="-card"], .td-page .cap-card, .td-page .price-card, .td-page .site,
-        .td-page .hero-panel, .td-page .show-visual, .td-page .story-panel, .td-page .demo-stage,
-        .td-page .price-wrap, .td-page .price, .td-page .collect-shell, .td-page .demo-body,
-        .td-page .quote-box, .td-page .story-quote, .td-page .app-tile { border-radius: 4px; }
-        .td-page .cap-card, .td-page .price-card { background: var(--white); box-shadow: none; }
-        .td-page .mock-field, .td-page .mock-btn, .td-page .demo-btn { border-radius: 3px; }
-        .td-page .demo-body { background: #F6F7EF; }
-        .td-page .show-badge, .td-page .chip { border-radius: 3px; }
+        .td-page .show-visual, .td-page .story-panel, .td-page .price-wrap, .td-page .price,
+        .td-page .collect-shell, .td-page .demo-body, .td-page .quote-box, .td-page .story-quote {
+          border-radius: 18px;
+        }
+        .td-page .hero-panel, .td-page .demo-stage { border-radius: 26px; }
+        .td-page .app-tile { border-radius: 999px; }
+        .td-page .cap-card, .td-page .price-card { background: var(--white); box-shadow: var(--shadow-sm); }
+        .td-page .mock-field, .td-page .mock-btn, .td-page .demo-btn { border-radius: 10px; }
+        .td-page .demo-body { background: var(--white); }
+        .td-page .show-badge, .td-page .chip { border-radius: 999px; }
 
-        /* flat fills, no glow or glass */
-        .btn-primary { background: var(--blue); color: var(--ink); box-shadow: none; }
-        .btn-primary:hover { background: var(--blue-dark); color: #fff; box-shadow: none; }
-        .btn-lime { background: var(--blue); color: var(--ink); }
-        .btn-lime:hover { background: var(--blue-dark); color: #fff; box-shadow: none; }
-        .btn-light { background: var(--white); color: var(--ink); box-shadow: none; }
-        .btn-light:hover { box-shadow: none; }
-        .btn-white-outline { background: transparent; border-color: rgba(250,251,246,.34); backdrop-filter: none; -webkit-backdrop-filter: none; }
-        .btn-white-outline:hover { background: rgba(250,251,246,.08); }
-        .btn-secondary:hover { background: transparent; border-color: var(--ink); }
-        .td-nav { background: var(--bg); backdrop-filter: none; -webkit-backdrop-filter: none; }
-        .td-nav.is-scrolled { box-shadow: none; }
-        .mobile-menu { box-shadow: none; }
+        /* fills: blue on white, soft shadow, no glow */
+        .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 8px 20px -10px rgba(0,107,255,.7); }
+        .btn-primary:hover { background: var(--blue-dark); color: #fff; transform: translateY(-1px); box-shadow: 0 12px 24px -10px rgba(0,107,255,.75); }
+        .btn-lime { background: var(--blue); color: #fff; }
+        .btn-lime:hover { background: var(--blue-dark); color: #fff; }
+        .btn-light { background: var(--white); color: var(--ink); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+        .btn-light:hover { border-color: #B9D2F2; transform: translateY(-1px); }
+        .btn-white-outline { background: var(--white); color: var(--ink); border-color: var(--line); box-shadow: var(--shadow-sm); }
+        .btn-white-outline:hover { background: var(--blue-soft); border-color: #BFD8FB; }
+        .btn-secondary { border-color: var(--line); color: var(--ink); }
+        /* links inherit the page colour, so filled buttons re-assert theirs */
+        .td-page a.btn-primary, .td-page a.btn-lime { color: #fff; }
+        .td-page a.btn-light, .td-page a.btn-white-outline, .td-page a.btn-secondary { color: var(--ink); }
+        .price-guarantee { background: var(--blue-soft); border-color: #D6E6FC; color: var(--ink-soft); }
+        .price-guarantee svg { color: var(--blue); }
+        .dot { background: #D7E3F2; }
+        .btn-secondary:hover { background: var(--blue-soft); border-color: #BFD8FB; }
+        .td-nav { background: rgba(255,255,255,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+        .td-nav.is-scrolled { background: rgba(255,255,255,.94); box-shadow: 0 1px 0 var(--line); }
+        .mobile-menu { box-shadow: var(--shadow-md); border: 1px solid var(--line); }
         .eyebrow { display: none; }
 
-        /* capability cards: icon, heading, sentence; no tile, no chip */
-        .cap-card { box-shadow: none; }
-        .cap-card:hover { box-shadow: none; border-color: var(--ink); transform: translateY(-4px); }
+        /* capability cards */
+        .cap-card { box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+        .cap-card .cap-link { margin-top: auto; padding-top: 14px; }
+        .cap-card:hover { box-shadow: 0 18px 34px -22px rgba(11,53,88,.4); border-color: #BFD8FB; transform: translateY(-4px); }
         .cap-card::after { background: var(--blue); }
-        .cap-icon { background: none; color: var(--ink); border-radius: 0; margin-bottom: 22px; }
-        .cap-card:hover .cap-icon { transform: none; box-shadow: none; }
+        .cap-icon { background: var(--blue-soft); color: var(--blue); border-radius: 12px; margin-bottom: 20px; }
 
-        /* product visuals: one quiet tone instead of four gradients */
-        .demo-card, .mock-card, .site { box-shadow: none; }
-        .demo-stage { background: var(--ink); }
-        .demo-hint i { background: rgba(250,251,246,.4); }
-        .g-violet { background: #C9C2D8; }
-        .g-peach { background: #E6C6B2; }
-        .g-mint { background: #BFD6C6; }
-        .g-blue { background: #C2CEDA; }
-        .org-avatar { background: #E3D6C8; color: var(--ink); }
-        .bars span { background: var(--ink); }
-        .bars span:nth-child(6) { background: var(--ink); }
+        /* product visuals: one blue family instead of four gradients */
+        .demo-stage { background: var(--blue-soft); border: 1px solid #D6E6FC; }
+        .demo-hint i { background: #B7CDE8; }
+        .g-violet, .g-peach, .g-mint, .g-blue { background: #D8E8FF; }
+        .org-avatar { background: var(--blue-soft); color: var(--blue-dark); }
+        .bars span { background: #C6DDFB; }
+        .bars span:nth-child(6) { background: var(--blue); }
         .show-meter span { background: var(--blue); }
 
         /* stories and pricing panels */
-        .story-panel { background: #E4E8DE; }
-        .story-metric { background: none; -webkit-text-fill-color: var(--ink); color: var(--ink); }
-        .price-left { background: #E7EBE1; }
-        .price-badge { background: transparent; border-color: var(--line); color: var(--ink); }
+        .story-panel { background: var(--blue-soft); border: 1px solid #D6E6FC; }
+        .story-metric { background: none; -webkit-text-fill-color: var(--blue); color: var(--blue); }
+        .price-left { background: var(--blue-soft); }
+        .price-badge { background: var(--blue-soft); border-color: #CFE2FB; color: var(--blue-dark); }
 
-        /* trust strip */
+        /* script accents */
+        .eyebrow {
+          display: inline-block; font-family: var(--font-hand), cursive; font-size: 22px;
+          font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--blue);
+          margin-bottom: 6px;
+        }
+        .trust-label { font-family: var(--font-hand), cursive; font-size: 21px; color: var(--ink-soft); }
         .marquee-item { color: var(--muted); }
         .marquee-item i { background: var(--blue); }
+        .h2 .mark-quote { font-family: var(--font-quote), cursive; color: var(--blue); font-size: 1.08em; }
+        .quote-glyph {
+          font-family: var(--font-quote), cursive; color: var(--blue); opacity: .25;
+          font-size: 96px; line-height: .6; letter-spacing: 0;
+        }
+        .story-quote { background: var(--white); backdrop-filter: none; -webkit-backdrop-filter: none; box-shadow: var(--shadow-sm); }
+        .pub-widget .quote-glyph, .mini-widget .quote-glyph { font-size: 44px; }
+
+        /* hand-drawn underline for the script word */
+        .hero-underline { display: block; width: min(226px, 46%); height: 14px; margin: -4px auto 0; overflow: visible; }
+        .hero-underline path {
+          fill: none; stroke: var(--blue); stroke-width: 3.4; stroke-linecap: round;
+          stroke-dasharray: 240; stroke-dashoffset: 240;
+          animation: drawLine 1.1s var(--ease) .85s forwards;
+        }
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-underline path { animation: none; stroke-dashoffset: 0; }
+        }
+
+        .hero-handnote {
+          display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+          font-family: var(--font-hand), cursive;
+          margin: 34px auto -8px; font-size: 23px; line-height: 1.1; color: var(--ink-soft);
+          transform: rotate(-1.6deg); animation: fadeUp .8s var(--ease) .6s both;
+        }
+        .hero-handnote svg { color: var(--blue); align-self: flex-end; margin-bottom: -6px; }
+        .hero-demo-wrap { padding-bottom: 8px; }
+        .brand-name { font-family: var(--font-brand), cursive; font-weight: 400; letter-spacing: 0; }
 `}</style>
 
       {/* NAV */}
@@ -2496,18 +2564,33 @@ export default function LandingPage() {
       <section className="hero-section" id="top">
         <div className="hero-panel">
           <div className="hero-inner">
+            <span className="hero-badge">
+              <span className="rating" aria-hidden="true">
+                <Star size={13} />
+              </span>
+              4.9 average from 1,200+ businesses
+              <span className="badge-divider" aria-hidden="true" />
+              <span className="badge-soft">No credit card</span>
+            </span>
+
             <h1 className="hero-h1">
               <span className="line">
-                <span>Every happy customer,</span>
+                <span>Easy testimonials</span>
               </span>
               <span className="line">
-                <span>on the record.</span>
+                <span>
+                  <span className="mark">ahead.</span>
+                </span>
               </span>
             </h1>
 
+            <svg className="hero-underline" viewBox="0 0 240 14" aria-hidden="true" preserveAspectRatio="none">
+              <path d="M3 9.5C46 4.5 96 3.2 138 5.4c30 1.6 66 3.4 99 1.1" />
+            </svg>
+
             <p className="hero-sub">
-              TrustDrop collects reviews with one link, curates the best ones, and publishes them as a live wall of
-              love on your website — in minutes, not weeks.
+              TrustDrop gives every customer one link to leave a review, keeps the best ones in one inbox, and publishes
+              them as a live wall of love on your site. Set up in minutes, not weeks.
             </p>
 
             <div className="hero-actions">
@@ -2534,7 +2617,18 @@ export default function LandingPage() {
               <span className="app-caption">Works with your site</span>
             </div>
 
-            <HeroDemo />
+            <p className="hero-handnote">
+              their whole review takes 30 seconds
+              <svg width="34" height="24" viewBox="0 0 34 24" fill="none" stroke="currentColor" strokeWidth="2"
+                strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M2 4c9 1 20 6 27 15" />
+                <path d="M22 19.5 29.5 19.8 28 12.6" />
+              </svg>
+            </p>
+
+            <div className="hero-demo-wrap">
+              <HeroDemo />
+            </div>
           </div>
         </div>
       </section>
