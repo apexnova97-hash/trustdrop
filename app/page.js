@@ -2384,6 +2384,7 @@ export default function LandingPage() {
         .td-page .quote-box, .td-page .story-quote, .td-page .app-tile { border-radius: 4px; }
         .td-page .cap-card, .td-page .price-card { background: var(--white); box-shadow: none; }
         .td-page .mock-field, .td-page .mock-btn, .td-page .demo-btn { border-radius: 3px; }
+        .td-page .demo-body { background: #F6F7EF; }
         .td-page .show-badge, .td-page .chip { border-radius: 3px; }
 
         /* flat fills, no glow or glass */
