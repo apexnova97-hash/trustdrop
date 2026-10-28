@@ -2433,6 +2433,8 @@ export default function LandingPage() {
         .price-guarantee { background: var(--blue-soft); border-color: #D6E6FC; color: var(--ink-soft); }
         .price-guarantee svg { color: var(--blue); }
         .dot { background: #D7E3F2; }
+        /* the floating proof pills collide with the CTA headline on tablets */
+        @media (max-width: 920px) { .float-pill { display: none; } }
         .btn-secondary:hover { background: var(--blue-soft); border-color: #BFD8FB; }
         .td-nav { background: rgba(255,255,255,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
         .td-nav.is-scrolled { background: rgba(255,255,255,.94); box-shadow: 0 1px 0 var(--line); }
