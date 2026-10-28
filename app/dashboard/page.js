@@ -420,6 +420,25 @@ const STYLES = `
   .tdd-nav-right .tdd-btn-ghost { display:none; }
   .tdd-product-actions { opacity:1; }
 }
+
+/* entrance: cards settle in a short cascade, once per mount */
+@keyframes tddRise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+.tdd-stat { animation:tddRise .45s var(--ease) both; }
+.tdd-stat:nth-child(1) { animation-delay:.02s; }
+.tdd-stat:nth-child(2) { animation-delay:.06s; }
+.tdd-stat:nth-child(3) { animation-delay:.1s; }
+.tdd-stat:nth-child(4) { animation-delay:.14s; }
+.tdd-card { animation:tddRise .5s var(--ease) .05s both; }
+.tdd-link-card { animation:tddRise .5s var(--ease) .12s both; }
+.tdd-btn:active { transform:translateY(0) scale(.975); }
+.tdd-icon-btn:active { transform:scale(.94); }
+.tdd-review { transition:background .2s; }
+.tdd-review:hover { background:#FAFCFF; }
+.tdd-input:focus, .tdd-field:focus { background:#fff; }
+@media (prefers-reduced-motion: reduce) {
+  .tdd-stat, .tdd-card, .tdd-link-card, .tdd-banner { animation:none; }
+  .tdd-btn, .tdd-icon-btn { transition:none; }
+}
 `
 
 function IconChart() {

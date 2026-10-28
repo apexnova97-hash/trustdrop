@@ -288,7 +288,11 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
         .ta-error { display:flex; gap:9px; align-items:flex-start; border-radius:12px;
           background:rgba(255,120,120,.13); border:1px solid rgba(255,120,120,.32);
           padding:12px 14px; color:#FFD3CC; font-size:15px; line-height:1.5; }
-        .ta-error { animation:taIn .4s var(--ease) both; }
+        .ta-error { animation:taIn .4s var(--ease) both, taShake .4s .05s var(--ease); }
+        .ta-form > *:focus-within .ta-label { color:var(--paper); }
+        .ta-label { transition:color .2s; }
+        @keyframes taShake { 0%,100% { transform:none; } 25% { transform:translateX(-3px); } 50% { transform:translateX(3px); } 75% { transform:translateX(-2px); } }
+        @media (prefers-reduced-motion: reduce) { .ta-error { animation:taIn .01s both; } }
         .ta-error svg { flex-shrink:0; margin-top:2px; }
 
         .ta-submit { width:100%; border:0; border-radius:999px; min-height:54px;

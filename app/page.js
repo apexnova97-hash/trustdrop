@@ -834,7 +834,9 @@ function Showcase() {
         <div className="wrap">
           <div className="how-head reveal">
             <span className="eyebrow">How it works</span>
-            <h2 className="h2">Easy testimonials ahead.</h2>
+            <h2 className="h2">
+              Easy testimonials <span className="script">ahead.</span>
+            </h2>
             <p className="sub">
               Collect, curate, and publish social proof without touching a spreadsheet. It all happens in one calm,
               tidy place.
@@ -2435,6 +2437,70 @@ export default function LandingPage() {
         .dot { background: #D7E3F2; }
         /* the floating proof pills collide with the CTA headline on tablets */
         @media (max-width: 920px) { .float-pill { display: none; } }
+
+        /* ---------- script accents inside section headings ---------- */
+        .script { font-family: var(--font-script), cursive; font-weight: 600; letter-spacing: -.005em; color: var(--blue); }
+        .script-quote { font-family: var(--font-quote), cursive; font-weight: 400; letter-spacing: 0;
+          color: var(--blue); font-size: 1.12em; line-height: .8; }
+        .td-page h2 { line-height: 1.16; }
+
+        /* ---------- motion ---------- */
+        .btn:active { transform: scale(.975); }
+        .cap-card .cap-link svg { transition: transform .25s var(--ease); }
+        .cap-card:hover .cap-link svg { transform: translateX(3px); }
+        .cap-icon { transition: transform .35s var(--ease), background .25s; }
+        .cap-card:hover .cap-icon { transform: translateY(-2px); }
+        .app-tile { transition: transform .25s var(--ease), border-color .2s, background .2s; }
+        .app-tile:hover { transform: translateY(-2px); border-color: #BFD8FB; background: var(--blue-soft); }
+        .mobile-menu { animation: menuIn .26s var(--ease) both; }
+        @keyframes menuIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+        .dot { transition: width .3s var(--ease), background .25s; }
+        .price-card { transition: box-shadow .35s var(--ease); }
+        .price-card:hover { box-shadow: 0 30px 70px -34px rgba(11,53,88,.4); }
+        .quote-glyph { font-size: 104px; opacity: .3; }
+        .cta-eyebrow {
+          font-family: var(--font-hand), cursive; font-size: 22px; font-weight: 600;
+          letter-spacing: 0; text-transform: none; color: #9EC8FF;
+        }
+        .foot-col h4 {
+          font-family: var(--font-hand), cursive; font-size: 20px; font-weight: 600;
+          letter-spacing: 0; text-transform: none; color: rgba(255,255,255,.62); margin-bottom: 12px;
+        }
+        .foot-bottom { padding-bottom: 18px; }
+        .foot-note { font-size: 13px; color: rgba(255,255,255,.45); }
+
+        /* ---------- phone refinements ---------- */
+        @media (max-width: 700px) {
+          .hero-section { padding: 76px 12px 0; }
+          .hero-panel { padding: 30px 16px 34px; border-radius: 20px; }
+          .hero-h1 { font-size: clamp(34px, 10vw, 46px); margin-top: 16px; }
+          .hero-sub { font-size: 15px; margin-top: 18px; }
+          .hero-underline { width: 54%; margin-top: -2px; }
+          .hero-handnote { font-size: 19px; margin: 24px auto 0; }
+          .hero-demo-wrap { margin-top: 4px; }
+          .demo-stage { background: transparent; border: 0; border-radius: 0 !important; padding: 0; }
+          .demo-body { min-height: 0; padding: 26px 2px 10px; }
+          .demo-card { padding: 10px 10px 12px; border-radius: 16px; }
+          .site { border-radius: 13px; }
+          .site-body { padding: 12px 12px 52px; }
+          .site-nav-links { display: none; }
+          .site-hero { font-size: 18px; margin-top: 9px; }
+          .site-brand { font-size: 9px; letter-spacing: .12em; }
+          .pub-widget { padding: 10px 11px; margin-top: 10px; }
+          .pub-widget p { font-size: 12.5px; }
+          .live-chip { right: 10px; bottom: 10px; font-size: 10px; padding: 5px 9px; }
+          .show-visual { min-height: 0; padding: 16px 10px; }
+          .quote-glyph { font-size: 74px; }
+          .cap-icon { margin-bottom: 14px; }
+          .cap-card { padding: 18px; }
+          .section { padding-top: 62px; }
+          .h2 { font-size: clamp(27px, 8vw, 36px); }
+          /* forced breaks are tuned for desktop widths; let balance do it here */
+          .h2 br { display: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .mobile-menu, .cap-icon, .app-tile { animation: none; transition: none; }
+        }
         .btn-secondary:hover { background: var(--blue-soft); border-color: #BFD8FB; }
         .td-nav { background: rgba(255,255,255,.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
         .td-nav.is-scrolled { background: rgba(255,255,255,.94); box-shadow: 0 1px 0 var(--line); }
@@ -2662,7 +2728,7 @@ export default function LandingPage() {
           <div className="sec-head reveal">
             <span className="eyebrow">From link to live widget</span>
             <h2 className="h2">
-              Everything your reviews need.
+              Everything your <span className="script">reviews</span> need.
               <br />
               Nothing they don&rsquo;t.
             </h2>
@@ -2717,7 +2783,7 @@ export default function LandingPage() {
           <div className="sec-head center reveal">
             <span className="eyebrow">Loved by businesses</span>
             <h2 className="h2">
-              A wall of love that works
+              A wall of <span className="script-quote">love</span> that works
               <br />
               while you sleep.
             </h2>
@@ -2735,7 +2801,9 @@ export default function LandingPage() {
         <div className="wrap">
           <div className="sec-head center reveal">
             <span className="eyebrow">Pricing</span>
-            <h2 className="h2">Simple pricing. Serious proof.</h2>
+            <h2 className="h2">
+              Simple pricing. Serious <span className="script">proof.</span>
+            </h2>
             <p className="sub">
               One plan with everything included. Start free for 14 days — no credit card, no contracts, no surprise
               upgrade prompts.
