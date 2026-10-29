@@ -209,7 +209,7 @@ const STYLES = `
 .tdd-btn-sm { padding:10px 16px; font-size:13.5px; }
 .tdd-btn-block { width:100%; border-radius:14px; padding:14px 18px; }
 .tdd-icon-btn { width:34px; height:34px; display:inline-flex; align-items:center; justify-content:center; border-radius:10px;
-  border:1px solid var(--line); background:#fff; color:#A6AFB9; cursor:pointer; transition:color .2s, border-color .2s, transform .25s var(--ease), background .2s; }
+  border:1px solid var(--line); background:#fff; color:#62748A; cursor:pointer; transition:color .2s, border-color .2s, transform .25s var(--ease), background .2s; }
 .tdd-icon-btn:hover { color:#D92D20; border-color:#FBD9D4; background:#FEF3F2; transform:translateY(-1px); }
 .tdd-logout { display:inline-flex; align-items:center; gap:7px; border:none; background:transparent; font-family:inherit; font-size:13.5px;
   font-weight:500; color:var(--body); cursor:pointer; padding:8px 6px; border-radius:9px; transition:color .2s, background .2s; }
@@ -253,7 +253,7 @@ const STYLES = `
 .tdd-stat-icon.violet { background:#2E86FF; }
 .tdd-stat-label { font-size:12px; font-weight:600; letter-spacing:0; color:var(--body); margin:0 0 8px; }
 .tdd-stat-value { font-family:var(--font-display),sans-serif; font-size:33px; font-weight:800; letter-spacing:-.035em; line-height:1; margin:0; font-variant-numeric:tabular-nums; }
-.tdd-stat-value span { font-size:14px; font-weight:600; color:#B6BFC9; letter-spacing:0; }
+.tdd-stat-value span { font-size:14px; font-weight:600; color:#8B9BB0; letter-spacing:0; }
 .tdd-stars-row { color:#F5A524; font-size:13px; letter-spacing:2px; margin-top:3px; }
 .tdd-stat-foot { font-size:12.5px; color:var(--muted); margin:12px 0 0; }
 
@@ -280,7 +280,7 @@ const STYLES = `
   transition:background .25s var(--ease), color .2s, box-shadow .25s var(--ease), transform .2s var(--ease); }
 .tdd-seg-btn:hover { color:var(--ink); }
 .tdd-seg-btn.is-on { background:var(--ink); color:var(--paper); }
-.tdd-seg-btn span { font-size:11px; color:#A6AFB9; font-weight:700; }
+.tdd-seg-btn span { font-size:11px; color:#62748A; font-weight:700; }
 .tdd-seg-btn.is-on span { color:#9CC4FF; }
 .tdd-bars { display:flex; align-items:flex-end; gap:4px; height:124px; }
 .tdd-bar-col { flex:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; }
@@ -291,7 +291,7 @@ const STYLES = `
 .tdd-bar.is-empty { background:#EFF1F4; }
 .tdd-bar-col:hover .tdd-bar:not(.is-empty) { filter:brightness(1.06); }
 .tdd-bar-labels { display:flex; gap:4px; margin-top:10px; border-top:1px solid var(--line-soft); padding-top:9px; }
-.tdd-bar-label { flex:1; text-align:center; font-size:10px; color:#A6AFB9; white-space:nowrap; overflow:visible; }
+.tdd-bar-label { flex:1; text-align:center; font-size:10px; color:#62748A; white-space:nowrap; overflow:visible; }
 
 /* reviews */
 .tdd-reviews { padding:22px 22px 6px; }
@@ -301,7 +301,7 @@ const STYLES = `
 .tdd-review { display:block; padding:20px 4px; border-top:1px solid var(--line-soft); border-radius:14px;
   transition:background .25s; animation:tddFadeUp .5s var(--ease) both; }
 .tdd-review:first-of-type { border-top:none; }
-.tdd-review:hover { background:#FCFBF8; }
+.tdd-review:hover { background:#F7FAFF; }
 .tdd-review-top { display:flex; gap:12px; }
 .tdd-review-avatar { width:38px; height:38px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center;
   font-size:12.5px; font-weight:700; flex-shrink:0; }
@@ -315,7 +315,7 @@ const STYLES = `
 .tdd-review-stars { color:#F5A524; letter-spacing:1.5px; margin-left:2px; }
 .tdd-review-text { font-size:14px; line-height:1.65; color:var(--ink-soft); margin:9px 0 0 50px; }
 .tdd-review-foot { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:14px 0 0 50px; flex-wrap:wrap; }
-.tdd-verified { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#A6AFB9; }
+.tdd-verified { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:#62748A; }
 .tdd-review-actions { display:flex; align-items:center; gap:8px; }
 .tdd-empty { text-align:center; padding:42px 16px 48px; }
 .tdd-empty-icon { width:48px; height:48px; border-radius:14px; background:#EDF3FB;
@@ -364,13 +364,15 @@ const STYLES = `
 .tdd-link-note { display:flex; align-items:center; gap:6px; font-size:11.5px; color:#8F9DB4; margin:12px 0 0; position:relative; }
 
 /* trial card */
-.tdd-trial-title { display:flex; align-items:center; gap:7px; font-size:14px; font-weight:700; margin:0 0 10px; }
-.tdd-trial-big { font-family:var(--font-display),sans-serif; font-size:30px; font-weight:800; letter-spacing:-.03em; margin:0 0 14px; line-height:1; }
-.tdd-trial-big span { font-size:15px; font-weight:600; color:var(--muted); letter-spacing:-.01em; }
+.tdd-trial-title { display:flex; align-items:center; gap:7px; font-family:var(--font-hand),cursive;
+  font-size:21px; font-weight:600; letter-spacing:0; color:var(--ink); margin:0 0 6px; }
+.tdd-trial-big { font-family:var(--font-script),cursive; font-size:40px; font-weight:600; letter-spacing:0; margin:0 0 12px; line-height:1; }
+.tdd-trial-big span { font-family:var(--font-hand),cursive; font-size:19px; font-weight:600; color:var(--muted); letter-spacing:0; }
 .tdd-progress { height:7px; border-radius:99px; background:#E6EFFB; overflow:hidden; margin-bottom:9px; }
 .tdd-progress i { display:block; height:100%; border-radius:99px; background:var(--blue);
   transform-origin:left; animation:tddGrow .9s var(--ease) both; }
-.tdd-progress-labels { display:flex; justify-content:space-between; font-size:11.5px; color:#A6AFB9; margin-bottom:16px; }
+.tdd-progress-labels { display:flex; justify-content:space-between; font-family:var(--font-hand),cursive;
+  font-size:16px; color:#6C7F94; margin-bottom:16px; }
 
 /* modal */
 .tdd-backdrop { position:fixed; inset:0; z-index:90; background:rgba(11,53,88,.42);
@@ -381,7 +383,7 @@ const STYLES = `
 .tdd-modal p { font-size:13px; color:var(--body); margin:0 0 18px; line-height:1.55; }
 .tdd-field { width:100%; border:1px solid var(--line); background:#F5F9FF; border-radius:14px; padding:12px 14px;
   font-family:inherit; font-size:14px; color:var(--ink); transition:border-color .2s, box-shadow .25s, background .2s; }
-.tdd-field::placeholder { color:#B6BFC9; }
+.tdd-field::placeholder { color:#8B9BB0; }
 .tdd-field:focus { outline:none; background:#fff; border-color:rgba(0,107,255,.55); box-shadow:0 0 0 3px rgba(0,107,255,.14); }
 .tdd-slug-preview { font-size:11.5px; color:var(--muted); margin:9px 0 0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .tdd-modal-actions { display:flex; gap:9px; margin-top:20px; }
@@ -404,6 +406,9 @@ const STYLES = `
 .tdd-state-card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:40px 34px; max-width:440px; width:100%;
   text-align:center; box-shadow:var(--shadow-sm); animation:tddPanel .5s var(--ease) both; }
 .tdd-state-title { font-family:var(--font-display),sans-serif; font-size:22px; font-weight:800; letter-spacing:-.02em; margin:0 0 10px; }
+.tdd-state-title .tdd-script { font-family:var(--font-script),cursive; font-weight:600;
+  font-size:1.2em; letter-spacing:0; color:var(--blue); }
+
 .tdd-state-sub { font-size:14px; color:var(--body); line-height:1.65; margin:0 0 22px; }
 .tdd-spinner { width:34px; height:34px; border:2px solid #E3EDFA; border-top-color:#006BFF; border-radius:50%;
   animation:tddSpin .8s linear infinite; margin:0 auto 16px; }
@@ -450,6 +455,7 @@ const STYLES = `
   .tdd-bar-count { display:none; }
   .tdd-bar-labels { gap:3px; }
   .tdd-bar-label { font-size:9.5px; }
+  .tdd-trial-big { font-size:34px; }
   .tdd-review { padding:16px 2px; }
   .tdd-review-text, .tdd-review-foot { margin-left:0; }
   .tdd-review-text { font-size:13.5px; }
@@ -834,10 +840,10 @@ export default function Dashboard() {
         <style>{STYLES}</style>
         <div className="tdd-center">
           <div className="tdd-state-card">
-            <div style={{ width: 54, height: 54, borderRadius: 3, background: '#F3EAD3', color: '#7A5612', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+            <div style={{ width: 54, height: 54, borderRadius: 15, background: '#E8F1FF', color: '#006BFF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
               <IconClock />
             </div>
-            <h2 className="tdd-state-title">Your free trial has ended</h2>
+            <h2 className="tdd-state-title">Your free trial has <span className="tdd-script">ended</span></h2>
             <p className="tdd-state-sub">
               Your 14-day TrustDrop trial is over. Upgrade to keep your dashboard, widget and collection page live.
             </p>
