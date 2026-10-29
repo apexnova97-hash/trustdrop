@@ -89,7 +89,7 @@ export default function ReviewTrend({
 
       <div className="tdd-bar-labels" key={'labels' + range}>
         {series.map((b, i) => {
-          const hide = series.length >= 20 ? i % 5 !== 0 : series.length > 8 && i % 2 !== 0
+          const hide = series.length >= 20 ? i % 7 !== 0 : series.length > 8 && i % 2 !== 0
           return (
             <div key={i} className="tdd-bar-label">
               {hide ? '' : b.label}
