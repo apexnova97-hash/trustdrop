@@ -150,6 +150,13 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
           -webkit-tap-highlight-color:transparent; overflow-x:clip;
         }
         .ta *, .ta *::before, .ta *::after { box-sizing:border-box; }
+        .ta::before { content:''; position:absolute; left:-26%; top:-28%; width:min(760px,82vw); height:min(760px,82vw);
+          border-radius:50%; pointer-events:none; z-index:0;
+          background:radial-gradient(circle at 34% 32%, rgba(0,107,255,.16), rgba(0,107,255,0) 68%);
+          animation:taDrift 26s var(--ease) infinite alternate; }
+        .ta-arg, .ta-panel, .ta-masthead, .ta-copy, .ta-steps, .ta-note { position:relative; z-index:1; }
+        @keyframes taDrift { from { transform:translate3d(0,0,0) scale(1); }
+          to { transform:translate3d(52px,38px,0) scale(1.09); } }
         .ta :where(h1,h2,p,ol,li) { margin:0; padding:0; }
         .ta h1, .ta h2 { font-family:var(--font-display),var(--font-body),sans-serif; font-weight:700; }
         .ta ::selection { background:var(--lime); color:#fff; }
@@ -167,10 +174,14 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
           font-size:19px; letter-spacing:0; }
         .ta-h1 .ta-script { font-family:var(--font-script),cursive; font-style:normal;
           font-weight:600; letter-spacing:0; color:var(--blue); padding-right:.04em; }
+        .ta-acc { font-family:var(--font-script),cursive; font-style:normal; font-weight:600;
+          color:#8CC2FF; letter-spacing:0; font-size:1.1em; padding-right:.03em; }
+        .ta-quote { font-family:var(--font-quote),cursive; font-style:normal; font-weight:400;
+          font-size:1.55em; letter-spacing:0; color:#8CC2FF; line-height:0; }
 
         .ta-h1 { font-size:clamp(34px,6.5vw,98px); line-height:.9; letter-spacing:-.035em;
           font-weight:700; color:var(--ink); }
-        .ta-line { display:block; overflow:hidden; padding-bottom:.08em; }
+        .ta-line { display:block; overflow:hidden; padding-bottom:.16em; margin-bottom:-.08em; }
         .ta-line > span { display:block; transform:translateY(104%);
           animation:taRise .95s var(--ease) forwards; }
         .ta-line:nth-child(2) > span { animation-delay:.09s; }
@@ -190,7 +201,8 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
         .ta-steps li::before { content:''; position:absolute; left:2px; top:.62em;
           width:8px; height:8px; border-radius:50%; background:var(--blue); }
 
-        .ta-note { font-size:14px; color:var(--muted); animation:taIn .6s var(--ease) .56s both;
+        .ta-note { font-family:var(--font-hand),cursive; font-size:22px; line-height:1.35;
+          color:var(--ink-soft); animation:taIn .6s var(--ease) .56s both;
           padding-top:clamp(4px,1vh,10px); }
         .ta-note b { color:var(--ink); font-weight:600; }
 
@@ -203,9 +215,10 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
         .ta-tabs { display:flex; gap:clamp(18px,2vw,26px); }
         .ta-tab { background:none; border:0; padding:6px 0; cursor:pointer; font-size:16px;
           font-weight:600; color:rgba(252,251,248,.55); position:relative;
-          transition:color .2s;
-          &:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }
+          transition:color .2s, transform .18s var(--ease);
+          &:focus-visible { outline:2px solid #8CC2FF; outline-offset:3px; }
           &:hover { color:rgba(252,251,248,.85); }
+          &:active { transform:translateY(1px); }
         }
         .ta-tab::after { content:''; position:absolute; left:0; right:0; bottom:0; height:2px;
           background:var(--lime); transform:scaleX(0); transform-origin:left;
@@ -215,12 +228,12 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
         .ta :focus-visible { outline-color:#8CC2FF; }
         .ta-tab[aria-pressed="true"] { color:var(--paper); }
         .ta-tab[aria-pressed="true"]::after { transform:scaleX(1); }
-        .ta-tab:focus-visible { outline:2px solid var(--lime); outline-offset:3px; }
+        .ta-tab:focus-visible { outline:2px solid #8CC2FF; outline-offset:3px; }
 
         .ta-back { display:inline-flex; align-items:center; gap:7px; color:rgba(252,251,248,.6);
           font-size:14px; text-decoration:none; transition:color .2s, gap .3s var(--ease); }
         .ta-back:hover { color:var(--paper); gap:10px; }
-        .ta-back:focus-visible { outline:2px solid var(--lime); outline-offset:3px; }
+        .ta-back:focus-visible { outline:2px solid #8CC2FF; outline-offset:3px; }
 
         .ta-formwrap { margin:auto 0; padding:clamp(26px,6vh,54px) 0 clamp(20px,4vh,34px); width:100%; }
         .ta-panel h2 { font-size:clamp(23px,2.2vw,29px); letter-spacing:-.035em; line-height:1.15;
@@ -250,10 +263,10 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
           border-bottom:1px solid rgba(252,251,248,.24); /* taste-skill-ignore */ color:var(--paper);
           font-family:inherit; font-size:17px; padding:9px 0 10px; outline:none;
           transition:border-color .2s, box-shadow .2s; }
-        .ta-input:focus { border-bottom-color:var(--lime); box-shadow:0 0 0 3px var(--lime-hi) inset; }
+        .ta-input:focus { border-bottom-color:#8CC2FF; box-shadow:0 1px 0 0 #8CC2FF; }
         .ta-input::placeholder { color:rgba(252,251,248,.42); }
         .ta-input:hover { border-bottom-color:rgba(252,251,248,.4); }
-        .ta-input:focus { border-bottom-color:var(--lime); }
+        .ta-input:focus { border-bottom-color:#8CC2FF; }
         .ta-input:-webkit-autofill, .ta-input:-webkit-autofill:focus {
           -webkit-text-fill-color:var(--paper); -webkit-box-shadow:0 0 0 60px var(--ink) inset; /* taste-skill-ignore */ }
         .ta-passwrap { position:relative; }
@@ -262,6 +275,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
           background:none; border:0; padding:6px 0 6px 8px; cursor:pointer;
           color:rgba(252,251,248,.45); display:flex; align-items:center; }
         .ta-eye:hover { color:var(--paper); }
+        .ta-eye:active { transform:translateY(-50%) scale(.9); }
         .ta-eye:focus-visible { outline:2px solid var(--lime); outline-offset:2px; }
 
         /* the live link */
@@ -271,7 +285,8 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
           overflow-wrap:anywhere; animation:taFlash .5s var(--ease); }
         .ta-link-value i { font-style:normal; color:rgba(217,242,122,.55); }
         .ta-examples { display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-top:12px; }
-        .ta-try { font-size:13.5px; color:rgba(252,251,248,.4); }
+        .ta-try { font-family:var(--font-hand),cursive; font-size:19px; line-height:1;
+          color:rgba(252,251,248,.5); }
         .ta-example { background:none; border:0; padding:0; cursor:pointer; font-size:13.5px;
           color:rgba(252,251,248,.55); text-decoration:underline; text-underline-offset:3px;
           text-decoration-color:rgba(252,251,248,.25); transition:color .2s, text-decoration-color .2s; }
@@ -308,8 +323,8 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
         .ta-submit:active:not(:disabled) { transform:scale(.99); }
         .ta-submit:disabled { opacity:.34; cursor:not-allowed; }
         .ta-submit:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }
-        .ta-spin { width:15px; height:15px; border:2px solid rgba(7,26,49,.3);
-          border-top-color:var(--ink); border-radius:50%; animation:taSpin .7s linear infinite; }
+        .ta-spin { width:15px; height:15px; border:2px solid rgba(255,255,255,.4);
+          border-top-color:#fff; border-radius:50%; animation:taSpin .7s linear infinite; }
 
         .ta-switch { margin-top:clamp(16px,2.4vw,20px); font-size:15px;
           color:rgba(252,251,248,.6); }
@@ -329,7 +344,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
 
         /* sent state */
         .ta-sent { padding:6px 0; animation:taIn .6s var(--ease) both; }
-        .ta-sent h2 { font-size:clamp(24px,2.4vw,30px); letter-spacing:-.035em; }
+        .ta-sent h2 { font-size:clamp(25px,2.6vw,33px); line-height:1.12; letter-spacing:-.035em; }
         .ta-sent p { margin-top:12px; font-size:16px; color:rgba(252,251,248,.66); line-height:1.6; }
         .ta-sent b { color:#8CC2FF; font-weight:600; overflow-wrap:anywhere; }
         .ta-sent .ta-submit { margin-top:26px; }
@@ -378,6 +393,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
           .ta-back:hover { gap:7px; }
         }
         @media (prefers-reduced-motion: reduce) {
+          .ta::before { animation:none; }
           .ta *, .ta *::before, .ta *::after {
             animation-duration:.001ms !important; animation-iteration-count:1 !important;
             animation-delay:0s !important; transition-duration:.001ms !important;
@@ -445,7 +461,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
         <div className="ta-formwrap">
           {done ? (
             <div className="ta-sent">
-              <h2>Check your email.</h2>
+              <h2>Check your <span className="ta-quote">email</span>.</h2>
               <p>
                 We sent a confirmation link to <b>{email}</b>. Open it, then log in.
               </p>
@@ -469,7 +485,9 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
               key={mode}
               style={{ '--swap-x': dir > 0 ? '10px' : '-10px' }}
             >
-              <h2>{isSignup ? 'Create your account' : 'Welcome back'}</h2>
+              <h2>
+                {isSignup ? <>Create your <span className="ta-acc">account</span></> : <>Welcome <span className="ta-acc">back</span></>}
+              </h2>
               <p className="ta-sub">
                 {isSignup ? 'Your review link is ready the moment you sign up.' : 'Log in to your workspace.'}
               </p>

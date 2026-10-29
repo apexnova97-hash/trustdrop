@@ -83,7 +83,7 @@ export default function CollectPage({ params }) {
 
   return (
     <div className="cpg">
-      <style>{`        .cpg { --bg:#FCFBF8; --ink:#071A31; --ink-soft:#33465C; --body:#5D6E82; --muted:#8391A2; --line:#E8E4DA;
+      <style>{`        .cpg { --bg:#F5F9FF; --ink:#071A31; --ink-soft:#24486B; --body:#5D6E82; --muted:#6C7F94; --line:#DCE7F5;
           --blue:#0069FF; --blue-dark:#0052CC; --violet:#6B5CE7; --lime:#D9F27A; --ease:cubic-bezier(.16,1,.3,1);
           min-height:100vh; min-height:100dvh; background:var(--bg); color:var(--ink);
           font-family:var(--font-body),'Inter',-apple-system,BlinkMacSystemFont,sans-serif; -webkit-font-smoothing:antialiased;
@@ -111,12 +111,17 @@ export default function CollectPage({ params }) {
           box-shadow:0 24px 60px -28px rgba(7,26,49,.28); animation:panelIn .6s var(--ease) both; }
         .cpg-brand { display:inline-flex; align-items:center; gap:clamp(7px,1.2vw,9px); margin-bottom:clamp(16px,3vw,24px); }
         .cpg-brand svg { width:clamp(24px,4vw,28px); height:auto; }
-        .cpg-brand-name { font-family:var(--font-display),sans-serif; font-weight:800; font-size:clamp(14px,1.6vw,15px); letter-spacing:-.02em; }
+        .cpg-brand-name { font-family:var(--font-brand),cursive; font-weight:400;
+          font-size:clamp(19px,2.3vw,21px); letter-spacing:0; line-height:1; padding-bottom:2px; }
         .cpg-product { display:inline-flex; align-items:center; gap:7px; font-size:clamp(11px,1.3vw,12px); font-weight:600;
           color:#0E9F6E; background:#E7F8EF; border:1px solid #CBEFDD; padding:4px 10px; border-radius:999px;
           margin-bottom:12px; animation:popIn .4s var(--ease) both; max-width:100%; overflow-wrap:anywhere; }
         .cpg-product i { width:5px; height:5px; border-radius:50%; background:#0E9F6E; display:block; flex-shrink:0; animation:pulseDot 2.4s infinite; }
         .cpg h1 { font-family:var(--font-display),sans-serif; font-size:clamp(21px,3.4vw,27px); line-height:1.16; letter-spacing:-.035em; font-weight:800; margin-bottom:6px; text-wrap:balance; }
+        .cpg-script { font-family:var(--font-script),cursive; font-weight:600; font-size:1.2em;
+          letter-spacing:0; color:var(--blue); padding-right:.04em; }
+        .cpg-hand { font-family:var(--font-hand),cursive; font-size:1.12em; font-weight:600;
+          letter-spacing:0; color:var(--muted); }
         .cpg-sub { color:var(--body); font-size:clamp(13px,1.4vw,14.5px); line-height:1.55; margin-bottom:4px; }
         .cpg label { display:block; font-size:clamp(10px,.95vw,11.5px); font-weight:700; color:var(--ink-soft);
           text-transform:uppercase; letter-spacing:.09em; margin-bottom:7px; }
@@ -124,19 +129,24 @@ export default function CollectPage({ params }) {
         .cpg-field { width:100%; background:#fff; border:1px solid var(--line); border-radius:12px;
           padding:clamp(11px,1.6vw,12px) clamp(12px,1.8vw,14px); font-size:16px; color:var(--ink);
           font-family:inherit; outline:none; transition:border-color .2s, box-shadow .25s; }
-        .cpg-field::placeholder { color:#B6BFC9; }
+        .cpg-field::placeholder { color:#93A6BA; }
         .cpg-field:focus { border-color:rgba(0,105,255,.5); box-shadow:0 0 0 4px rgba(0,105,255,.1); }
-        .cpg-row { margin-top:clamp(14px,2.4vw,18px); }
+        .cpg-row { margin-top:clamp(14px,2.4vw,18px); animation:panelIn .5s var(--ease) both; }
+        .cpg-row:nth-of-type(2) { animation-delay:.05s; }
+        .cpg-row:nth-of-type(3) { animation-delay:.1s; }
+        .cpg-row:nth-of-type(4) { animation-delay:.15s; }
+        .cpg-row:nth-of-type(5) { animation-delay:.2s; }
         .cpg-stars { display:flex; align-items:center; gap:2px; flex-wrap:wrap; }
         .cpg-star { background:none; border:none; cursor:pointer; padding:2px 3px; font-size:clamp(26px,7vw,32px);
           line-height:1; color:#F5A524; transition:transform .22s var(--ease); -webkit-tap-highlight-color:transparent; }
         .cpg-star:hover { transform:scale(1.16) rotate(-4deg); }
         .cpg-star:active { transform:scale(.94); }
         .cpg-star.on { animation:starPop .38s var(--ease) both; }
-        .cpg-star.off { color:#E4DED2; }
-        .cpg-star-label { margin-left:8px; font-size:clamp(11.5px,1.3vw,12.5px); font-weight:600; color:var(--body); }
-        .cpg-count { text-align:right; font-size:11px; color:#B6BFC9; margin-top:4px; }
-        .cpg-submit { margin-top:clamp(16px,2.6vw,20px); }
+        .cpg-star.off { color:#DCE7F5; }
+        .cpg-star-label { margin-left:8px; font-family:var(--font-hand),cursive;
+          font-size:clamp(17px,2vw,19px); font-weight:600; color:var(--body); }
+        .cpg-count { text-align:right; font-size:11px; color:#93A6BA; margin-top:4px; }
+        .cpg-submit { margin-top:clamp(16px,2.6vw,20px); animation:panelIn .5s var(--ease) .25s both; }
         .cpg-submit { width:100%; border:none; border-radius:14px; padding:clamp(13px,2vw,15px);
           font-family:inherit; font-size:clamp(14px,1.6vw,15px); font-weight:700; color:#fff; cursor:pointer;
           background:linear-gradient(135deg,#2E7CFF,#0052CC); box-shadow:0 14px 30px -12px rgba(0,105,255,.65);
@@ -144,14 +154,16 @@ export default function CollectPage({ params }) {
         .cpg-submit:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 20px 38px -14px rgba(0,105,255,.7); }
         .cpg-submit:active:not(:disabled) { transform:scale(.985); }
         .cpg-submit:disabled { opacity:.38; cursor:not-allowed; box-shadow:none; }
-        .cpg-foot { text-align:center; font-size:clamp(11px,1.2vw,11.5px); color:#AEB8C4; margin-top:16px; }
-        .cpg-foot b { color:var(--blue); font-weight:700; }
+        .cpg-foot { text-align:center; font-family:var(--font-hand),cursive;
+          font-size:clamp(15px,1.8vw,17px); color:#7C8FA5; margin-top:16px; }
+        .cpg-foot b { color:var(--blue); font-weight:600; }
         .cpg-done { text-align:center; padding:10px 0 4px; animation:panelIn .6s var(--ease) both; }
         .cpg-done-icon { width:clamp(60px,13vw,74px); height:clamp(60px,13vw,74px); border-radius:50%; margin:0 auto 18px;
           display:flex; align-items:center; justify-content:center; font-size:clamp(26px,6vw,32px);
           background:linear-gradient(150deg,#D9F8E8,#BFE9FF); box-shadow:0 18px 40px -18px rgba(14,159,110,.5);
           animation:popIn .5s var(--ease) both; }
-        .cpg-done h2 { font-family:var(--font-display),sans-serif; font-size:clamp(19px,2.8vw,23px); letter-spacing:-.03em; margin-bottom:7px; font-weight:800; }
+        .cpg-done h2 { font-family:var(--font-quote),cursive; font-size:clamp(30px,4.4vw,38px);
+          letter-spacing:0; line-height:1.06; margin-bottom:8px; font-weight:400; }
         .cpg-done p { color:var(--body); font-size:clamp(13px,1.5vw,14px); margin-bottom:16px; line-height:1.6; }
         .cpg-done-stars { display:inline-flex; gap:3px; color:#F5A524; font-size:clamp(18px,4vw,22px); letter-spacing:2px; }
 
@@ -166,7 +178,7 @@ export default function CollectPage({ params }) {
           .cpg-submit:hover:not(:disabled) { transform:none; }
         }
         @media (prefers-reduced-motion: reduce) {
-          .cpg-blob, .cpg-card, .cpg-star, .cpg-product, .cpg-done-icon { animation:none !important; }
+          .cpg-blob, .cpg-card, .cpg-star, .cpg-product, .cpg-done-icon, .cpg-row, .cpg-submit { animation:none !important; }
           .cpg *, .cpg *::before, .cpg *::after { transition:none !important; }
         }
 `}</style>
@@ -203,7 +215,7 @@ export default function CollectPage({ params }) {
             {product && (
               <span className="cpg-product"><i />{product.name}</span>
             )}
-            <h1>Leave a review</h1>
+            <h1>Leave a <span className="cpg-script">review</span></h1>
             <p className="cpg-sub">
               {product
                 ? 'How was your ' + product.name.toLowerCase() + '? Your feedback helps others decide.'
