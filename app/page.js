@@ -1106,7 +1106,7 @@ export default function LandingPage() {
           --ink: #0B3558;
           --ink-soft: #24486B;
           --body: #476788;
-          --muted: #6B7F94;
+          --muted: #5F7285;
           --blue: #006BFF;
           --blue-dark: #0052CC;
           --blue-soft: #E8F1FF;
@@ -1533,6 +1533,8 @@ export default function LandingPage() {
         .demo-panel {
           position: relative;
           width: 100%;
+          max-width: 660px;
+          margin: 0 auto;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1561,7 +1563,7 @@ export default function LandingPage() {
         }
         .org-meta { display: flex; flex-direction: column; line-height: 1.3; }
         .org-meta strong { font-size: 14px; font-weight: 700; color: var(--ink); }
-        .org-meta span { font-size: 11.5px; color: #8B97A6; }
+        .org-meta span { font-size: 11.5px; color: #66788C; }
         .org-rating {
           margin-left: auto;
           display: inline-flex;
@@ -1615,7 +1617,7 @@ export default function LandingPage() {
         .mini-avatar { width: 30px; height: 30px; font-size: 12px; }
         .person div { display: flex; flex-direction: column; line-height: 1.35; }
         .person strong { font-size: 13px; color: var(--ink); }
-        .person span { font-size: 11.5px; color: #8B97A6; }
+        .person span { font-size: 11.5px; color: #66788C; }
         .demo-btn {
           display: inline-flex;
           align-items: center;
@@ -1664,7 +1666,7 @@ export default function LandingPage() {
         .dash-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px 14px; border-bottom: 1px solid #EFF3F8; }
         .dash-head div { display: flex; flex-direction: column; }
         .dash-head strong { font-size: 15px; font-family: var(--font-display), sans-serif; }
-        .dash-head span { font-size: 11.5px; color: #8B97A6; }
+        .dash-head span { font-size: 11.5px; color: #66788C; }
         .dash-count { background: #EAF2FF; color: var(--blue-dark) !important; font-weight: 700; border-radius: 999px; padding: 4px 10px; font-size: 11.5px !important; }
         .dash-row { display: flex; align-items: center; gap: 12px; padding: 13px 18px; border-bottom: 1px solid #F3F6FA; }
         .dash-row:last-child { border-bottom: 0; }
@@ -1842,8 +1844,8 @@ export default function LandingPage() {
           place-items: center;
           font-size: 10.5px;
           font-weight: 700;
-          background: #F0EDE6;
-          color: #8C8477;
+          background: #E8F1FF;
+          color: #4B6B8C;
           transition: background .3s, color .3s;
         }
         .show-item.is-active .show-num { background: var(--blue); color: #fff; }
@@ -1896,7 +1898,7 @@ export default function LandingPage() {
         .mock-org { display: flex; align-items: center; gap: 9px; }
         .mock-org div { display: flex; flex-direction: column; line-height: 1.3; }
         .mock-org strong { font-size: 12.5px; color: var(--ink); }
-        .mock-org span { font-size: 10.5px; color: #8B97A6; }
+        .mock-org span { font-size: 10.5px; color: #66788C; }
         .mock-q { font-family: var(--font-display), sans-serif; font-size: 16px; font-weight: 700; margin: 15px 0 7px; letter-spacing: -0.02em; }
         .mock-field { margin-top: 12px; border: 1px solid #E9EEF5; background: #F8FAFD; border-radius: 10px; padding: 11px 12px; font-size: 12.5px; color: var(--ink-soft); }
         .mock-btn { margin-top: 12px; text-align: center; background: var(--blue); color: #fff; border-radius: 9px; padding: 9px; font-size: 12.5px; font-weight: 600; }
@@ -1910,7 +1912,7 @@ export default function LandingPage() {
         .mock-row { display: flex; align-items: center; gap: 9px; padding: 10px 0; border-bottom: 1px solid #F2F5F9; }
         .mock-row-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
         .mock-row-text strong { font-size: 11.5px; color: var(--ink); }
-        .mock-row-text span { font-size: 10.5px; color: #8B97A6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .mock-row-text span { font-size: 10.5px; color: #66788C; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .mini-avatar.new { background: var(--green-soft); color: var(--green); }
         .mini-pill { background: var(--green-soft); color: var(--green); border-radius: 999px; padding: 3px 8px; font-size: 9.5px; font-weight: 700; display: inline-flex; align-items: center; gap: 3px; }
         .mini-pill svg { width: 11px; height: 11px; }
@@ -2168,8 +2170,8 @@ export default function LandingPage() {
           top: 6px;
           width: 5px;
           height: 5px;
-          border-right: 1.5px solid #8B97A6;
-          border-bottom: 1.5px solid #8B97A6;
+          border-right: 1.5px solid #66788C;
+          border-bottom: 1.5px solid #66788C;
           transform: translateX(-50%) rotate(45deg);
           animation: hintBounce 1.8s ease-in-out infinite;
         }
@@ -2636,7 +2638,7 @@ export default function LandingPage() {
               <span className="rating" aria-hidden="true">
                 <Star size={13} />
               </span>
-              4.9 average from 1,200+ businesses
+              4.9 average from 500+ businesses
               <span className="badge-divider" aria-hidden="true" />
               <span className="badge-soft">No credit card</span>
             </span>

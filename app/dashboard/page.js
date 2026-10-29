@@ -157,7 +157,7 @@ function daysRemaining(business) {
 }
 
 const STYLES = `
-.tdd { --bg:#F7FAFF; --card:#FFFFFF; --line:#DCE7F5; --line-soft:#EAF1FA; --ink:#0B3558; --ink-soft:#24486B; --body:#476788; --muted:#6B7F94;
+.tdd { --bg:#F7FAFF; --card:#FFFFFF; --line:#DCE7F5; --line-soft:#EAF1FA; --ink:#0B3558; --ink-soft:#24486B; --body:#476788; --muted:#5F7285;
   --blue:#006BFF; --blue-dark:#0052CC; --blue-soft:#E8F1FF; --violet:#2E86FF; --lime:#006BFF; --green:#0E9F6E;
   --paper:#FFFFFF;
   --ease:cubic-bezier(.16,1,.3,1); --shadow-sm:0 1px 0 rgba(11,53,88,.05);
@@ -253,13 +253,13 @@ const STYLES = `
 .tdd-stat-icon.violet { background:#2E86FF; }
 .tdd-stat-label { font-size:12px; font-weight:600; letter-spacing:0; color:var(--body); margin:0 0 8px; }
 .tdd-stat-value { font-family:var(--font-display),sans-serif; font-size:33px; font-weight:800; letter-spacing:-.035em; line-height:1; margin:0; font-variant-numeric:tabular-nums; }
-.tdd-stat-value span { font-size:14px; font-weight:600; color:#8B9BB0; letter-spacing:0; }
+.tdd-stat-value span { font-size:14px; font-weight:600; color:#62748A; letter-spacing:0; }
 .tdd-stars-row { color:#F5A524; font-size:13px; letter-spacing:2px; margin-top:3px; }
 .tdd-stat-foot { font-size:12.5px; color:var(--muted); margin:12px 0 0; }
 
 /* layout */
 .tdd-grid { display:grid; grid-template-columns:1.72fr 1fr; gap:16px; align-items:start; }
-.tdd-col { display:flex; flex-direction:column; gap:16px; }
+.tdd-col { display:flex; flex-direction:column; gap:16px; min-width:0; }
 .tdd-card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px; }
 
 /* chart */
@@ -361,7 +361,7 @@ const STYLES = `
 .tdd-input:focus { outline:none; border-color:rgba(0,107,255,.5); box-shadow:0 0 0 3px rgba(0,107,255,.14); }
 .tdd-link-actions { display:flex; gap:8px; position:relative; }
 .tdd-link-actions .tdd-btn { flex:1; border-radius:14px; }
-.tdd-link-note { display:flex; align-items:center; gap:6px; font-size:11.5px; color:#8F9DB4; margin:12px 0 0; position:relative; }
+.tdd-link-note { display:flex; align-items:center; gap:6px; font-size:11.5px; color:#5F7285; margin:12px 0 0; position:relative; }
 
 /* trial card */
 .tdd-trial-title { display:flex; align-items:center; gap:7px; font-family:var(--font-hand),cursive;
@@ -417,7 +417,8 @@ const STYLES = `
 @media (max-width: 980px) {
   .tdd-h1 { font-size:42px; }
   .tdd-stats { grid-template-columns:repeat(2,1fr); }
-  .tdd-grid { grid-template-columns:1fr; }
+  .tdd-grid { grid-template-columns:minmax(0,1fr); }
+  .tdd-card { min-width:0; }
 }
 @media (max-width: 620px) {
   .tdd-wrap { padding:0 16px; }
@@ -450,7 +451,7 @@ const STYLES = `
   .tdd-seg-btn { font-size:12px; padding:6px 10px; }
   .tdd-chart-head { margin-bottom:14px; }
   .tdd-chart-controls { width:100%; }
-  .tdd-select { max-width:none; flex:1; }
+  .tdd-select { max-width:none; flex:1; min-width:0; }
   .tdd-bars { height:104px; gap:3px; }
   .tdd-bar-count { display:none; }
   .tdd-bar-labels { gap:3px; }
@@ -462,6 +463,8 @@ const STYLES = `
   .tdd-banner { padding:14px; margin:22px 0 18px; }
   .tdd-banner-icon { display:none; }
   .tdd-nav-right .tdd-btn-ghost { display:none; }
+  .tdd-link-actions { flex-wrap:wrap; }
+  .tdd-link-actions .tdd-btn { flex:1 1 130px; min-width:0; }
   .tdd-product-actions { opacity:1; }
 }
 
@@ -804,7 +807,7 @@ export default function Dashboard() {
         <div className="tdd-center">
           <div style={{ textAlign: 'center' }}>
             <div className="tdd-spinner" />
-            <p style={{ color: '#8391A2', fontSize: 13.5 }}>Loading your workspace…</p>
+            <p style={{ color: '#5F7285', fontSize: 13.5 }}>Loading your workspace…</p>
           </div>
         </div>
       </div>

@@ -83,7 +83,7 @@ export default function CollectPage({ params }) {
 
   return (
     <div className="cpg">
-      <style>{`        .cpg { --bg:#F5F9FF; --ink:#071A31; --ink-soft:#24486B; --body:#5D6E82; --muted:#6C7F94; --line:#DCE7F5;
+      <style>{`        .cpg { --bg:#F5F9FF; --ink:#071A31; --ink-soft:#24486B; --body:#5D6E82; --muted:#5F7285; --line:#DCE7F5;
           --blue:#0069FF; --blue-dark:#0052CC; --violet:#6B5CE7; --lime:#D9F27A; --ease:cubic-bezier(.16,1,.3,1);
           min-height:100vh; min-height:100dvh; background:var(--bg); color:var(--ink);
           font-family:var(--font-body),'Inter',-apple-system,BlinkMacSystemFont,sans-serif; -webkit-font-smoothing:antialiased;
@@ -155,7 +155,7 @@ export default function CollectPage({ params }) {
         .cpg-submit:active:not(:disabled) { transform:scale(.985); }
         .cpg-submit:disabled { opacity:.38; cursor:not-allowed; box-shadow:none; }
         .cpg-foot { text-align:center; font-family:var(--font-hand),cursive;
-          font-size:clamp(15px,1.8vw,17px); color:#7C8FA5; margin-top:16px; }
+          font-size:clamp(15px,1.8vw,17px); color:#5F7285; margin-top:16px; }
         .cpg-foot b { color:var(--blue); font-weight:600; }
         .cpg-done { text-align:center; padding:10px 0 4px; animation:panelIn .6s var(--ease) both; }
         .cpg-done-icon { width:clamp(60px,13vw,74px); height:clamp(60px,13vw,74px); border-radius:50%; margin:0 auto 18px;
