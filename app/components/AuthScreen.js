@@ -149,42 +149,39 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
     setError('')
     setLoading(true)
 
-    if (isSignup) {
-      // The database trigger creates the businesses row from this metadata.
-      // Never insert into businesses from the browser: an email-confirmation
-      // signup has no authenticated session yet, so RLS would block it.
-      const { data, error: signupError } = await supabase.auth.signUp({
+    try {
+      if (isSignup) {
+        // The database trigger creates the businesses row from this metadata.
+        // Never insert into businesses from the browser: an email-confirmation
+        // signup has no authenticated session yet, so RLS would block it.
+        const { data, error: signupError } = await supabase.auth.signUp({
+          email: email.trim(),
+          password,
+          options: { data: { business_name: business.trim() } },
+        })
+
+        if (signupError) throw signupError
+        if (!data.user) {
+          throw new Error('Account could not be created. Please try again.')
+        }
+
+        if (data.session) window.location.assign('/dashboard')
+        else setDone(true)
+        return
+      }
+
+      const { error: loginError } = await supabase.auth.signInWithPassword({
         email: email.trim(),
         password,
-        options: { data: { business_name: business.trim() } },
       })
+      if (loginError) throw loginError
 
-      if (signupError) {
-        setError(signupError.message)
-        setLoading(false)
-        return
-      }
-      if (!data.user) {
-        setError('Account could not be created. Please try again.')
-        setLoading(false)
-        return
-      }
-      if (data.session) window.location.href = '/dashboard'
-      else setDone(true)
+      window.location.assign('/dashboard')
+    } catch (authError) {
+      setError(authError?.message || 'Authentication failed. Please try again.')
+    } finally {
       setLoading(false)
-      return
     }
-
-    const { error: loginError } = await supabase.auth.signInWithPassword({
-      email: email.trim(),
-      password,
-    })
-    if (loginError) {
-      setError(loginError.message)
-      setLoading(false)
-      return
-    }
-    window.location.href = '/dashboard'
   }
 
   async function signInWithGoogle() {
@@ -192,19 +189,22 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
     setError('')
     setOauthLoading(true)
 
-    // Use the browser's actual host for OAuth; a server-derived request origin can be stale or incorrect behind a proxy.\n    const base = window.location.origin
-    const { error: oauthError } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: { redirectTo: base + '/auth' },
-    })
+    try {
+      // Use the browser's current host so OAuth returns to the same site the
+      // visitor opened (the production alias or the local development host).
+      const redirectTo = window.location.origin + '/auth'
+      const { error: oauthError } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo },
+      })
 
-    if (oauthError) {
-      setError(oauthError.message)
+      if (oauthError) throw oauthError
+      // Supabase redirects the browser to Google on success. Keep the loading
+      // state only while that navigation is taking place.
+    } catch (authError) {
+      setError(authError?.message || 'Google sign-in could not be started. Please try again.')
       setOauthLoading(false)
-      return
     }
-    // On success the browser is already leaving for Google, so the button
-    // stays in its loading state until the page unloads.
   }
 
   const canSubmit = email.trim() && password && (!isSignup || business.trim())
