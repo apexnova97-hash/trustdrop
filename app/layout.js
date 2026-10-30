@@ -1,53 +1,52 @@
 import './globals.css'
-import {
-  Manrope,
-  Instrument_Sans,
-  Pacifico,
-  Dancing_Script,
-  Caveat,
-  Great_Vibes,
-} from 'next/font/google'
+import localFont from 'next/font/local'
 
-const displayFont = Manrope({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
+/* The faces are vendored in app/fonts instead of fetched from Google at build
+   time. Google Fonts intermittently answers with extensionless /l/font?kit=…
+   URLs, which makes next/font throw "queries have exactly one entry" and fails
+   an otherwise healthy Vercel build (vercel/next.js#99114). Local files keep
+   the build deterministic and the fonts identical. */
+
+const displayFont = localFont({
+  src: './fonts/manrope-latin.woff2',
+  weight: '400 800',
   variable: '--font-display',
   display: 'swap',
 })
 
-const bodyFont = Instrument_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+const bodyFont = localFont({
+  src: './fonts/instrument-sans-latin.woff2',
+  weight: '400 700',
   variable: '--font-body',
   display: 'swap',
 })
 
 /* Script faces are accents, not body copy: body text set in any of these
    falls apart below ~20px and fails contrast/legibility checks. */
-const scriptPacfico = Pacifico({
-  subsets: ['latin'],
-  weight: ['400'],
+const scriptPacfico = localFont({
+  src: './fonts/pacifico-latin.woff2',
+  weight: '400',
   variable: '--font-brand',
   display: 'swap',
 })
 
-const scriptDancing = Dancing_Script({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
+const scriptDancing = localFont({
+  src: './fonts/dancing-script-latin.woff2',
+  weight: '400 700',
   variable: '--font-script',
   display: 'swap',
 })
 
-const scriptCaveat = Caveat({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
+const scriptCaveat = localFont({
+  src: './fonts/caveat-latin.woff2',
+  weight: '400 700',
   variable: '--font-hand',
   display: 'swap',
 })
 
-const scriptVibes = Great_Vibes({
-  subsets: ['latin'],
-  weight: ['400'],
+const scriptVibes = localFont({
+  src: './fonts/great-vibes-latin.woff2',
+  weight: '400',
   variable: '--font-quote',
   display: 'swap',
 })
