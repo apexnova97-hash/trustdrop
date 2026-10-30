@@ -192,7 +192,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
     setError('')
     setOauthLoading(true)
 
-    const base = origin ? origin.replace(/\/$/, '') : window.location.origin
+    // Use the browser's actual host for OAuth; a server-derived request origin can be stale or incorrect behind a proxy.\n    const base = window.location.origin
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo: base + '/auth' },
