@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { supabase } from '../../lib/supabase'
 
@@ -28,6 +28,17 @@ function Logo() {
       </svg>
       <span className="ta-brand-name">TrustDrop</span>
     </span>
+  )
+}
+
+function GoogleMark() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h6.47a5.53 5.53 0 0 1-2.4 3.63v3.02h3.87c2.27-2.09 3.55-5.17 3.55-8.89z" />
+      <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.94-2.91l-3.87-3.02c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.12A11.99 11.99 0 0 0 12 24z" />
+      <path fill="#FBBC05" d="M5.27 14.27a7.2 7.2 0 0 1 0-4.54V6.61H1.29a11.99 11.99 0 0 0 0 10.78l3.98-3.12z" />
+      <path fill="#EA4335" d="M12 4.77c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0A11.99 11.99 0 0 0 1.29 6.61l3.98 3.12C6.22 6.88 8.87 4.77 12 4.77z" />
+    </svg>
   )
 }
 
@@ -67,17 +78,61 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
   const [business, setBusiness] = useState('')
   const [showPass, setShowPass] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [oauthLoading, setOauthLoading] = useState(false)
   const [error, setError] = useState('')
+  // Kept in a ref as well as in state: consuming the URL is one-shot, so a
+  // remount (React strict mode in development) must not lose the message.
+  const returnedError = useRef('')
 
   const isSignup = mode === 'signup'
   const slug = slugify(business)
   const strength = strengthOf(password)
   const linkBase = origin ? origin.replace(/\/$/, '') + '/collect/' : '/collect/'
 
+  // Google sends the visitor back either with a session in the URL or with an
+  // error (a cancelled consent screen, for example). Read that error, then
+  // strip it from the address bar so a refresh does not replay it.
+  function consumeProviderError() {
+    if (returnedError.current) return returnedError.current
+
+    const hash = window.location.hash.replace(/^#/, '')
+    const returned = new URLSearchParams(hash || window.location.search.replace(/^\?/, ''))
+    const description = returned.get('error_description') || returned.get('error')
+    if (!description) return ''
+
+    const url = new URL(window.location.href)
+    url.hash = ''
+    ;['error', 'error_description', 'error_code'].forEach((key) => url.searchParams.delete(key))
+    window.history.replaceState(null, '', url.pathname + url.search)
+    returnedError.current = description.replace(/\+/g, ' ')
+    return returnedError.current
+  }
+
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    let alive = true
+
+    async function boot() {
+      const providerError = consumeProviderError()
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!alive) return
+      // A returning Google visitor with a session goes straight to the app.
+      if (session) {
+        window.location.href = '/dashboard'
+        return
+      }
+      if (providerError) setError((current) => current || providerError)
+    }
+    boot()
+
+    // A Google sign-in returns as a full page load, so listen for the session
+    // being established rather than relying only on the initial getSession().
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session) window.location.href = '/dashboard'
     })
+    return () => {
+      alive = false
+      data.subscription.unsubscribe()
+    }
   }, [])
 
   // Mode changes stay on this page: no navigation, form values kept. /* v2-anims x */
@@ -130,6 +185,26 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
       return
     }
     window.location.href = '/dashboard'
+  }
+
+  async function signInWithGoogle() {
+    if (oauthLoading || loading) return
+    setError('')
+    setOauthLoading(true)
+
+    const base = origin ? origin.replace(/\/$/, '') : window.location.origin
+    const { error: oauthError } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: base + '/auth' },
+    })
+
+    if (oauthError) {
+      setError(oauthError.message)
+      setOauthLoading(false)
+      return
+    }
+    // On success the browser is already leaving for Google, so the button
+    // stays in its loading state until the page unloads.
   }
 
   const canSubmit = email.trim() && password && (!isSignup || business.trim())
@@ -240,6 +315,24 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
           font-weight:700; animation:taIn .6s var(--ease) .2s both; }
         .ta-sub { margin-top:7px; font-size:15.5px; color:rgba(252,251,248,.66);
           animation:taIn .6s var(--ease) .26s both; }
+
+        /* Google sign-in: one action above the email form, same navy field */
+        .ta-oauth { margin-top:clamp(20px,3vw,28px); animation:taIn .5s var(--ease) .14s both; }
+        .ta-google { width:100%; min-height:53px; display:inline-flex; align-items:center; justify-content:center;
+          gap:11px; border-radius:14px; border:1px solid rgba(252,251,248,.22);
+          background:rgba(252,251,248,.06); color:var(--paper); font-family:inherit;
+          font-size:16px; font-weight:600; letter-spacing:-.005em; cursor:pointer;
+          transition:background .2s, border-color .2s, transform .25s var(--ease), opacity .2s; }
+        .ta-google svg { flex-shrink:0; }
+        .ta-google:hover:not(:disabled) { background:rgba(252,251,248,.12);
+          border-color:rgba(252,251,248,.36); transform:translateY(-1px); }
+        .ta-google:active:not(:disabled) { transform:translateY(0) scale(.995); }
+        .ta-google:disabled { opacity:.6; cursor:not-allowed; }
+        .ta-google:focus-visible { outline:2px solid #8CC2FF; outline-offset:3px; }
+        .ta-google .ta-spin { border-color:rgba(245,249,255,.32); border-top-color:#8CC2FF; }
+        .ta-or { display:flex; align-items:center; gap:12px; margin-top:clamp(16px,2.4vw,20px);
+          font-size:13.5px; line-height:1.4; color:rgba(252,251,248,.6); }
+        .ta-or::before, .ta-or::after { content:''; flex:1; height:1px; background:rgba(252,251,248,.18); }
 
         /* the block that swaps when you change mode */
         .ta-swap { animation:taSwap .42s var(--ease) both; }
@@ -390,6 +483,8 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
         @media (hover: none) {
           .ta-submit:hover:not(:disabled) { transform:none; }
           .ta-submit:hover:not(:disabled) svg { transform:none; }
+          .ta-google:hover:not(:disabled) { background:rgba(252,251,248,.06);
+            border-color:rgba(252,251,248,.22); transform:none; }
           .ta-back:hover { gap:7px; }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -492,6 +587,29 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
                 {isSignup ? 'Your review link is ready the moment you sign up.' : 'Log in to your workspace.'}
               </p>
 
+              <div className="ta-oauth">
+                <button
+                  type="button"
+                  className="ta-google"
+                  onClick={signInWithGoogle}
+                  disabled={oauthLoading || loading}
+                  aria-busy={oauthLoading || undefined}
+                >
+                  {oauthLoading ? (
+                    <>
+                      <span className="ta-spin" aria-hidden="true" />
+                      Opening Google…
+                    </>
+                  ) : (
+                    <>
+                      <GoogleMark />
+                      Continue with Google
+                    </>
+                  )}
+                </button>
+                <p className="ta-or">or continue with email</p>
+              </div>
+
               <form className="ta-form" onSubmit={submit} noValidate>
                 {error ? (
                   <div className="ta-error" role="alert">
@@ -587,7 +705,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
                   ) : null}
                 </div>
 
-                <button type="submit" className="ta-submit" disabled={!canSubmit || loading}>
+                <button type="submit" className="ta-submit" disabled={!canSubmit || loading || oauthLoading}>
                   {loading ? (
                     <>
                       <span className="ta-spin" aria-hidden="true" />
