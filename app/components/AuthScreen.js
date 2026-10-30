@@ -111,24 +111,21 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
   useEffect(() => {
     let alive = true
 
-    async function boot() {
-      const providerError = consumeProviderError()
-      const { data: { session } } = await supabase.auth.getSession()
-      if (!alive) return
-      // A returning Google visitor with a session goes straight to the app.
-      if (session) {
-        window.location.href = '/dashboard'
-        return
-      }
-      if (providerError) setError((current) => current || providerError)
+    // Do not redirect just because a session already exists. Keeping /auth
+    // visible lets the user deliberately choose Google or another account.
+    const providerError = consumeProviderError()
+    if (alive && providerError) {
+      setError((current) => current || providerError)
     }
-    boot()
 
-    // A Google sign-in returns as a full page load, so listen for the session
-    // being established rather than relying only on the initial getSession().
-    const { data } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session) window.location.href = '/dashboard'
+    // Supabase emits INITIAL_SESSION on page load. Only redirect after a new
+    // sign-in completes (for example, when Google returns to /auth).
+    const { data } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session) {
+        window.location.assign('/dashboard')
+      }
     })
+
     return () => {
       alive = false
       data.subscription.unsubscribe()
