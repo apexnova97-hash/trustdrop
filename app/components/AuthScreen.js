@@ -79,6 +79,14 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
   const [showPass, setShowPass] = useState(false)
   const [loading, setLoading] = useState(false)
   const [oauthLoading, setOauthLoading] = useState(false)
+  // Google refuses OAuth inside an embedded WebView, so the Android app hides
+  // this button rather than sending people to a dead page. Read after mount so
+  // the server and client markup stay identical.
+  const [inAppShell, setInAppShell] = useState(false)
+
+  useEffect(() => {
+    if (/TrustDropApp/.test(navigator.userAgent)) setInAppShell(true)
+  }, [])
   const [error, setError] = useState('')
   // Kept in a ref as well as in state: consuming the URL is one-shot, so a
   // remount (React strict mode in development) must not lose the message.
@@ -584,6 +592,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
                 {isSignup ? 'Your review link is ready the moment you sign up.' : 'Log in to your workspace.'}
               </p>
 
+              {inAppShell ? null : (
               <div className="ta-oauth">
                 <button
                   type="button"
@@ -606,6 +615,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
                 </button>
                 <p className="ta-or">or continue with email</p>
               </div>
+              )}
 
               <form className="ta-form" onSubmit={submit} noValidate>
                 {error ? (
