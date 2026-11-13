@@ -730,7 +730,7 @@ export default function AuthScreen({ initialMode = 'login', origin = '' }) {
         </div>
 
         <p className="ta-terms">
-          <a href="#">Terms</a> and <a href="#">Privacy</a>
+          <a href="/privacy">Terms</a> and <a href="/privacy">Privacy</a>
         </p>
       </main>
     </div>
